@@ -189,17 +189,17 @@ const ReactDataTable = ({ data, columns, pagination, actions, className, selecta
           </div>
         }
         pagination={pagination}
-        paginationComponent={({ currentPage, rowsPerPage, rowCount, onChangePage, onChangeRowsPerPage }) => (
-          <DataTablePagination
-            customItemPerPage={rowsPerPageS}
-            itemPerPage={rowsPerPage}
-            totalItems={rowCount}
-            paginate={onChangePage}
-            currentPage={currentPage}
-            onChangeRowsPerPage={onChangeRowsPerPage}
-            setRowsPerPage={setRowsPerPage}
-          />
-        )}
+        // paginationComponent={({ currentPage, rowsPerPage, rowCount, onChangePage, onChangeRowsPerPage }) => (
+        //   <DataTablePagination
+        //     customItemPerPage={rowsPerPageS}
+        //     itemPerPage={rowsPerPage}
+        //     totalItems={rowCount}
+        //     paginate={onChangePage}
+        //     currentPage={currentPage}
+        //     onChangeRowsPerPage={onChangeRowsPerPage}
+        //     setRowsPerPage={setRowsPerPage}
+        //   />
+        // )}
       ></DataTable>
     </div>
   );

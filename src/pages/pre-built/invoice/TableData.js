@@ -5,7 +5,7 @@ import User4 from "../../../images/avatar/d-sm.jpg";
 import React from "react";
 import { UserAvatar, Icon } from "../../../components/Component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { faEye, faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
 import { Link, NavLink } from "react-router-dom";
 import { findUpper } from "../../../utils/Utils";
 
@@ -93,87 +93,531 @@ export const dataTableColumns2 = [
   //   ),
   //   sortable: true,
   // },
+
   {
-    name: "ID",
-    selector: (row) => row.id,
-    minWidth: "100px",
-    maxWidth: "50px",
+    // name: "ID",
+    // selector: (row) => row.id,
+    // minWidth: "100px",
+    // maxWidth: "50px",
+    dataField: "id",
+    text: "ID",
+    sort: true,
+    width: "100px",
+    sortCaret: (order, column) => {
+      if (!order)
+        return (
+          <span>
+            &nbsp;&nbsp;{" "}
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+          </span>
+        );
+      else if (order === "asc")
+        return (
+          <span>
+            &nbsp;&nbsp;
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+            <font color="#000">
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </font>
+          </span>
+        );
+      else if (order === "desc")
+        return (
+          <span>
+            &nbsp;&nbsp;
+            <font color="#000">
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </font>
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+          </span>
+        );
+      return null;
+    },
     // cell: (row) => (
     //   <span className="tb-amount">
     //     {row.balance} <span className="currency">USD</span>
     //   </span>
     // ),
-    sortable: true,
-    hide: 480,
+    // sortable: true,
+    // hide: 480,
   },
   {
-    name: "Course unit",
-    selector: (row) => row.courseunit,
-    minWidth: "200px",
-    cell: (row) => <span className="tb-amount">{row.courseunit}</span>,
-    sortable: true,
-    hide: 480,
+    // name: "Course unit",
+    // selector: (row) => row.course_unit_name,
+    // minWidth: "200px",
+    // cell: (row) => <span className="tb-amount">{row.course_unit_name}</span>,
+    // sortable: true,
+    // hide: 480,
+    dataField: "course_unit_name",
+    text: "Course Unit",
+    sort: true,
+    sortCaret: (order, column) => {
+      if (!order)
+        return (
+          <span>
+            &nbsp;&nbsp;{" "}
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+          </span>
+        );
+      else if (order === "asc")
+        return (
+          <span>
+            &nbsp;&nbsp;
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+            <font color="#000">
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </font>
+          </span>
+        );
+      else if (order === "desc")
+        return (
+          <span>
+            &nbsp;&nbsp;
+            <font color="#000">
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </font>
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+          </span>
+        );
+      return null;
+    },
   },
   {
-    name: "Lecturer",
-    selector: (row) => row.lecturer,
-    minWidth: "auto",
-    // cell: (row) => <span>{row.lecturer}</span>,
-    sortable: true,
-    hide: 480,
+    // name: "Lecturer",
+    // selector: (row) => row.staff_name,
+    // minWidth: "150px",
+    // sortable: true,
+    // hide: 480,
+
+    dataField: "staff_name",
+    text: "Lecturer",
+    sort: true,
+    sortCaret: (order, column) => {
+      if (!order)
+        return (
+          <span>
+            &nbsp;&nbsp;{" "}
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+          </span>
+        );
+      else if (order === "asc")
+        return (
+          <span>
+            &nbsp;&nbsp;
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+            <font color="#000">
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </font>
+          </span>
+        );
+      else if (order === "desc")
+        return (
+          <span>
+            &nbsp;&nbsp;
+            <font color="#000">
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </font>
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+          </span>
+        );
+      return null;
+    },
   },
 
-  {
-    name: "Room",
-    selector: (row) => row.room,
-    minWidth: "auto",
-    cell: (row) => <span>{row.room}</span>,
-    sortable: true,
-    hide: 480,
-  },
+  // {
+  //   // name: "Room",
+  //   // selector: (row) => row.room,
+  //   // minWidth: "auto",
+  //   // cell: (row) => <span>{row.room}</span>,
+  //   // sortable: true,
+  //   // hide: 480,
+
+  //   dataField: "room",
+  //   text: "Room",
+  //   sort: true,
+  //   sortCaret: (order, column) => {
+  //     if (!order)
+  //       return (
+  //         <span>
+  //           &nbsp;&nbsp;{" "}
+  //           <FontAwesomeIcon
+  //             icon={faArrowDown}
+  //             // color="#000"
+  //             size="sm"
+  //             // style={{
+  //             //   cursor: "pointer",
+  //             // }}
+  //             // onClick={() => handleView(row)}
+  //             //onClick={() => {console.log("row clicked", row)}}
+  //           ></FontAwesomeIcon>
+  //           <FontAwesomeIcon
+  //             icon={faArrowUp}
+  //             // color="#000"
+  //             size="sm"
+  //             // style={{
+  //             //   cursor: "pointer",
+  //             // }}
+  //             // onClick={() => handleView(row)}
+  //             //onClick={() => {console.log("row clicked", row)}}
+  //           ></FontAwesomeIcon>
+  //         </span>
+  //       );
+  //     else if (order === "asc")
+  //       return (
+  //         <span>
+  //           &nbsp;&nbsp;
+  //           <FontAwesomeIcon
+  //             icon={faArrowDown}
+  //             // color="#000"
+  //             size="sm"
+  //             // style={{
+  //             //   cursor: "pointer",
+  //             // }}
+  //             // onClick={() => handleView(row)}
+  //             //onClick={() => {console.log("row clicked", row)}}
+  //           ></FontAwesomeIcon>
+  //           <font color="#000">
+  //             <FontAwesomeIcon
+  //               icon={faArrowUp}
+  //               // color="#000"
+  //               size="sm"
+  //               // style={{
+  //               //   cursor: "pointer",
+  //               // }}
+  //               // onClick={() => handleView(row)}
+  //               //onClick={() => {console.log("row clicked", row)}}
+  //             ></FontAwesomeIcon>
+  //           </font>
+  //         </span>
+  //       );
+  //     else if (order === "desc")
+  //       return (
+  //         <span>
+  //           &nbsp;&nbsp;
+  //           <font color="#000">
+  //             <FontAwesomeIcon
+  //               icon={faArrowDown}
+  //               // color="#000"
+  //               size="sm"
+  //               // style={{
+  //               //   cursor: "pointer",
+  //               // }}
+  //               // onClick={() => handleView(row)}
+  //               //onClick={() => {console.log("row clicked", row)}}
+  //             ></FontAwesomeIcon>
+  //           </font>
+  //           <FontAwesomeIcon
+  //             icon={faArrowUp}
+  //             // color="#000"
+  //             size="sm"
+  //             // style={{
+  //             //   cursor: "pointer",
+  //             // }}
+  //             // onClick={() => handleView(row)}
+  //             //onClick={() => {console.log("row clicked", row)}}
+  //           ></FontAwesomeIcon>
+  //         </span>
+  //       );
+  //     return null;
+  //   },
+  // },
 
   {
-    name: "Time",
-    selector: (row) => row.verified,
-    sortable: true,
-    minWidth: "170px",
-    hide: "md",
-    cell: (row) => (
-      <ul className="list-status d-flex">
-        <li>
-          {/* <Icon
-            className={`text-${
-              row.emailStatus === "success" ? "success" : row.emailStatus === "pending" ? "info" : "secondary"
-            }`}
-            name={`${
-              row.emailStatus === "success"
-                ? "check-circle"
-                : row.emailStatus === "alert"
-                ? "alert-circle"
-                : "alarm-alt"
-            }`}
-          ></Icon>{" "} */}
-          <span>{row.start_time}</span>
-        </li>
-        {"-"}
-        <li>
-          {/* <Icon
-            className={`text-${
-              row.emailStatus === "success" ? "success" : row.emailStatus === "pending" ? "info" : "secondary"
-            }`}
-            name={`${
-              row.emailStatus === "success"
-                ? "check-circle"
-                : row.emailStatus === "alert"
-                ? "alert-circle"
-                : "alarm-alt"
-            }`}
-          ></Icon> */}
+    // name: "Time",
+    // selector: (row) => row.verified,
+    // sortable: true,
+    // minWidth: "170px",
+    // hide: "md",
+    // cell: (row) => (
+    //   <ul className="list-status d-flex">
+    //     <li>
+    //       {/* <Icon
+    //         className={`text-${
+    //           row.emailStatus === "success" ? "success" : row.emailStatus === "pending" ? "info" : "secondary"
+    //         }`}
+    //         name={`${
+    //           row.emailStatus === "success"
+    //             ? "check-circle"
+    //             : row.emailStatus === "alert"
+    //             ? "alert-circle"
+    //             : "alarm-alt"
+    //         }`}
+    //       ></Icon>{" "} */}
+    //       <span>{row.start_time}</span>
+    //     </li>
+    //     {"-"}
+    //     <li>
+    //       {/* <Icon
+    //         className={`text-${
+    //           row.emailStatus === "success" ? "success" : row.emailStatus === "pending" ? "info" : "secondary"
+    //         }`}
+    //         name={`${
+    //           row.emailStatus === "success"
+    //             ? "check-circle"
+    //             : row.emailStatus === "alert"
+    //             ? "alert-circle"
+    //             : "alarm-alt"
+    //         }`}
+    //       ></Icon> */}
 
-          <span>{row.end_time}</span>
-        </li>
-      </ul>
-    ),
+    //       <span>{row.end_time}</span>
+    //     </li>
+    //   </ul>
+    // ),
+
+    dataField: "verified",
+    text: "Time",
+    sort: true,
+    sortCaret: (order, column) => {
+      if (!order)
+        return (
+          <span>
+            &nbsp;&nbsp;{" "}
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+          </span>
+        );
+      else if (order === "asc")
+        return (
+          <span>
+            &nbsp;&nbsp;
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+            <font color="#000">
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </font>
+          </span>
+        );
+      else if (order === "desc")
+        return (
+          <span>
+            &nbsp;&nbsp;
+            <font color="#000">
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </font>
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+          </span>
+        );
+      return null;
+    },
   },
   // {
   //   name: "Mode",
@@ -183,50 +627,140 @@ export const dataTableColumns2 = [
   //   hide: "md",
   // },
   {
-    name: "Status",
-    selector: (row) => row.status,
-    sortable: true,
-    hide: "sm",
-    cell: (row) => (
-      <span
-        className={`tb-status ml-1 text-${
-          row.status === "Active" ? "success" : row.status === "Pending" ? "warning" : "danger"
-        }`}
-      >
-        {row.status}
-      </span>
-    ),
-  },
+    // name: "Status",
+    // selector: (row) => row.status,
+    // sortable: true,
+    // hide: "sm",
+    // cell: (row) => (
+    //   <span
+    //     className={`tb-status ml-1 text-${
+    //       row.status === "Active" ? "success" : row.status === "Pending" ? "warning" : "danger"
+    //     }`}
+    //   >
+    //     {row.status}
+    //   </span>
+    // ),
 
-  {
-    name: "Action",
-    button: true,
-    cell: (row) => (
-      <>
-        <div
-          style={{
-            // backgroundColor: "red",
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "flex-end",
-          }}
-        >
-          <Link to={`${process.env.PUBLIC_URL}/lecture-details`} className="edit-button" style={{ color: "black" }}>
+    dataField: "status",
+    text: "Status",
+    sort: true,
+    sortCaret: (order, column) => {
+      if (!order)
+        return (
+          <span>
+            &nbsp;&nbsp;{" "}
             <FontAwesomeIcon
-              icon={faEye}
-              color="#000"
-              size="lg"
-              style={{
-                cursor: "pointer",
-              }}
-              onClick={() => handleView(row)}
+              icon={faArrowDown}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
               //onClick={() => {console.log("row clicked", row)}}
             ></FontAwesomeIcon>
-          </Link>
-        </div>
-      </>
-    ),
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+          </span>
+        );
+      else if (order === "asc")
+        return (
+          <span>
+            &nbsp;&nbsp;
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+            <font color="#000">
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </font>
+          </span>
+        );
+      else if (order === "desc")
+        return (
+          <span>
+            &nbsp;&nbsp;
+            <font color="#000">
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </font>
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+          </span>
+        );
+      return null;
+    },
   },
+
+  // {
+  //   name: "Action",
+  //   button: true,
+  //   cell: (row) => (
+  //     <>
+  //       <div
+  //         style={{
+  //           // backgroundColor: "red",
+  //           display: "flex",
+  //           alignItems: "flex-end",
+  //           justifyContent: "flex-end",
+  //         }}
+  //       >
+  //         <Link to={`${process.env.PUBLIC_URL}/lecture-details`} className="edit-button" style={{ color: "black" }}>
+  //           <FontAwesomeIcon
+  //             icon={faEye}
+  //             color="#000"
+  //             size="lg"
+  //             style={{
+  //               cursor: "pointer",
+  //             }}
+  //             onClick={() => handleView(row)}
+  //             //onClick={() => {console.log("row clicked", row)}}
+  //           ></FontAwesomeIcon>
+  //         </Link>
+  //       </div>
+  //     </>
+  //   ),
+  // },
+
   // {
   //   name: "Action",
   //   selector: (row) => row.lastLogin,

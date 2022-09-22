@@ -1,13 +1,92 @@
 import React, { useEffect, useState } from "react";
 import { DropdownToggle, DropdownMenu, UncontrolledDropdown, DropdownItem } from "reactstrap";
+import staffApi from "../../../../api/staffApi";
+import { Line, Bar, Doughnut } from "react-chartjs-2";
 import studentsApi from "../../../../api/studentApi";
-import { TCDoughnut } from "../../charts/analytics/AnalyticsCharts";
+// import { TCDoughnut } from "../../charts/analytics/AnalyticsCharts";
 
 const TrafficDougnut = () => {
   const [traffic, setTraffic] = useState("30");
   const [statistics, setStatistics] = useState([]);
+  const [totalNumOfStudents, setTotalNumOfStudents] = useState(0);
+  const [totalSBAstudents, setTotalSBAstudents] = useState("0");
+  const [totalSCIstudents, setTotalSCIstudents] = useState("0");
+  const [totalSCIADstudents, setTotalSCIADstudents] = useState("0");
+  const [totalSCOSstudents, setTotalSCOSstudents] = useState("0");
+  const [totalSOSSstudents, setTotalSOSSstudents] = useState("0");
+
+  var TrafficChannelDoughnutData = {
+    labels: ["SCI", "SBA", "SCIAD", "SCOS"],
+    dataUnit: "People",
+    legend: false,
+    datasets: [
+      {
+        borderColor: "#fff",
+        backgroundColor: ["#798bff", "#b8acff", "#ffa9ce", "#f9db7b"],
+        data: [totalSCIstudents, totalSBAstudents, totalSCIADstudents, totalSCOSstudents],
+      },
+    ],
+  };
+
+  const TCDoughnut = ({ state, className }) => {
+    const [data, setData] = useState(TrafficChannelDoughnutData);
+    // useEffect(() => {
+    //   if (state === "7") {
+    //     setData(TrafficChannelDoughnutData2);
+    //   } else if (state === "15") {
+    //     setData(TrafficChannelDoughnutData3);
+    //   } else {
+    //     setData(TrafficChannelDoughnutData4);
+    //   }
+    // }, [state]);
+    return (
+      <Doughnut
+        className={className}
+        data={data}
+        options={{
+          legend: {
+            display: false,
+          },
+          rotation: -1.5,
+          cutoutPercentage: 70,
+          maintainAspectRatio: false,
+          tooltips: {
+            enabled: true,
+            backgroundColor: "#fff",
+            borderColor: "#eff6ff",
+            borderWidth: 2,
+            titleFontSize: 13,
+            titleFontColor: "#6783b8",
+            titleMarginBottom: 6,
+            bodyFontColor: "#9eaecf",
+            bodyFontSize: 12,
+            bodySpacing: 4,
+            yPadding: 10,
+            xPadding: 10,
+            footerMarginTop: 0,
+            displayColors: false,
+          },
+        }}
+      ></Doughnut>
+    );
+  };
 
   const schools = ["SCI", "SOSS", "SBA", "SCOS", "SCIAD"];
+
+  const loadTotalStudents = async () => {
+    // const res = await studentApi.getTotalStudentsToday();
+    const res2 = await studentsApi.getNumAllStudents();
+
+    if (!res2.ok) {
+      console.log("Failed to get the total number of students today");
+    }
+
+    // console.log("in campus", res.data);
+    // setNumOfStudents2de(res.data);
+    // console.log("Total", res2.data);
+
+    setTotalNumOfStudents(res2.data);
+  };
 
   const loadStudentsPerSchool = async () => {
     let data = [];
@@ -24,8 +103,36 @@ const TrafficDougnut = () => {
     console.log("After data", data);
   };
 
+  const getstudentsTotalBySchool = async (school) => {
+    const res = await staffApi.getstudentsTotalBySchool(school);
+
+    if (!res.ok) {
+      console.log("Failed to get the required students from the server");
+    }
+
+    if (school == "SBA") {
+      setTotalSBAstudents(res.data ? res.data : `0`);
+    } else if (school === "SCI") {
+      setTotalSCIstudents(res.data ? res.data : `0`);
+    } else if (school === "SCIAD") {
+      setTotalSCIADstudents(res.data ? res.data : `0`);
+    } else if (school === "SCOS") {
+      setTotalSCOSstudents(res.data ? res.data : `0`);
+    } else if (school === "SOSS") {
+      setTotalSOSSstudents(res.data ? res.data : `0`);
+    }
+    // console.log(school, res.data);
+    // return res.data;
+  };
+
   useEffect(() => {
-    loadStudentsPerSchool();
+    // loadStudentsPerSchool();
+    loadTotalStudents();
+    getstudentsTotalBySchool("SBA");
+    getstudentsTotalBySchool("SCI");
+    getstudentsTotalBySchool("SCIAD");
+    getstudentsTotalBySchool("SOSS");
+    getstudentsTotalBySchool("SCOS");
   }, []);
   return (
     <React.Fragment>
@@ -88,7 +195,8 @@ const TrafficDougnut = () => {
               <span>SBA</span>
             </div>
             <div className="amount">
-              {traffic === "7" ? "3,055" : traffic === "15" ? "4,505" : "4,705"} <small>58.63%</small>
+              {traffic === "7" ? totalSBAstudents : traffic === "15" ? totalSBAstudents : totalSBAstudents}{" "}
+              <small>{"58.63%"}</small>
             </div>
           </div>
           <div className="traffic-channel-data">
@@ -97,7 +205,8 @@ const TrafficDougnut = () => {
               <span>SCI</span>
             </div>
             <div className="amount">
-              {traffic === "7" ? "259" : traffic === "15" ? "1,059" : "1509"} <small>23.94%</small>
+              {traffic === "7" ? totalSCIstudents : traffic === "15" ? totalSCIstudents : totalSCIstudents}{" "}
+              <small>23.94%</small>
             </div>
           </div>
           <div className="traffic-channel-data">
@@ -106,7 +215,14 @@ const TrafficDougnut = () => {
               <span>SCIAD</span>
             </div>
             <div className="amount">
-              {traffic === "7" ? "438" : traffic === "15" ? "282" : "482"} <small>12.94%</small>
+              {traffic === "7"
+                ? totalSCIADstudents === null
+                  ? "0"
+                  : totalSCIADstudents
+                : traffic === "15"
+                ? totalSCIADstudents
+                : totalSCIADstudents}{" "}
+              <small>12.94%</small>
             </div>
           </div>
           <div className="traffic-channel-data">
@@ -115,7 +231,8 @@ const TrafficDougnut = () => {
               <span>SCOS</span>
             </div>
             <div className="amount">
-              {traffic === "7" ? "438" : traffic === "15" ? "800" : "1000"} <small>4.49%</small>
+              {traffic === "7" ? totalSCOSstudents : traffic === "15" ? totalSCOSstudents : totalSCOSstudents}{" "}
+              <small>4.49%</small>
             </div>
           </div>
         </div>

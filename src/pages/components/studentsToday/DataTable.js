@@ -161,6 +161,7 @@ const DataTablePage = () => {
     },
   ];
   const dispatch = useDispatch();
+  const [hasError, setHasError] = useState(false);
   const [students, setStudents] = useState([]);
   const [tableData, setTableData] = useState(students);
   const [searchText, setSearchText] = useState("");
@@ -169,12 +170,17 @@ const DataTablePage = () => {
   const [pending, setPending] = useState(false);
 
   const getAllStudentDetails = async (studentNo) => {
-    const res = await studentApi.getForSpecificStudent(studentNo);
-    if (!res.ok) {
-      console.log("Failed to get today's details");
-    }
+    try {
+      const res = await studentApi.getForSpecificStudent(studentNo);
+      if (!res.ok) {
+        setHasError(true);
+        console.log("Failed to get today's details");
+      }
 
-    dispatch(actions.getDetailsForStudent(res.data));
+      dispatch(actions.getDetailsForStudent(res.data));
+    } catch (error) {
+      alert("There is a problem with the server");
+    }
   };
 
   const handleView = (row) => {
@@ -275,14 +281,20 @@ const DataTablePage = () => {
   ];
 
   const loadTodaysStudents = async () => {
-    setPending(true);
-    const res = await studentApi.getAllStudents();
-    setPending(false);
-    if (!res.ok) {
-      console.log("Failed to get students");
-    }
+    try {
+      setPending(true);
+      const res = await studentApi.getAllStudents();
+      setPending(false);
+      if (!res.ok) {
+        setHasError(true);
+        console.log("Failed to get students");
+      }
 
-    setStudents(res.data);
+      setStudents(res.data);
+    } catch (error) {
+      setHasError(true);
+      // alert("There is an unknown problem with the server");
+    }
     // console.log(res.data);
   };
 
@@ -322,98 +334,104 @@ const DataTablePage = () => {
 
   return (
     <React.Fragment>
-      <Head title="Basic Tables" />
+      <Head title="Students Today" />
       {/* {console.log("Students", students)} */}
       <Content page="component">
         <Block size="lg">
-          <BlockHead>
-            <BlockHeadContent>
-              <BlockTitle tag="h4">Students Today</BlockTitle>
-              <p>
-                {/* {" Pass in the <code>actions</code> props to add export option to the table."} */}
-                {"22 August 2021"}
-              </p>
-            </BlockHeadContent>
-          </BlockHead>
+          {hasError ? (
+            <h1>Server Error</h1>
+          ) : (
+            <>
+              <BlockHead>
+                <BlockHeadContent>
+                  <BlockTitle tag="h4">Students Today</BlockTitle>
+                  <p>
+                    {/* {" Pass in the <code>actions</code> props to add export option to the table."} */}
+                    {"22 August 2021"}
+                  </p>
+                </BlockHeadContent>
+              </BlockHead>
 
-          <PreviewCard>
-            {/* <ReactDataTable data={students} columns={dataTableColumns} expandableRows pagination actions /> */}
-            <div className={`dataTables_wrapper dt-bootstrap4 no-footer`}>
-              <Row className={`justify-between g-2 with-export`}>
-                <Col className="col-7 text-left" sm="4">
-                  <div id="DataTables_Table_0_filter" className="dataTables_filter">
-                    <label>
-                      <input
-                        type="search"
-                        className="form-control form-control-sm"
-                        placeholder="Search by Student Number"
-                        onChange={(ev) => setSearchText(ev.target.value)}
-                      />
-                    </label>
-                  </div>
-                </Col>
-                <Col className="col-5 text-right" sm="8">
-                  <div className="datatable-filter">
-                    <div className="d-flex justify-content-end g-2">
-                      {<Export data={students} />}
-                      <div className="dataTables_length" id="DataTables_Table_0_length">
+              <PreviewCard>
+                {/* <ReactDataTable data={students} columns={dataTableColumns} expandableRows pagination actions /> */}
+                <div className={`dataTables_wrapper dt-bootstrap4 no-footer`}>
+                  <Row className={`justify-between g-2 with-export`}>
+                    <Col className="col-7 text-left" sm="4">
+                      <div id="DataTables_Table_0_filter" className="dataTables_filter">
                         <label>
-                          <span className="d-none d-sm-inline-block">Show</span>
-                          <div className="form-control-select">
-                            {" "}
-                            <select
-                              name="DataTables_Table_0_length"
-                              className="custom-select custom-select-sm form-control form-control-sm"
-                              onChange={(e) => setRowsPerPage(e.target.value)}
-                              value={rowsPerPageS}
-                            >
-                              <option value="10">10</option>
-                              <option value="25">25</option>
-                              <option value="40">40</option>
-                              <option value="50">50</option>
-                            </select>{" "}
-                          </div>
+                          <input
+                            type="search"
+                            className="form-control form-control-sm"
+                            placeholder="Search by Student Number"
+                            onChange={(ev) => setSearchText(ev.target.value)}
+                          />
                         </label>
                       </div>
-                    </div>
-                  </div>
-                </Col>
-              </Row>
-              <DataTable
-                keyField="stdno"
-                data={students}
-                progressPending={pending}
-                columns={dataTableColumns}
-                // className={className}
-                // selectableRows={selectableRows}
-                selectableRowsComponent={CustomCheckbox}
-                striped
-                highlightOnHover
-                expandableRowsComponent={ExpandableRowComponent}
-                expandableRows={mobileView}
-                noDataComponent={<div className="p-2">There are no records found</div>}
-                sortIcon={
-                  <div>
-                    <span>&darr;</span>
-                    <span>&uarr;</span>
-                  </div>
-                }
-                pagination={true}
-                paginationPerPage={10}
-                // paginationComponent={({ currentPage, rowsPerPage, rowCount, onChangePage, onChangeRowsPerPage }) => (
-                //   <DataTablePagination
-                //     customItemPerPage={rowsPerPageS}
-                //     itemPerPage={rowsPerPage}
-                //     totalItems={rowCount}
-                //     paginate={onChangePage}
-                //     currentPage={currentPage}
-                //     onChangeRowsPerPage={onChangeRowsPerPage}
-                //     setRowsPerPage={setRowsPerPage}
-                //   />
-                // )}
-              ></DataTable>
-            </div>
-          </PreviewCard>
+                    </Col>
+                    <Col className="col-5 text-right" sm="8">
+                      <div className="datatable-filter">
+                        <div className="d-flex justify-content-end g-2">
+                          {<Export data={students} />}
+                          <div className="dataTables_length" id="DataTables_Table_0_length">
+                            <label>
+                              <span className="d-none d-sm-inline-block">Show</span>
+                              <div className="form-control-select">
+                                {" "}
+                                <select
+                                  name="DataTables_Table_0_length"
+                                  className="custom-select custom-select-sm form-control form-control-sm"
+                                  onChange={(e) => setRowsPerPage(e.target.value)}
+                                  value={rowsPerPageS}
+                                >
+                                  <option value="10">10</option>
+                                  <option value="25">25</option>
+                                  <option value="40">40</option>
+                                  <option value="50">50</option>
+                                </select>{" "}
+                              </div>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </Col>
+                  </Row>
+                  <DataTable
+                    keyField="stdno"
+                    data={students}
+                    progressPending={pending}
+                    columns={dataTableColumns}
+                    // className={className}
+                    // selectableRows={selectableRows}
+                    selectableRowsComponent={CustomCheckbox}
+                    striped
+                    highlightOnHover
+                    expandableRowsComponent={ExpandableRowComponent}
+                    expandableRows={mobileView}
+                    noDataComponent={<div className="p-2">There are no records found</div>}
+                    sortIcon={
+                      <div>
+                        <span>&darr;</span>
+                        <span>&uarr;</span>
+                      </div>
+                    }
+                    pagination={true}
+                    paginationPerPage={10}
+                    // paginationComponent={({ currentPage, rowsPerPage, rowCount, onChangePage, onChangeRowsPerPage }) => (
+                    //   <DataTablePagination
+                    //     customItemPerPage={rowsPerPageS}
+                    //     itemPerPage={rowsPerPage}
+                    //     totalItems={rowCount}
+                    //     paginate={onChangePage}
+                    //     currentPage={currentPage}
+                    //     onChangeRowsPerPage={onChangeRowsPerPage}
+                    //     setRowsPerPage={setRowsPerPage}
+                    //   />
+                    // )}
+                  ></DataTable>
+                </div>
+              </PreviewCard>
+            </>
+          )}
         </Block>
       </Content>
     </React.Fragment>

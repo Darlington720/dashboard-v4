@@ -57,6 +57,7 @@ const damiData = [
 
 const DataTablePage = () => {
   const [stafftoday, setStaffToday] = useState([]);
+  const [hasError, setHasError] = useState(false);
   const [staffImage, setStaffImage] = useState("");
   const [searchText, setSearchText] = useState("");
 
@@ -180,6 +181,7 @@ const DataTablePage = () => {
   const loadStaffToday = async () => {
     const res = await staffApi.getAllStaffToday();
     if (!res.ok) {
+      setHasError(true);
       console.log("Failed to get staff members");
     }
 
@@ -206,21 +208,27 @@ const DataTablePage = () => {
       <Head title="Basic Tables" />
       <Content page="component">
         <Block size="lg">
-          <BlockHead>
-            <BlockHeadContent>
-              {console.log("Staff", stafftoday)}
-              <BlockTitle tag="h4">Staff Today</BlockTitle>
-              {/* <p>
+          {hasError ? (
+            <h1>Server Error</h1>
+          ) : (
+            <>
+              <BlockHead>
+                <BlockHeadContent>
+                  {console.log("Staff", stafftoday)}
+                  <BlockTitle tag="h4">Staff Today</BlockTitle>
+                  {/* <p>
                 Pass in the <code>actions</code> props to add export option to the table.
               </p> */}
-              <p>20 September 2022</p>
-            </BlockHeadContent>
-          </BlockHead>
+                  <p>20 September 2022</p>
+                </BlockHeadContent>
+              </BlockHead>
 
-          <PreviewCard>
-            {/* <ReactDataTable data={DataTableData} columns={dataTableColumns} expandableRows pagination actions /> */}
-            <ReactDataTable data={stafftoday} columns={dataTableColumns} pagination className="nk-tb-list" />
-          </PreviewCard>
+              <PreviewCard>
+                {/* <ReactDataTable data={DataTableData} columns={dataTableColumns} expandableRows pagination actions /> */}
+                <ReactDataTable data={stafftoday} columns={dataTableColumns} pagination className="nk-tb-list" />
+              </PreviewCard>
+            </>
+          )}
         </Block>
 
         {/* <Block size="lg">

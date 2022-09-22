@@ -7,6 +7,8 @@ const getAllStaffDetails = (staff_id) => apiClient.get(`/allstaffdetails/${staff
 const getLecturerCourseUnits = (data) => apiClient.post("/lecturerCourseunits", data);
 const getEnrolledStudents = (course_id) => apiClient.get(`/getEnrolledStudents/${course_id}`);
 const getLectureData = (data) => apiClient.post(`/getLectureData/`, data);
+const getTodaysLectures = (school) => apiClient.get(`/todaysLectures/${school}`);
+const getstudentsTotalBySchool = (school) => apiClient.get(`/studentsTotalBySchool/${school}`);
 
 const apiCalls = {
   getNumAllStaff,
@@ -16,6 +18,8 @@ const apiCalls = {
   getLecturerCourseUnits,
   getEnrolledStudents,
   getLectureData,
+  getTodaysLectures,
+  getstudentsTotalBySchool,
 };
 
 export default apiCalls;
