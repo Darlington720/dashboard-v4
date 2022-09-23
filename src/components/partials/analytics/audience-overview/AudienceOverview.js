@@ -23,7 +23,7 @@ const AudienceOverview = () => {
 
     // console.log("in campus", res.data);
     setNumOfStudents2de(res.data);
-    // console.log("Total", res2.data);
+    console.log("Total", res2.data);
     setTotalNumOfStudents(res2.data);
   };
 

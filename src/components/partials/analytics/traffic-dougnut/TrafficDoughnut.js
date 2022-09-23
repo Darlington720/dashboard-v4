@@ -28,6 +28,20 @@ const TrafficDougnut = () => {
     ],
   };
 
+  const loadTotalStudentsToday = async () => {
+    // const res = await studentsApi.getTotalStudentsToday();
+    const res2 = await studentsApi.getNumAllStudents();
+
+    if (!res2.ok) {
+      console.log("Failed to get the total number of students today");
+    }
+
+    // console.log("in campus", res.data);
+    // setNumOfStudents2de(res.data);
+    console.log("Total Num", res2.data);
+    setTotalNumOfStudents(res2.data);
+  };
+
   const TCDoughnut = ({ state, className }) => {
     const [data, setData] = useState(TrafficChannelDoughnutData);
     // useEffect(() => {
@@ -133,6 +147,7 @@ const TrafficDougnut = () => {
     getstudentsTotalBySchool("SCIAD");
     getstudentsTotalBySchool("SOSS");
     getstudentsTotalBySchool("SCOS");
+    loadTotalStudentsToday();
   }, []);
   return (
     <React.Fragment>
@@ -196,7 +211,7 @@ const TrafficDougnut = () => {
             </div>
             <div className="amount">
               {traffic === "7" ? totalSBAstudents : traffic === "15" ? totalSBAstudents : totalSBAstudents}{" "}
-              <small>{"58.63%"}</small>
+              <small>{parseInt(parseInt(totalSBAstudents) / parseInt(totalNumOfStudents)) * 100}%</small>
             </div>
           </div>
           <div className="traffic-channel-data">
@@ -206,7 +221,7 @@ const TrafficDougnut = () => {
             </div>
             <div className="amount">
               {traffic === "7" ? totalSCIstudents : traffic === "15" ? totalSCIstudents : totalSCIstudents}{" "}
-              <small>23.94%</small>
+              <small>{parseInt(parseInt(totalSCIADstudents) / parseInt(totalNumOfStudents)) * 100}%</small>
             </div>
           </div>
           <div className="traffic-channel-data">
@@ -222,7 +237,7 @@ const TrafficDougnut = () => {
                 : traffic === "15"
                 ? totalSCIADstudents
                 : totalSCIADstudents}{" "}
-              <small>12.94%</small>
+              <small>{parseInt(parseInt(totalSBAstudents) / parseInt(totalNumOfStudents)) * 100}%</small>
             </div>
           </div>
           <div className="traffic-channel-data">
@@ -232,7 +247,7 @@ const TrafficDougnut = () => {
             </div>
             <div className="amount">
               {traffic === "7" ? totalSCOSstudents : traffic === "15" ? totalSCOSstudents : totalSCOSstudents}{" "}
-              <small>4.49%</small>
+              <small>{parseInt(parseInt(totalSCOSstudents) / parseInt(totalNumOfStudents)) * 100}%</small>
             </div>
           </div>
         </div>

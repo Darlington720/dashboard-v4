@@ -3,6 +3,7 @@ import UserAvatar from "../../../../components/user/UserAvatar";
 import { DropdownToggle, DropdownMenu, Dropdown } from "reactstrap";
 import { Icon } from "../../../../components/Component";
 import { LinkList, LinkItem } from "../../../../components/links/Links";
+import urls from "../../../../api/apiConstants";
 
 const User = () => {
   const [open, setOpen] = useState(false);
@@ -23,22 +24,23 @@ const User = () => {
         }}
       >
         <div className="user-toggle">
-          <UserAvatar icon="user-alt" className="sm" />
+          <UserAvatar className="sm" image={`${urls.baseUrl1}image/NUA213`} />
           <div className="user-info d-none d-md-block">
             <div className="user-status">Administrator</div>
-            <div className="user-name dropdown-indicator">Abu Bin Ishityak</div>
+            <div className="user-name dropdown-indicator">Prof Jude Lubega</div>
           </div>
         </div>
       </DropdownToggle>
       <DropdownMenu right className="dropdown-menu-md dropdown-menu-s1">
         <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
           <div className="user-card sm">
-            <div className="user-avatar">
+            <UserAvatar className="sm" image={`${urls.baseUrl1}image/NUA213`} />
+            {/* <div className="user-avatar">
               <span>AB</span>
-            </div>
+            </div> */}
             <div className="user-info">
-              <span className="lead-text">Abu Bin Ishtiyak</span>
-              <span className="sub-text">info@softnio.com</span>
+              <span className="lead-text">Professor Jude Lubega</span>
+              <span className="sub-text">judelubega@gmail.com</span>
             </div>
           </div>
         </div>

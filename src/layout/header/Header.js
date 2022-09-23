@@ -37,7 +37,7 @@ const Header = ({ fixed, theme, className, setVisibility, ...props }) => {
                 <User />
               </li>
               <li className="notification-dropdown mr-n1" onClick={() => setVisibility(false)}>
-                <Notification />
+                {/* <Notification /> */}
               </li>
             </ul>
           </div>

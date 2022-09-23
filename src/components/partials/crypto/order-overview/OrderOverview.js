@@ -6,7 +6,7 @@ import { Row, Col } from "../../../grid/Grid";
 // import { Link } from "react-router-dom";
 
 const OrderOverview = () => {
-  const [orderOverview,] = useState("");
+  const [orderOverview] = useState("");
   return (
     <React.Fragment>
       <div className="card-title-group align-start mb-3">
@@ -19,19 +19,18 @@ const OrderOverview = () => {
             </Link>
           </p> 
         </CardTitle> */}
-        <div className="card-tools mt-n1 mr-n1">
-        </div>
+        <div className="card-tools mt-n1 mr-n1"></div>
       </div>
       <div className="nk-order-ovwg">
         <Row className="g-4 align-end">
-          
           <Col xxl="2">
-          {/* Mbu flex style */}
-            <Row className="g-4"> 
+            {/* Mbu flex style */}
+            <Row className="g-4">
               <Col xxl="6" sm="4">
                 <div className="nk-order-ovwg-data buy">
                   <div className="amount">
-                    {orderOverview === "set2" ? "12,495" : "14"} <small className="currenct currency-usd">Lectures</small>
+                    {orderOverview === "set2" ? "12,495" : "14"}{" "}
+                    <small className="currenct currency-usd">Lectures</small>
                   </div>
                   <div className="info">
                     Yesterday {orderOverview === "set2" ? "30" : "15"} lectures where conducted.{" "}
@@ -53,7 +52,6 @@ const OrderOverview = () => {
                   </div>
                   <div className="info">
                     Yesterday {orderOverview === "set2" ? "30" : "19"} lectures where not taught.{" "}
-                    
                     {/* <strong>
                       {orderOverview === "set2" ? "39,258" : "18,365"}{" "}
                       <span className="currenct currency-usd">USD</span>
@@ -73,7 +71,6 @@ const OrderOverview = () => {
                   </div>
                   <div className="info">
                     Yesterday {orderOverview === "set2" ? "30" : "112"} lectures where taught.{" "}
-                    
                     {/* <strong>
                       {orderOverview === "set2" ? "39,258" : "18,365"}{" "}
                       <span className="currenct currency-usd">USD</span>
