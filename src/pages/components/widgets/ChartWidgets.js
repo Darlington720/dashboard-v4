@@ -759,7 +759,7 @@ const TrafficChannel = () => {
             <Row>
               <Col md="6">
                 <PreviewAltCard>
-                  <TrafficDougnut />
+                  <TrafficDougnut /> 
                 </PreviewAltCard>
               </Col>
             </Row>

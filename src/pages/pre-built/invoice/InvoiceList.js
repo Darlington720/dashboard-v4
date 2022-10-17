@@ -117,7 +117,13 @@ function lectureStatusFormatter(cell, row) {
         }
         // className="badge-dot"
       >
-        {`Not Started`}
+        {row.has_started && !row.has_ended
+          ? "ongoing"
+          : !row.has_started
+          ? "Not Started"
+          : row.has_ended
+          ? "Ended"
+          : "Not Startedd"}
       </Badge>
       {/* <Badge className="badge-dot" color="primary">
         Primary

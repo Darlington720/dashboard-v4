@@ -11,6 +11,7 @@ import { createStore } from "redux";
 import { Provider } from "react-redux";
 import reportWebVitals from "./reportWebVitals";
 import editCustomerDetails from "./redux/reducers/Reducers";
+import AppCard from "./components/mycards/AppCard";
 
 const Error404Modern = lazy(() => import("./pages/error/404-modern"));
 
@@ -24,6 +25,7 @@ ReactDOM.render(
           <Route render={({ location }) => (location.state && location.state.is404 ? <Error404Modern /> : <App />)} />
         </Router>
       </Suspense>
+      {/* <AppCard /> */}
     </React.Fragment>
   </Provider>,
   document.getElementById("root")

@@ -494,10 +494,6 @@ export const dataTableColumns = [
         );
       return null;
     },
-    // name: "Date",
-    // selector: (row) => row.startDate,
-    // sortable: true,
-    // hide: "md",
   },
   {
     dataField: "salary",
