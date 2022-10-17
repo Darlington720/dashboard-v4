@@ -13,10 +13,15 @@ const getRowData = (row) => ({
   payload: row,
 });
 
+const percentage = (percentage) => ({
+  type: "PERCENTAGE",
+  payload: percentage,
+});
 const actions = {
   getDetailsForStudent,
   editConstraint,
   getRowData,
+  percentage,
 };
 
 export default actions;

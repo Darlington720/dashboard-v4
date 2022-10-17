@@ -87,6 +87,7 @@ import InvoiceDetails from "../pages/pre-built/invoice/InvoiceDetails";
 import PricingTable from "../pages/pre-built/pricing-table/PricingTable";
 import GalleryPreview from "../pages/pre-built/gallery/GalleryCardPreview";
 import ReactToastify from "../pages/components/misc/ReactToastify";
+import Constraints from "../pages/components/constraints/Contraints";
 
 import AppMessages from "../pages/app/messages/Messages";
 import Chat from "../pages/app/chat/ChatContainer";
@@ -352,6 +353,7 @@ const Pages = () => {
         <Route exact path={`${process.env.PUBLIC_URL}/staffToday`} component={staffToday}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/table-special`} component={SpecialTablePage}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/charts/chartjs`} component={ChartPage}></Route>
+        <Route exact path={`${process.env.PUBLIC_URL}/constraints`} component={Constraints}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/charts/knobs`} component={KnobPreview}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/email-template`} component={EmailTemplate}></Route>
         <Route exact path={`${process.env.PUBLIC_URL}/nioicon`} component={NioIconPage}></Route>

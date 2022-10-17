@@ -317,7 +317,7 @@ const DataTablePage = () => {
 
   // function to change the design view under 1200 px
   const viewChange = () => {
-    if (window.innerWidth < 960 && expandableRows) {
+    if (window.innerWidth < 960) {
       setMobileView(true);
     } else {
       setMobileView(false);
@@ -347,7 +347,7 @@ const DataTablePage = () => {
                   <BlockTitle tag="h4">Students Today</BlockTitle>
                   <p>
                     {/* {" Pass in the <code>actions</code> props to add export option to the table."} */}
-                    {"22 August 2021"}
+                    {new Date().toDateString()}
                   </p>
                 </BlockHeadContent>
               </BlockHead>

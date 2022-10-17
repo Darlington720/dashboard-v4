@@ -8,6 +8,9 @@ const editCustomerDetails = (state = {}, action) => {
     case "GET_ROW_DATA":
       return Object.assign({}, state, { row: action.payload });
 
+    case "PERCENTAGE":
+      return Object.assign({}, state, { percentage: action.payload });
+
     default:
       return state;
   }

@@ -219,7 +219,7 @@ const DataTablePage = () => {
                   {/* <p>
                 Pass in the <code>actions</code> props to add export option to the table.
               </p> */}
-                  <p>20 September 2022</p>
+                  <p>{new Date().toDateString()}</p>
                 </BlockHeadContent>
               </BlockHead>
 

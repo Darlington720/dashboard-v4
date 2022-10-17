@@ -87,7 +87,7 @@ function actionFormatter(cell, row) {
           style={{
             cursor: "pointer",
           }}
-          onClick={() => handleView(row)}
+          // onClick={() => handleView(row)}
           //onClick={() => {console.log("row clicked", row)}}
         ></FontAwesomeIcon>
       </Link>

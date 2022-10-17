@@ -5,11 +5,11 @@ const menu = [
     link: "/",
   },
 
-  // {
-  //   icon: "dashlite",
-  //   text: "Constraints",
-  //   link: "/constraints",
-  // },
+  {
+    icon: "dashlite",
+    text: "Constraints",
+    link: "/constraints",
+  },
   // {
   //   icon: "bitcoin-cash",
   //   text: "Crypto Dashboard",
