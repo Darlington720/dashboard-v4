@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Content from "../../../layout/content/Content";
 import Head from "../../../layout/head/Head";
 // import makeAnimated from "react-select/animated";
@@ -26,6 +26,7 @@ import actions from "../../../redux/actions/Actions";
 function Contraints() {
   const [selectedItem, setSelectedItem] = useState();
   const [typedConstraint, setTypedConstraint] = useState("");
+  const [constraints, setConstraints] = useState([]);
   const dispatch = useDispatch();
 
   //   const addConstraint = async (constraint) => {
@@ -37,6 +38,24 @@ function Contraints() {
   //     // successAlert();
   //   };
 
+  const getConstraints = async () => {
+    const response = await constraintsApi.getContraints();
+
+    if (!response.ok) {
+      console.log("Failed to load constraints");
+    }
+    let arr = [];
+
+    response.data.forEach((constraint) => {
+      arr.push({
+        value: constraint.c_id,
+        label: constraint.c_name,
+      });
+    });
+
+    setConstraints(arr);
+  };
+
   const updateConstraint = async (constraint) => {
     const res = await constraintsApi.updateConstraint(constraint);
 
@@ -45,14 +64,24 @@ function Contraints() {
     }
 
     // successAlert();
-    console.log("response", res.data);
+    // console.log("response", res.data);
   };
+
+  const defaultOptions = [
+    { value: constraints.c_id, label: constraints.c_name },
+    // { value: "strawberry", label: "Strawberry" },
+    // { value: "vanilla", label: "Vanilla" },
+  ];
+
+  useEffect(() => {
+    getConstraints();
+  }, []);
 
   const handleSuccess = () => {
     dispatch(actions.percentage(parseInt(typedConstraint)));
     const data = {
-      c_id: 5,
-      c_name: selectedItem.value,
+      c_id: selectedItem.value,
+      c_name: selectedItem.label,
       c_percentage: parseInt(typedConstraint),
     };
     updateConstraint(data);
@@ -69,6 +98,7 @@ function Contraints() {
 
   return (
     <React.Fragment>
+      {/* {console.log("constraaints", constraints)} */}
       {/* {console.log(typedConstraint)} */}
       <Head title="Dashboard"></Head>
       <Content page="component">
@@ -85,7 +115,11 @@ function Contraints() {
               <Col sm={6}>
                 <div className="form-group">
                   <label className="form-label">Select Constraint</label>
-                  <RSelect options={defaultOptions} value={selectedItem} onChange={(value) => setSelectedItem(value)} />
+                  <RSelect
+                    options={constraints}
+                    value={selectedItem}
+                    onChange={(value) => setSelectedItem(value)}
+                  />
                 </div>
               </Col>
               <Col sm="6">
@@ -110,7 +144,11 @@ function Contraints() {
                   Primary
                 </OverlineTitle> */}
                 {/* <Button color="primary">Add</Button> */}
-                <Button color="primary" className="eg-swal-default" onClick={() => handleSuccess()}>
+                <Button
+                  color="primary"
+                  className="eg-swal-default"
+                  onClick={() => handleSuccess()}
+                >
                   Set
                 </Button>
               </Col>

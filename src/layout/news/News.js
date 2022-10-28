@@ -23,13 +23,25 @@ const News = () => {
   useEffect(() => {
     loadConstraints();
     // console.log("Constraint", constraints);
-    dispatch(actions.percentage(constraints ? (constraints[0].c_percentage ? constraints[0].c_percentage : 0) : 0));
+    dispatch(
+      actions.percentage(
+        constraints
+          ? constraints[0].c_percentage
+            ? constraints[0].c_percentage
+            : 0
+          : 0
+      )
+    );
   }, [constraints]);
 
   return (
     <div className="nk-news-list">
       {/* {console.log("Current constraint 101", constraints)} */}
-      <a className="nk-news-item" href="#news" onClick={(ev) => ev.preventDefault()}>
+      <a
+        className="nk-news-item"
+        href="#news"
+        onClick={(ev) => ev.preventDefault()}
+      >
         <div className="nk-news-icon">
           <Icon name="card-view" />
         </div>
@@ -39,11 +51,11 @@ const News = () => {
           </p> */}
           <p
             style={{
-              width: 150,
+              width: 200,
               fontSize: 16,
             }}
           >
-            Percentage:{" "}
+            Fees Percentage:{" "}
             <span
               style={{
                 fontSize: 16,

@@ -5,11 +5,33 @@ const menu = [
     link: "/",
   },
 
+  // {
+  //   icon: "dashlite",
+  //   text: "Constraints",
+  //   link: "/constraints",
+  // },
   {
-    icon: "dashlite",
+    icon: "tile-thumb",
     text: "Constraints",
-    link: "/constraints",
+    active: false,
+    subMenu: [
+      {
+        text: "Set Constraint",
+        // link: "/project-card",
+        link: "/constraints",
+      },
+      {
+        text: "Constraint List",
+        // link: "/project-card",
+        link: "/constraintsList",
+      },
+      // {
+      //   text: "Project List",
+      //   link: "/project-list",
+      // },
+    ],
   },
+
   // {
   //   icon: "bitcoin-cash",
   //   text: "Crypto Dashboard",
@@ -90,6 +112,7 @@ const menu = [
       // },
     ],
   },
+
   // {
   //   icon: "tranx",
   //   text: "Non Teaching Staff",
@@ -176,6 +199,32 @@ const menu = [
       // {
       //   text: "Invoice Details",
       //   link: "/invoice-details/1",
+      // },
+    ],
+  },
+  {
+    icon: "tile-thumb",
+    text: "Voting",
+    active: false,
+    subMenu: [
+      {
+        text: "Voters List - Main",
+        // link: "/project-card",
+        link: "/voters-list",
+      },
+      {
+        text: "Voters List - Kampala",
+        // link: "/project-card",
+        link: "/voters-list-kmp",
+      },
+      // {
+      //   text: "Constraint List",
+      //   // link: "/project-card",
+      //   link: "/constraintsList",
+      // },
+      // {
+      //   text: "Project List",
+      //   link: "/project-list",
       // },
     ],
   },

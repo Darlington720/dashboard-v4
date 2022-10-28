@@ -5,7 +5,11 @@ import User4 from "../../../images/avatar/d-sm.jpg";
 import React from "react";
 import { UserAvatar, Icon } from "../../../components/Component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEye, faArrowDown, faArrowUp } from "@fortawesome/free-solid-svg-icons";
+import {
+  faEye,
+  faArrowDown,
+  faArrowUp,
+} from "@fortawesome/free-solid-svg-icons";
 import { findUpper } from "../../../utils/Utils";
 
 export const basicData = {
@@ -31,7 +35,7 @@ export const basicData = {
 
 export const dataTableColumns = [
   {
-    dataField: "name",
+    dataField: "id",
     text: "ID",
     sort: true,
     sortCaret: (order, column) => {
@@ -124,7 +128,7 @@ export const dataTableColumns = [
     // sortable: true,
   },
   {
-    dataField: "age",
+    dataField: "v_full_name",
     text: "Name",
     sort: true,
     sortCaret: (order, column) => {
@@ -218,7 +222,7 @@ export const dataTableColumns = [
     // hide: 370,
   },
   {
-    dataField: "gender",
+    dataField: "reason",
     text: "Reason",
     sort: true,
     sortCaret: (order, column) => {
@@ -312,7 +316,7 @@ export const dataTableColumns = [
     // hide: "sm",
   },
   {
-    dataField: "company",
+    dataField: "office",
     text: "office",
     sort: true,
     sortCaret: (order, column) => {
@@ -405,98 +409,9 @@ export const dataTableColumns = [
     // sortable: true,
     // hide: "sm",
   },
+
   {
-    dataField: "startDate",
-    text: "Date",
-    sort: true,
-    sortCaret: (order, column) => {
-      if (!order)
-        return (
-          <span>
-            &nbsp;&nbsp;{" "}
-            <FontAwesomeIcon
-              icon={faArrowDown}
-              // color="#000"
-              size="sm"
-              // style={{
-              //   cursor: "pointer",
-              // }}
-              // onClick={() => handleView(row)}
-              //onClick={() => {console.log("row clicked", row)}}
-            ></FontAwesomeIcon>
-            <FontAwesomeIcon
-              icon={faArrowUp}
-              // color="#000"
-              size="sm"
-              // style={{
-              //   cursor: "pointer",
-              // }}
-              // onClick={() => handleView(row)}
-              //onClick={() => {console.log("row clicked", row)}}
-            ></FontAwesomeIcon>
-          </span>
-        );
-      else if (order === "asc")
-        return (
-          <span>
-            &nbsp;&nbsp;
-            <FontAwesomeIcon
-              icon={faArrowDown}
-              // color="#000"
-              size="sm"
-              // style={{
-              //   cursor: "pointer",
-              // }}
-              // onClick={() => handleView(row)}
-              //onClick={() => {console.log("row clicked", row)}}
-            ></FontAwesomeIcon>
-            <font color="#000">
-              <FontAwesomeIcon
-                icon={faArrowUp}
-                // color="#000"
-                size="sm"
-                // style={{
-                //   cursor: "pointer",
-                // }}
-                // onClick={() => handleView(row)}
-                //onClick={() => {console.log("row clicked", row)}}
-              ></FontAwesomeIcon>
-            </font>
-          </span>
-        );
-      else if (order === "desc")
-        return (
-          <span>
-            &nbsp;&nbsp;
-            <font color="#000">
-              <FontAwesomeIcon
-                icon={faArrowDown}
-                // color="#000"
-                size="sm"
-                // style={{
-                //   cursor: "pointer",
-                // }}
-                // onClick={() => handleView(row)}
-                //onClick={() => {console.log("row clicked", row)}}
-              ></FontAwesomeIcon>
-            </font>
-            <FontAwesomeIcon
-              icon={faArrowUp}
-              // color="#000"
-              size="sm"
-              // style={{
-              //   cursor: "pointer",
-              // }}
-              // onClick={() => handleView(row)}
-              //onClick={() => {console.log("row clicked", row)}}
-            ></FontAwesomeIcon>
-          </span>
-        );
-      return null;
-    },
-  },
-  {
-    dataField: "salary",
+    dataField: "time",
     text: "Time",
     sort: true,
     sortCaret: (order, column) => {
@@ -588,6 +503,101 @@ export const dataTableColumns = [
     // selector: (row) => row.salary,
     // sortable: true,
     // hide: "md",
+  },
+  {
+    dataField: "userfull_name",
+    text: "Signined in by",
+    headerStyle: (column, colIndex) => {
+      return {
+        width: "180px",
+      };
+    },
+    sort: true,
+    sortCaret: (order, column) => {
+      if (!order)
+        return (
+          <span>
+            &nbsp;&nbsp;{" "}
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+          </span>
+        );
+      else if (order === "asc")
+        return (
+          <span>
+            &nbsp;&nbsp;
+            <FontAwesomeIcon
+              icon={faArrowDown}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+            <font color="#000">
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </font>
+          </span>
+        );
+      else if (order === "desc")
+        return (
+          <span>
+            &nbsp;&nbsp;
+            <font color="#000">
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </font>
+            <FontAwesomeIcon
+              icon={faArrowUp}
+              // color="#000"
+              size="sm"
+              // style={{
+              //   cursor: "pointer",
+              // }}
+              // onClick={() => handleView(row)}
+              //onClick={() => {console.log("row clicked", row)}}
+            ></FontAwesomeIcon>
+          </span>
+        );
+      return null;
+    },
   },
   // {
   //   dataField: "salary",
@@ -702,13 +712,21 @@ export const dataTableColumns2 = [
     style: { paddingRight: "20px" },
     cell: (row) => (
       <div className="user-card mt-2 mb-2">
-        <UserAvatar theme={row.avatarBg} text={findUpper(row.name)} image={row.image}></UserAvatar>
+        <UserAvatar
+          theme={row.avatarBg}
+          text={findUpper(row.name)}
+          image={row.image}
+        ></UserAvatar>
         <div className="user-info">
           <span className="tb-lead">
             {row.name}{" "}
             <span
               className={`dot dot-${
-                row.status === "Active" ? "success" : row.status === "Pending" ? "warning" : "danger"
+                row.status === "Active"
+                  ? "success"
+                  : row.status === "Pending"
+                  ? "warning"
+                  : "danger"
               } d-md-none ml-1`}
             ></span>
           </span>
@@ -748,7 +766,11 @@ export const dataTableColumns2 = [
         <li>
           <Icon
             className={`text-${
-              row.emailStatus === "success" ? "success" : row.emailStatus === "pending" ? "info" : "secondary"
+              row.emailStatus === "success"
+                ? "success"
+                : row.emailStatus === "pending"
+                ? "info"
+                : "secondary"
             }`}
             name={`${
               row.emailStatus === "success"
@@ -772,7 +794,11 @@ export const dataTableColumns2 = [
                 : "secondary"
             }`}
             name={`${
-              row.kycStatus === "success" ? "check-circle" : row.kycStatus === "pending" ? "alarm-alt" : "alert-circle"
+              row.kycStatus === "success"
+                ? "check-circle"
+                : row.kycStatus === "pending"
+                ? "alarm-alt"
+                : "alert-circle"
             }`}
           ></Icon>{" "}
           <span>KYC</span>
@@ -795,7 +821,11 @@ export const dataTableColumns2 = [
     cell: (row) => (
       <span
         className={`tb-status ml-1 text-${
-          row.status === "Active" ? "success" : row.status === "Pending" ? "warning" : "danger"
+          row.status === "Active"
+            ? "success"
+            : row.status === "Pending"
+            ? "warning"
+            : "danger"
         }`}
       >
         {row.status}
