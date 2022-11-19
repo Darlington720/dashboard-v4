@@ -228,6 +228,83 @@ const menu = [
       // },
     ],
   },
+  {
+    icon: "tile-thumb",
+    text: "Examinations",
+    active: false,
+    subMenu: [
+      {
+        text: "Assign Invigilator",
+        // link: "/project-card",
+        link: "/assign-inv",
+      },
+      {
+        text: "Examination Reports",
+        // link: "/project-card",
+        link: "/exam-reports",
+      },
+      // {
+      //   text: "Voters List - Kampala",
+      //   // link: "/project-card",
+      //   link: "/voters-list-kmp",
+      // },
+      {
+        text: "Rooms",
+        // link: "/project-card",
+        link: "/rooms",
+      },
+      // {
+      //   text: "Constraint List",
+      //   // link: "/project-card",
+      //   link: "/constraintsList",
+      // },
+      // {
+      //   text: "Project List",
+      //   link: "/project-list",
+      // },
+    ],
+  },
+  {
+    icon: "tile-thumb",
+    text: "Timetable",
+    active: false,
+    subMenu: [
+      {
+        text: "Exam Timetables",
+        // link: "/project-card",
+        link: "/exam-tt",
+      },
+      {
+        text: "Class Timetables",
+        // link: "/project-card",
+        link: "/exam-tt",
+      },
+      // {
+      //   text: "Voters List - Kampala",
+      //   // link: "/project-card",
+      //   link: "/voters-list-kmp",
+      // },
+      {
+        text: "Add Exam Timetable",
+        // link: "/project-card",
+        link: "/add-exam-tt",
+      },
+      {
+        text: "Add Class Timetable",
+        // link: "/project-card",
+        link: "/add-class-tt",
+      },
+      // {
+      //   text: "Constraint List",
+      //   // link: "/project-card",
+      //   link: "/constraintsList",
+      // },
+      // {
+      //   text: "Project List",
+      //   link: "/project-list",
+      // },
+    ],
+  },
   // {
   //   icon: "view-col",
   //   text: "Pricing Table",

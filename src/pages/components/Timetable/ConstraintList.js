@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import BootstrapTable from "react-bootstrap-table-next";
 import Content from "../../../layout/content/Content";
 import Head from "../../../layout/head/Head";
-import overlayFactory from "react-bootstrap-table2-overlay";
 import {
   Block,
   BlockHead,
@@ -26,59 +25,43 @@ import ToolkitProvider, {
   CSVExport,
 } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import { Row } from "reactstrap";
-import studentsApi from "../../../api/studentApi";
+import constraintsApi from "../../../api/constraintsApi";
 
 const DataTablePage = () => {
   const { SearchBar } = Search;
   const { ExportCSVButton } = CSVExport;
-  const [voters, setVoters] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [constraints, setConstraints] = useState([]);
 
-  const loadVoters = async (campus_id) => {
-    setLoading(true);
-    const res = await studentsApi.getVoters(campus_id);
-    setLoading(false);
-    if (!res.ok) {
-      console.log("Failed to load the voters");
+  const getConstraints = async () => {
+    const response = await constraintsApi.getContraints();
+
+    if (!response.ok) {
+      console.log("Failed to load constraints");
     }
 
-    setVoters(res.data);
+    setConstraints(response.data);
   };
 
   useEffect(() => {
-    loadVoters(2);
+    getConstraints();
   }, []);
-
-  const NoDataIndication = () => (
-    <div className="spinner">
-      <div className="rect1" />
-      <div className="rect2" />
-      <div className="rect3" />
-      <div className="rect4" />
-      <div className="rect5" />
-    </div>
-  );
 
   return (
     <React.Fragment>
-      <Head title="Voters" />
+      <Head title="Constraint List" />
       <Content page="component">
         <Block size="lg">
           <BlockHead>
             <BlockHeadContent>
-              <BlockTitle tag="h4">Voters</BlockTitle>
-              {/* <p>
-                Pass in the <code>actions</code> props to add export option to the table.
-              </p> */}
-              <p>{new Date().toDateString()}</p>
+              <BlockTitle tag="h4">Constraint List</BlockTitle>
             </BlockHeadContent>
           </BlockHead>
 
           <PreviewCard>
             <ToolkitProvider
-              keyField="id"
+              keyField="c_id"
               exportCSV
-              data={voters}
+              data={constraints}
               columns={dataTableColumns}
               search
             >
@@ -115,23 +98,9 @@ const DataTablePage = () => {
                     striped
                     hover
                     condensed
-                    tabIndexCell
-                    // remote
-                    loading={loading}
                     {...props.baseProps}
                     pagination={paginationFactory()}
                     // expandRow={expandRow}
-
-                    noDataIndication={"Table is empty"}
-                    overlay={overlayFactory({
-                      spinner: true,
-                      styles: {
-                        overlay: (base) => ({
-                          ...base,
-                          background: "lightblue",
-                        }),
-                      },
-                    })}
                   />
                 </div>
               )}

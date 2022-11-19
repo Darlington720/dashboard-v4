@@ -26,8 +26,11 @@ import FormValidation from "../pages/components/forms/FormValidation";
 import DataTablePage from "../pages/components/table/DataTable";
 import StudentsToday from "../pages/components/studentsToday/DataTable";
 import visitorsToday from "../pages/components/visitorsToday/DataTable";
+import Rooms from "../pages/components/examinations/Rooms";
+import ExamsTimetable from "../pages/components/Timetable/ExamsTimetable";
 import VotersList from "../pages/components/Voting/VotersList";
 import VotersListKmp from "../pages/components/Voting/VisitorsListKmp";
+import AddExamsTT from "../pages/components/Timetable/AddExamTT";
 import staffToday from "../pages/components/staffToday/DataTable";
 import Modals from "../pages/components/Modals";
 import Pagination from "../pages/components/Pagination";
@@ -91,6 +94,7 @@ import GalleryPreview from "../pages/pre-built/gallery/GalleryCardPreview";
 import ReactToastify from "../pages/components/misc/ReactToastify";
 import Constraints from "../pages/components/constraints/Contraints";
 import ConstraintList from "../pages/components/constraints/ConstraintList";
+import AssignInvigilator from "../pages/components/examinations/AssignInvigilator";
 
 import AppMessages from "../pages/app/messages/Messages";
 import Chat from "../pages/app/chat/ChatContainer";
@@ -701,6 +705,11 @@ const Pages = () => {
         ></Route>
         <Route
           exact
+          path={`${process.env.PUBLIC_URL}/add-exam-tt`}
+          component={AddExamsTT}
+        ></Route>
+        <Route
+          exact
           path={`${process.env.PUBLIC_URL}/staffToday`}
           component={staffToday}
         ></Route>
@@ -723,6 +732,21 @@ const Pages = () => {
           exact
           path={`${process.env.PUBLIC_URL}/constraintsList`}
           component={ConstraintList}
+        ></Route>
+        <Route
+          exact
+          path={`${process.env.PUBLIC_URL}/assign-inv`}
+          component={AssignInvigilator}
+        ></Route>
+        <Route
+          exact
+          path={`${process.env.PUBLIC_URL}/exam-tt`}
+          component={ExamsTimetable}
+        ></Route>
+        <Route
+          exact
+          path={`${process.env.PUBLIC_URL}/rooms`}
+          component={Rooms}
         ></Route>
         <Route
           exact

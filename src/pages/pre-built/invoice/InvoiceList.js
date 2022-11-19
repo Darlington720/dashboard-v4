@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import overlayFactory from "react-bootstrap-table2-overlay";
 import Content from "../../../layout/content/Content";
 import Head from "../../../layout/head/Head";
 import classnames from "classnames";
@@ -812,6 +813,7 @@ const InvoiceList = () => {
   const [activeTab, setActivetab] = useState("1");
   const [hasError, setHasError] = useState(false);
   const [todaysLectures, setTodaysLectures] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const schools = ["SBA", "SCI", "SCOS", "SOSS", "SLAW", "SCIAD"];
 
@@ -859,7 +861,9 @@ const InvoiceList = () => {
     },
   };
   const getTodaysLectures = async (school) => {
+    setLoading(true);
     const res = await staffApi.getTodaysLectures(school);
+    setLoading(false);
 
     if (!res.ok) {
       setHasError(true);
@@ -1083,13 +1087,34 @@ const InvoiceList = () => {
                             </div>
                           </div>
                           {/* <hr /> */}
-                          <BootstrapTable
+                          {/* <BootstrapTable
                             striped
                             hover
                             condensed
                             {...props.baseProps}
                             pagination={paginationFactory()}
                             expandRow={expandRow}
+                          /> */}
+                          <BootstrapTable
+                            striped
+                            hover
+                            condensed
+                            tabIndexCell
+                            // remote
+                            loading={loading}
+                            {...props.baseProps}
+                            pagination={paginationFactory()}
+                            expandRow={expandRow}
+                            noDataIndication={"Table is empty"}
+                            overlay={overlayFactory({
+                              spinner: true,
+                              styles: {
+                                overlay: (base) => ({
+                                  ...base,
+                                  background: "lightblue",
+                                }),
+                              },
+                            })}
                           />
                         </div>
                       )}

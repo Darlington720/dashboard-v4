@@ -1,6 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import BootstrapTable from "react-bootstrap-table-next";
-import overlayFactory from "react-bootstrap-table2-overlay";
 import Content from "../../../layout/content/Content";
 import Head from "../../../layout/head/Head";
 import {
@@ -13,20 +12,11 @@ import {
   PreviewCard,
   ReactDataTable,
 } from "../../../components/Component";
-import {
-  DataTableData,
-  dataTableColumns,
-  dataTableColumns2,
-  userData,
-} from "./TableData";
+import { DataTableData, dataTableColumns, dataTableColumns2, userData } from "./TableData";
 import paginationFactory from "react-bootstrap-table2-paginator";
 // import ToolkitProvider, { Search } from "react-bootstrap-table2-toolkit";
-import ToolkitProvider, {
-  Search,
-  CSVExport,
-} from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
+import ToolkitProvider, { Search, CSVExport } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
 import { Row } from "reactstrap";
-import visitorsApi from "../../../api/visitorsApi";
 
 // const customTotal = (from, to, size) => (
 //   <span className="react-bootstrap-table-pagination-total">
@@ -71,36 +61,13 @@ import visitorsApi from "../../../api/visitorsApi";
 const DataTablePage = () => {
   const { SearchBar } = Search;
   const { ExportCSVButton } = CSVExport;
-  const [visitors, setVisitors] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const loadVisitors = async () => {
-    setLoading(true);
-    const res = await visitorsApi.getVisitorsToday();
-    setLoading(false);
-
-    if (!res.ok) {
-      console.log("Failed to load visitors");
-    }
-
-    setVisitors(res.data);
-  };
-
-  useEffect(() => {
-    loadVisitors();
-  }, []);
 
   const expandRow = {
     renderer: (row) => (
       <div>
         <p>{`This Expand row is belong to rowKey ${row.id}`}</p>
-        <p>
-          You can render anything here, also you can add additional data on
-          every row object
-        </p>
-        <p>
-          expandRow.renderer callback will pass the origin row object to you
-        </p>
+        <p>You can render anything here, also you can add additional data on every row object</p>
+        <p>expandRow.renderer callback will pass the origin row object to you</p>
       </div>
     ),
     showExpandColumn: true,
@@ -119,8 +86,47 @@ const DataTablePage = () => {
   };
   return (
     <React.Fragment>
-      <Head title="Visitors" />
+      <Head title="Basic Tables" />
       <Content page="component">
+        {/* <BlockHead size="lg" wide="sm">
+          <BlockHeadContent>
+            <BackTo link="/components" icon="arrow-left">
+              Components
+            </BackTo>
+            <BlockTitle tag="h2" className="fw-normal">
+              DataTable Example
+            </BlockTitle>
+            <BlockDes>
+              <p className="lead">
+                The tables in this section has used the{" "}
+                <a href="https://react-data-table-component.netlify.app/" target="_blank" rel="noreferrer">
+                  React-Data-Table-Component
+                </a>{" "}
+                package. Visit the{" "}
+                <a href="https://react-data-table-component.netlify.app/" target="_blank" rel="noreferrer">
+                  documentation
+                </a>{" "}
+                for further understanding. The plugin has been customized for the purpose of React Dashlite.
+              </p>
+            </BlockDes>
+          </BlockHeadContent>
+        </BlockHead> */}
+
+        {/* <Block size="lg">
+          <BlockHead>
+            <BlockHeadContent>
+              <BlockTitle tag="h4">DataTable Default</BlockTitle>
+              <p>
+                Just import <code>ReactDataTable</code> from <code>components</code>, it is built in for react dashlite.
+              </p>
+            </BlockHeadContent>
+          </BlockHead>
+
+          <PreviewCard>
+            <ReactDataTable data={DataTableData} columns={dataTableColumns} expandableRows pagination />
+          </PreviewCard>
+        </Block> */}
+
         <Block size="lg">
           <BlockHead>
             <BlockHeadContent>
@@ -133,13 +139,7 @@ const DataTablePage = () => {
           </BlockHead>
 
           <PreviewCard>
-            <ToolkitProvider
-              keyField="id"
-              exportCSV
-              data={visitors}
-              columns={dataTableColumns}
-              search
-            >
+            <ToolkitProvider keyField="id" exportCSV data={DataTableData} columns={dataTableColumns} search>
               {(props) => (
                 <div>
                   {/* <h3>Input something at below input field:</h3> */}
@@ -163,9 +163,7 @@ const DataTablePage = () => {
                         justifyContent: "center",
                       }}
                     >
-                      <ExportCSVButton {...props.csvProps}>
-                        Export CSV!!
-                      </ExportCSVButton>
+                      <ExportCSVButton {...props.csvProps}>Export CSV!!</ExportCSVButton>
                     </div>
                   </div>
                   {/* <hr /> */}
@@ -173,23 +171,9 @@ const DataTablePage = () => {
                     striped
                     hover
                     condensed
-                    tabIndexCell
-                    // remote
-                    loading={loading}
                     {...props.baseProps}
                     pagination={paginationFactory()}
-                    // expandRow={expandRow}
-
-                    noDataIndication={"Table is empty"}
-                    overlay={overlayFactory({
-                      spinner: true,
-                      styles: {
-                        overlay: (base) => ({
-                          ...base,
-                          background: "lightblue",
-                        }),
-                      },
-                    })}
+                    expandRow={expandRow}
                   />
                 </div>
               )}
