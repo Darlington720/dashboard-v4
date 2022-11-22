@@ -194,14 +194,23 @@ const SweetAlertPage = () => {
             <BlockDes>
               <p className="lead">
                 Inside React DashLite, we integrated the{" "}
-                <a href="https://sweetalert2.github.io/" target="_blank" rel="noreferrer">
+                <a
+                  href="https://sweetalert2.github.io/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   SweetAlert2
                 </a>{" "}
-                which is beautiful, responsive, highly customizable JavaScript's popup boxes.
+                which is beautiful, responsive, highly customizable JavaScript's
+                popup boxes.
               </p>
               <p>
                 You can see full uses documentation details from{" "}
-                <a href="https://sweetalert2.github.io/" rel="noreferrer" target="_blank">
+                <a
+                  href="https://sweetalert2.github.io/"
+                  rel="noreferrer"
+                  target="_blank"
+                >
                   here
                 </a>
                 .
@@ -219,12 +228,20 @@ const SweetAlertPage = () => {
           <PreviewCard>
             <ul className="align-center flex-wrap g-2">
               <li>
-                <Button color="primary" className="eg-swal-default" onClick={() => handleDefault()}>
+                <Button
+                  color="primary"
+                  className="eg-swal-default"
+                  onClick={() => handleDefault()}
+                >
                   Default
                 </Button>
               </li>
               <li>
-                <Button color="primary" className="eg-swal-default-s2" onClick={() => handleDefault2()}>
+                <Button
+                  color="primary"
+                  className="eg-swal-default-s2"
+                  onClick={() => handleDefault2()}
+                >
                   Default S2
                 </Button>
               </li>
@@ -253,27 +270,47 @@ const SweetAlertPage = () => {
           <PreviewCard>
             <ul className="align-center flex-wrap g-2">
               <li>
-                <Button color="success" className="eg-swal-success" onClick={() => handleSuccess()}>
+                <Button
+                  color="success"
+                  className="eg-swal-success"
+                  onClick={() => handleSuccess()}
+                >
                   Success
                 </Button>
               </li>
               <li>
-                <Button color="info" className="eg-swal-info" onClick={() => handleInfo()}>
+                <Button
+                  color="info"
+                  className="eg-swal-info"
+                  onClick={() => handleInfo()}
+                >
                   Info
                 </Button>
               </li>
               <li>
-                <Button color="warning" className="eg-swal-warning" onClick={() => handleWarning()}>
+                <Button
+                  color="warning"
+                  className="eg-swal-warning"
+                  onClick={() => handleWarning()}
+                >
                   Warning
                 </Button>
               </li>
               <li>
-                <Button color="danger" className="eg-swal-error" onClick={() => handleError()}>
+                <Button
+                  color="danger"
+                  className="eg-swal-error"
+                  onClick={() => handleError()}
+                >
                   Error
                 </Button>
               </li>
               <li>
-                <Button color="light" className="eg-swal-question" onClick={() => handleQuestion()}>
+                <Button
+                  color="light"
+                  className="eg-swal-question"
+                  onClick={() => handleQuestion()}
+                >
                   Question
                 </Button>
               </li>
@@ -304,32 +341,56 @@ const SweetAlertPage = () => {
           <PreviewCard>
             <ul className="align-center flex-wrap g-2">
               <li>
-                <Button color="primary" className="eg-swal-av1" onClick={(e) => handleAdvanced1(e)}>
+                <Button
+                  color="primary"
+                  className="eg-swal-av1"
+                  onClick={(e) => handleAdvanced1(e)}
+                >
                   Advanced 01
                 </Button>
               </li>
               <li>
-                <Button color="primary" className="eg-swal-av2" onClick={(e) => handleAdvanced2(e)}>
+                <Button
+                  color="primary"
+                  className="eg-swal-av2"
+                  onClick={(e) => handleAdvanced2(e)}
+                >
                   Advanced 02
                 </Button>
               </li>
               <li>
-                <Button color="primary" className="eg-swal-av3" onClick={(e) => handleAdvanced3(e)}>
+                <Button
+                  color="primary"
+                  className="eg-swal-av3"
+                  onClick={(e) => handleAdvanced3(e)}
+                >
                   Advanced 03
                 </Button>
               </li>
               <li>
-                <Button color="primary" className="eg-swal-av4" onClick={(e) => handleAdvanced4(e)}>
+                <Button
+                  color="primary"
+                  className="eg-swal-av4"
+                  onClick={(e) => handleAdvanced4(e)}
+                >
                   Advanced 04
                 </Button>
               </li>
               <li>
-                <Button color="primary" className="eg-swal-av5" onClick={(e) => handleAdvanced5(e)}>
+                <Button
+                  color="primary"
+                  className="eg-swal-av5"
+                  onClick={(e) => handleAdvanced5(e)}
+                >
                   Advanced 05
                 </Button>
               </li>
               <li>
-                <Button color="primary" className="eg-swal-av6" onClick={(e) => handleAdvanced6(e)}>
+                <Button
+                  color="primary"
+                  className="eg-swal-av6"
+                  onClick={(e) => handleAdvanced6(e)}
+                >
                   Advanced 06
                 </Button>
               </li>

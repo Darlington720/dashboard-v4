@@ -3,6 +3,7 @@ import menu from "./MenuData";
 import Icon from "../../components/icon/Icon";
 import classNames from "classnames";
 import { NavLink, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const MenuHeading = ({ heading }) => {
   return (
@@ -12,7 +13,19 @@ const MenuHeading = ({ heading }) => {
   );
 };
 
-const MenuItem = ({ icon, link, text, sub, newTab, sidebarToggle, mobileView, badge, ...props }) => {
+const MenuItem = ({
+  icon,
+  link,
+  text,
+  sub,
+  newTab,
+  sidebarToggle,
+  mobileView,
+  badge,
+  access,
+  ...props
+}) => {
+  const user = useSelector((state) => state.user);
   let currentUrl;
   const toggleActionSidebar = (e) => {
     if (!sub && !newTab && mobileView) {
@@ -54,15 +67,23 @@ const MenuItem = ({ icon, link, text, sub, newTab, sidebarToggle, mobileView, ba
   };
 
   useEffect(() => {
-    var element = document.getElementsByClassName("nk-menu-item active current-page");
+    var element = document.getElementsByClassName(
+      "nk-menu-item active current-page"
+    );
     var arrayElement = [...element];
 
     arrayElement.forEach((dom) => {
-      if (dom.parentElement.parentElement.parentElement.classList[0] === "nk-menu-item") {
+      if (
+        dom.parentElement.parentElement.parentElement.classList[0] ===
+        "nk-menu-item"
+      ) {
         dom.parentElement.parentElement.parentElement.classList.add("active");
         const subMenuHeight = menuHeight(dom.parentNode.children);
         dom.parentElement.parentElement.style.height = subMenuHeight + "px";
-        makeParentActive(dom.parentElement.parentElement.parentElement, subMenuHeight);
+        makeParentActive(
+          dom.parentElement.parentElement.parentElement,
+          subMenuHeight
+        );
       }
     });
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -109,7 +130,8 @@ const MenuItem = ({ icon, link, text, sub, newTab, sidebarToggle, mobileView, ba
           for (var l = 0; l < parentMenus.length; l++) {
             if (typeof parentMenus !== "undefined") {
               if (parentMenus[l].classList.contains("nk-menu-wrap")) {
-                parentMenus[l].style.height = subMenuHeight + parentMenus[l].clientHeight + "px";
+                parentMenus[l].style.height =
+                  subMenuHeight + parentMenus[l].clientHeight + "px";
               }
             }
           }
@@ -125,7 +147,8 @@ const MenuItem = ({ icon, link, text, sub, newTab, sidebarToggle, mobileView, ba
         for (var k = 0; k < parentMenus.length; k++) {
           if (typeof parentMenus !== "undefined") {
             if (parentMenus[k].classList.contains("nk-menu-wrap")) {
-              parentMenus[k].style.height = parentMenus[k].clientHeight - subMenuHeight + "px";
+              parentMenus[k].style.height =
+                parentMenus[k].clientHeight - subMenuHeight + "px";
             }
           }
         }
@@ -139,6 +162,17 @@ const MenuItem = ({ icon, link, text, sub, newTab, sidebarToggle, mobileView, ba
     "has-sub": sub,
     "active current-page": currentUrl === process.env.PUBLIC_URL + link,
   });
+
+  // if (access) {
+  //   access.map((role) => {
+  //     console.log("Role", role);
+  //     console.log("user role", user.role);
+  //     if (role == user.role) {
+
+  //     }
+  //   });
+  // }
+
   return (
     <li className={menuItemClass} onClick={(e) => toggleActionSidebar(e)}>
       {newTab ? (
@@ -172,14 +206,26 @@ const MenuItem = ({ icon, link, text, sub, newTab, sidebarToggle, mobileView, ba
       )}
       {sub ? (
         <div className="nk-menu-wrap">
-          <MenuSub sub={sub} sidebarToggle={sidebarToggle} mobileView={mobileView} />
+          <MenuSub
+            sub={sub}
+            sidebarToggle={sidebarToggle}
+            mobileView={mobileView}
+          />
         </div>
       ) : null}
     </li>
   );
 };
 
-const MenuSub = ({ icon, link, text, sub, sidebarToggle, mobileView, ...props }) => {
+const MenuSub = ({
+  icon,
+  link,
+  text,
+  sub,
+  sidebarToggle,
+  mobileView,
+  ...props
+}) => {
   return (
     <ul className="nk-menu-sub" style={props.style}>
       {sub.map((item) => (
@@ -200,9 +246,24 @@ const MenuSub = ({ icon, link, text, sub, sidebarToggle, mobileView, ...props })
 };
 
 const Menu = ({ sidebarToggle, mobileView }) => {
+  const user = useSelector((state) => state.user);
+  let newArr = [];
+
+  menu.map((item) => {
+    if (item.access && user) {
+      item.access.map((role) => {
+        if (user.role.toLowerCase() == role.toLowerCase()) {
+          newArr.push(item);
+        }
+      });
+    }
+  });
+
   return (
     <ul className="nk-menu">
-      {menu.map((item) =>
+      {/* {console.log("Menu data", menu)} */}
+
+      {newArr.map((item) =>
         item.heading ? (
           <MenuHeading heading={item.heading} key={item.heading} />
         ) : (
@@ -211,6 +272,7 @@ const Menu = ({ sidebarToggle, mobileView }) => {
             link={item.link}
             icon={item.icon}
             text={item.text}
+            access={item.access}
             sub={item.subMenu}
             badge={item.badge}
             sidebarToggle={sidebarToggle}

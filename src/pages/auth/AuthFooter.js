@@ -4,7 +4,12 @@ import SpanishFlag from "../../images/flags/spanish.png";
 import FrenchFlag from "../../images/flags/french.png";
 import TurkeyFlag from "../../images/flags/turkey.png";
 import { Row, Col } from "../../components/Component";
-import { DropdownItem, DropdownMenu, DropdownToggle, UncontrolledDropdown } from "reactstrap";
+import {
+  DropdownItem,
+  DropdownMenu,
+  DropdownToggle,
+  UncontrolledDropdown,
+} from "reactstrap";
 import { Link } from "react-router-dom";
 
 const AuthFooter = () => {
@@ -15,17 +20,29 @@ const AuthFooter = () => {
           <Col lg={6} className="order-lg-last">
             <ul className="nav nav-sm justify-content-center justify-content-lg-end">
               <li className="nav-item">
-                <Link className="nav-link" target="_blank" to={`${process.env.PUBLIC_URL}/auths/terms`}>
+                <Link
+                  className="nav-link"
+                  target="_blank"
+                  to={`${process.env.PUBLIC_URL}/auths/terms`}
+                >
                   Terms &amp; Condition
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" target="_blank" to={`${process.env.PUBLIC_URL}/auths/terms`}>
+                <Link
+                  className="nav-link"
+                  target="_blank"
+                  to={`${process.env.PUBLIC_URL}/auths/terms`}
+                >
                   Privacy Policy
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" target="_blank" to={`${process.env.PUBLIC_URL}/auths/faq`}>
+                <Link
+                  className="nav-link"
+                  target="_blank"
+                  to={`${process.env.PUBLIC_URL}/auths/faq`}
+                >
                   Help
                 </Link>
               </li>
@@ -48,7 +65,11 @@ const AuthFooter = () => {
                           }}
                           className="language-item"
                         >
-                          <img src={EnglishFlag} alt="" className="language-flag" />
+                          <img
+                            src={EnglishFlag}
+                            alt=""
+                            className="language-flag"
+                          />
                           <span className="language-name">English</span>
                         </DropdownItem>
                       </li>
@@ -61,7 +82,11 @@ const AuthFooter = () => {
                           }}
                           className="language-item"
                         >
-                          <img src={SpanishFlag} alt="" className="language-flag" />
+                          <img
+                            src={SpanishFlag}
+                            alt=""
+                            className="language-flag"
+                          />
                           <span className="language-name">Español</span>
                         </DropdownItem>
                       </li>
@@ -74,7 +99,11 @@ const AuthFooter = () => {
                           }}
                           className="language-item"
                         >
-                          <img src={FrenchFlag} alt="" className="language-flag" />
+                          <img
+                            src={FrenchFlag}
+                            alt=""
+                            className="language-flag"
+                          />
                           <span className="language-name">Français</span>
                         </DropdownItem>
                       </li>
@@ -87,7 +116,11 @@ const AuthFooter = () => {
                           }}
                           className="language-item"
                         >
-                          <img src={TurkeyFlag} alt="" className="language-flag" />
+                          <img
+                            src={TurkeyFlag}
+                            alt=""
+                            className="language-flag"
+                          />
                           <span className="language-name">Türkçe</span>
                         </DropdownItem>
                       </li>
@@ -99,7 +132,9 @@ const AuthFooter = () => {
           </Col>
           <Col lg="6">
             <div className="nk-block-content text-center text-lg-left">
-              <p className="text-soft">&copy; 2022 Dashlite. All Rights Reserved.</p>
+              <p className="text-soft">
+                &copy; 2022 Tredumo. All Rights Reserved.
+              </p>
             </div>
           </Col>
         </Row>

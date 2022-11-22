@@ -1,14 +1,15 @@
-import apiClient from "./client";
+import mainClient from "./client";
 
 const addConstraint = (constraint) =>
-  apiClient.post("/addConstraint", constraint);
+  mainClient.apiClient.post("/addConstraint", constraint);
 
 const updateConstraint = (constraint) =>
-  apiClient.post("/updateConstraint", constraint);
+  mainClient.apiClient.post("/updateConstraint", constraint);
 
-const getRooms = () => apiClient.get("/rooms");
+const getRooms = () => mainClient.apiClient.get("/rooms");
 
-const addRoom = (roomName) => apiClient.post("/api/addRoom", roomName);
+const addRoom = (roomName) =>
+  mainClient.apiClient.post("/api/addRoom", roomName);
 
 const apiCalls = {
   getRooms,

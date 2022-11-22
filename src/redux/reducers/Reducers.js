@@ -11,6 +11,9 @@ const editCustomerDetails = (state = {}, action) => {
     case "PERCENTAGE":
       return Object.assign({}, state, { percentage: action.payload });
 
+    case "SAVE_USER":
+      return Object.assign({}, state, { user: action.payload });
+
     default:
       return state;
   }

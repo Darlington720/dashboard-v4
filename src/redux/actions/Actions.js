@@ -17,11 +17,17 @@ const percentage = (percentage) => ({
   type: "PERCENTAGE",
   payload: percentage,
 });
+
+const saveUser = (user) => ({
+  type: "SAVE_USER",
+  payload: user,
+});
 const actions = {
   getDetailsForStudent,
   editConstraint,
   getRowData,
   percentage,
+  saveUser,
 };
 
 export default actions;

@@ -1,57 +1,68 @@
-import apiClient from "./client";
+import mainClient from "./client";
 
 //Number of all staff members in the university
-const getNumAllStaff = () => apiClient.get("/numofstaff");
+const getNumAllStaff = () => mainClient.apiClient.get("/numofstaff");
 
 //An array of staff in the university 2de
-const getAllStaffToday = () => apiClient.get("/stafftoday");
+const getAllStaffToday = () => mainClient.apiClient.get("/stafftoday");
 
 //Number of staff in campus 2de
-const numOfStaffToday = () => apiClient.get("/numofstafftoday");
+const numOfStaffToday = () => mainClient.apiClient.get("/numofstafftoday");
 
 //An image of the given staff id
-const getStaffImage = (staff_id) => apiClient.get(`/image/${staff_id}`);
+const getStaffImage = (staff_id) =>
+  mainClient.apiClient.get(`/image/${staff_id}`);
 
 const getAllStaffDetails = (staff_id) =>
-  apiClient.get(`/allstaffdetails/${staff_id}`);
+  mainClient.apiClient.get(`/allstaffdetails/${staff_id}`);
 const getLecturerCourseUnits = (data) =>
-  apiClient.post("/lecturerCourseunits", data);
+  mainClient.apiClient.post("/lecturerCourseunits", data);
 const getEnrolledStudents = (course_id) =>
-  apiClient.get(`/getEnrolledStudents/${course_id}`);
-const getLectureData = (data) => apiClient.post(`/getLectureData/`, data);
+  mainClient.apiClient.get(`/getEnrolledStudents/${course_id}`);
+const getLectureData = (data) =>
+  mainClient.apiClient.post(`/getLectureData/`, data);
 
 //An array of lectures today
 const getTodaysLectures = (school) =>
-  apiClient.get(`/todaysLectures/${school}`);
+  mainClient.apiClient.get(`/todaysLectures/${school}`);
 
 //Number of Lectures today based on school
 const getnumOfTodaysLectures = (school) =>
-  apiClient.get(`/numoftodaysLectures/${school}`);
+  mainClient.apiClient.get(`/numoftodaysLectures/${school}`);
 
 //Number of Students Per school 2de
 const getstudentsTotalBySchool = (school) =>
-  apiClient.get(`/studentsTotalBySchool/${school}`);
+  mainClient.apiClient.get(`/studentsTotalBySchool/${school}`);
 
-const getStaffMembers = () => apiClient.get(`/staff`);
+const getStaffMembers = () => mainClient.apiClient.get(`/staff`);
 
-const getExamSessions = () => apiClient.get(`/exam_sessions`);
+const getExamSessions = () => mainClient.apiClient.get(`/exam_sessions`);
 
-const addInvigilators = (data) => apiClient.post(`/api/addinvigilator/`, data);
+const addInvigilators = (data) =>
+  mainClient.apiClient.post(`/api/addinvigilator/`, data);
 
-const getInvigilators = () => apiClient.get(`/invigilator_sammary`);
+const getInvigilators = () => mainClient.apiClient.get(`/invigilator_sammary`);
 
-const getModules = () => apiClient.get(`/modules`);
+const getModules = () => mainClient.apiClient.get(`/modules`);
 
-const addTimetable = (data) => apiClient.post("/api/addExamTimetable", data);
+const addTimetable = (data) =>
+  mainClient.apiClient.post("/api/addExamTimetable", data);
 
-const getSchools = () => apiClient.get(`/schools`);
+const getSchools = () => mainClient.apiClient.get(`/schools`);
 
-const getStudyTimes = () => apiClient.get(`/study_time`);
+const getStudyTimes = () => mainClient.apiClient.get(`/study_time`);
 
-const getExamsOnGivenConstraints = (data) => apiClient.post("/api/exams", data);
+const getExamsOnGivenConstraints = (data) =>
+  mainClient.apiClient.post("/api/exams", data);
 
 const getFullInvigilatorData = (data) =>
-  apiClient.post("/api/invigilatordata", data);
+  mainClient.apiClient.post("/api/invigilatordata", data);
+
+const login = (loginDetails) =>
+  mainClient.apiClient.post("/api/login", loginDetails);
+
+const getExamTimetable = (data) =>
+  mainClient.apiClient.post("/api/examTT", data);
 
 const apiCalls = {
   getNumAllStaff,
@@ -75,6 +86,8 @@ const apiCalls = {
   getStudyTimes,
   getExamsOnGivenConstraints,
   getFullInvigilatorData,
+  login,
+  getExamTimetable,
 };
 
 export default apiCalls;

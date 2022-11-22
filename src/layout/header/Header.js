@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classNames from "classnames";
 import Toggle from "../sidebar/Toggle";
 import Logo from "../logo/Logo";
 import News from "../news/News";
 import User from "./dropdown/user/User";
 import Notification from "./dropdown/notification/Notification";
+import { useSelector } from "react-redux";
 
 const Header = ({ fixed, theme, className, setVisibility, ...props }) => {
+  const user = useSelector((state) => state.user);
+
   const headerClass = classNames({
     "nk-header": true,
     "nk-header-fixed": fixed,
@@ -16,6 +19,7 @@ const Header = ({ fixed, theme, className, setVisibility, ...props }) => {
   });
   return (
     <div className={headerClass}>
+      {/* {console.log("User in header", user)} */}
       <div className="container-fluid">
         <div className="nk-header-wrap">
           <div className="nk-menu-trigger d-xl-none ml-n1">
@@ -33,10 +37,16 @@ const Header = ({ fixed, theme, className, setVisibility, ...props }) => {
           </div>
           <div className="nk-header-tools">
             <ul className="nk-quick-nav">
-              <li className="user-dropdown" onClick={() => setVisibility(false)}>
+              <li
+                className="user-dropdown"
+                onClick={() => setVisibility(false)}
+              >
                 <User />
               </li>
-              <li className="notification-dropdown mr-n1" onClick={() => setVisibility(false)}>
+              <li
+                className="notification-dropdown mr-n1"
+                onClick={() => setVisibility(false)}
+              >
                 {/* <Notification /> */}
               </li>
             </ul>

@@ -3,6 +3,12 @@ const menu = [
     icon: "dashlite",
     text: "Dashboard",
     link: "/",
+    access: [
+      "Vice Chancellor",
+      "lecturer",
+      "Administrative Assistant",
+      "SENIOR ASSISTANT ACADEMIC REGISTRAR",
+    ],
   },
 
   // {
@@ -14,6 +20,11 @@ const menu = [
     icon: "tile-thumb",
     text: "Constraints",
     active: false,
+    access: [
+      "Vice Chancellor",
+      "Academic Registrar",
+      "SENIOR ASSISTANT ACADEMIC REGISTRAR",
+    ],
     subMenu: [
       {
         text: "Set Constraint",
@@ -53,6 +64,7 @@ const menu = [
   {
     icon: "tile-thumb",
     text: "Students",
+    access: ["Vice Chancellor"],
     active: false,
     subMenu: [
       {
@@ -70,6 +82,7 @@ const menu = [
     icon: "users",
     text: "Visitors",
     active: false,
+    access: ["Vice Chancellor"],
     subMenu: [
       {
         text: "Visitors Today",
@@ -97,6 +110,7 @@ const menu = [
     icon: "file-docs",
     text: "Teaching Staff",
     active: false,
+    access: ["Vice Chancellor"],
     subMenu: [
       {
         text: "Staff Today",
@@ -187,6 +201,7 @@ const menu = [
     icon: "file-docs",
     text: "Lectures",
     active: false,
+    access: ["Vice Chancellor"],
     subMenu: [
       {
         text: "Lectures Today",
@@ -206,6 +221,7 @@ const menu = [
     icon: "tile-thumb",
     text: "Voting",
     active: false,
+    access: ["Vice Chancellor"],
     subMenu: [
       {
         text: "Voters List - Main",
@@ -231,6 +247,13 @@ const menu = [
   {
     icon: "tile-thumb",
     text: "Examinations",
+    access: [
+      "Vice Chancellor",
+      "lecturer",
+      "Administrative Assistant",
+      "Academic Registrar",
+      "SENIOR ASSISTANT ACADEMIC REGISTRAR",
+    ],
     active: false,
     subMenu: [
       {
@@ -267,6 +290,11 @@ const menu = [
   {
     icon: "tile-thumb",
     text: "Timetable",
+    access: [
+      "Vice Chancellor",
+      "Academic Registrar",
+      "SENIOR ASSISTANT ACADEMIC REGISTRAR",
+    ],
     active: false,
     subMenu: [
       {
@@ -277,7 +305,7 @@ const menu = [
       {
         text: "Class Timetables",
         // link: "/project-card",
-        link: "/exam-tt",
+        link: "/class-tt",
       },
       // {
       //   text: "Voters List - Kampala",
@@ -294,6 +322,52 @@ const menu = [
         // link: "/project-card",
         link: "/add-class-tt",
       },
+      // {
+      //   text: "Constraint List",
+      //   // link: "/project-card",
+      //   link: "/constraintsList",
+      // },
+      // {
+      //   text: "Project List",
+      //   link: "/project-list",
+      // },
+    ],
+  },
+  {
+    icon: "tile-thumb",
+    text: "Exemptions",
+    access: [
+      "Vice Chancellor",
+      "Academic Registrar",
+      "SENIOR ASSISTANT ACADEMIC REGISTRAR",
+    ],
+    active: false,
+    subMenu: [
+      {
+        text: "Exam Exemptions",
+        // link: "/project-card",
+        link: "/exam-exemptions",
+      },
+      // {
+      //   text: "Class Timetables",
+      //   // link: "/project-card",
+      //   link: "/exam-tt",
+      // },
+      // // {
+      // //   text: "Voters List - Kampala",
+      // //   // link: "/project-card",
+      // //   link: "/voters-list-kmp",
+      // // },
+      // {
+      //   text: "Add Exam Timetable",
+      //   // link: "/project-card",
+      //   link: "/add-exam-tt",
+      // },
+      // {
+      //   text: "Add Class Timetable",
+      //   // link: "/project-card",
+      //   link: "/add-class-tt",
+      // },
       // {
       //   text: "Constraint List",
       //   // link: "/project-card",

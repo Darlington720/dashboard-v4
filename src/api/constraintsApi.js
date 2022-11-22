@@ -1,12 +1,12 @@
-import apiClient from "./client";
+import mainClient from "./client";
 
 const addConstraint = (constraint) =>
-  apiClient.post("/addConstraint", constraint);
+  mainClient.apiClient.post("/addConstraint", constraint);
 
 const updateConstraint = (constraint) =>
-  apiClient.post("/updateConstraint", constraint);
+  mainClient.apiClient.post("/updateConstraint", constraint);
 
-const getContraints = () => apiClient.get("/constraints");
+const getContraints = () => mainClient.apiClient.get("/constraints");
 
 const apiCalls = {
   addConstraint,

@@ -1,40 +1,84 @@
-import apiClient from "./client";
+import mainClient from "./client";
 
-const getStudent = (studentNo) => apiClient.get(`/student/${studentNo}`);
-const addStudent = (student) => apiClient.post("/studentReg", student);
+const getStudent = (studentNo) =>
+  mainClient.apiClient.get(`/student/${studentNo}`);
+
+const getStudentRegData = (studentNo) =>
+  mainClient.apiClient2.post("/bridge", {
+    action: "portal",
+    method: "load_reg_std",
+    data: [{ stdno: `${studentNo}`, inst_code: "nkumba" }],
+    type: "rpc",
+    tid: 9,
+  });
+const addStudent = (student) =>
+  mainClient.apiClient.post("/studentReg", student);
 const signOutStudent = (studentNo) =>
-  apiClient.post(`/studentSignout/${studentNo}`);
-const loginStudent = (studentInfo) => apiClient.post("/api/login", studentInfo);
-const getMyStudents = (userId) => apiClient.get(`/myStudents/${userId}`);
+  mainClient.apiClient.post(`/studentSignout/${studentNo}`);
+const loginStudent = (studentInfo) =>
+  mainClient.apiClient.post("/api/login", studentInfo);
+const getMyStudents = (userId) =>
+  mainClient.apiClient.get(`/myStudents/${userId}`);
 
 //An array of students that came in 2de
-const getAllStudents = () => apiClient.get("/studentsToday");
+const getAllStudents = () => mainClient.apiClient.get("/studentsToday");
 
 //Number of students that came in 2de
-const getTotalStudentsToday = () => apiClient.get("/studentsTodayTotal");
+const getTotalStudentsToday = () =>
+  mainClient.apiClient.get("/studentsTodayTotal");
 
 //Number of students in the whole university
-const getNumAllStudents = () => apiClient.get("/numofstudents_biodata");
+const getNumAllStudents = () =>
+  mainClient.apiClient.get("/numofstudents_biodata");
 
 //Number of students per school -- to be continued
 const getNumOfStudentsPerSchool = (school) =>
-  apiClient.get(`/studentsPerSchool/${school}`);
+  mainClient.apiClient.get(`/studentsPerSchool/${school}`);
 
 const getForSpecificStudent = (studentNo) =>
-  apiClient.get(`/allstudentdetails/${studentNo}`);
+  mainClient.apiClient.get(`/allstudentdetails/${studentNo}`);
 
 const getForSpecificStudentCustomReport = (student) =>
-  apiClient.post(`/allstudentdetails/`, student);
+  mainClient.apiClient.post(`/allstudentdetails/`, student);
 
-const getCustomReports = (data) => apiClient.post("/getCustomReports", data);
-const getChartData = () => apiClient.get("/weeklyChartData");
+const getCustomReports = (data) =>
+  mainClient.apiClient.post("/getCustomReports", data);
+const getChartData = () => mainClient.apiClient.get("/weeklyChartData");
 
-// const addCustomer = (customer) => apiClient.post("/customers", customer);
-const deleteInvoice = (invoice) => apiClient.post("/delInvoice", invoice);
+// const addCustomer = (customer) => mainClient.apiClient.post("/customers", customer);
+const deleteInvoice = (invoice) =>
+  mainClient.apiClient.post("/delInvoice", invoice);
 // const updateCustomer = (customer) =>
-//   apiClient.post("/updateCustomer", customer);
+//   mainClient.apiClient.post("/updateCustomer", customer);
 
-const getVoters = (campus_id) => apiClient.get(`/voters/${campus_id}`);
+const getVoters = (campus_id) =>
+  mainClient.apiClient.get(`/voters/${campus_id}`);
+
+const getMyRegisteredModules = (stdno) =>
+  mainClient.apiClient.get(`/api/getStudentRegisteredModules/${stdno}`);
+
+const getStudentRegisteredModules = (stdno, studyYr, sem, progcode, progvsn) =>
+  mainClient.apiClient2.post("/bridge", {
+    action: "portal",
+    method: "load_modules",
+    data: [
+      {
+        stdno: `${stdno}`,
+        study_yr: `${studyYr}`,
+        sem: `${sem}`,
+        progcode: `${progcode}`,
+        progvsn: `${progvsn}`,
+        page: 1,
+        start: 0,
+        limit: 20,
+      },
+    ],
+    type: "rpc",
+    tid: 19,
+  });
+
+const saveExemption = (data) =>
+  mainClient.apiClient.post("/api/saveExemption", data);
 
 const apiCalls = {
   getAllStudents,
@@ -46,6 +90,10 @@ const apiCalls = {
   getNumOfStudentsPerSchool,
   getChartData,
   getVoters,
+  getStudentRegData,
+  getMyRegisteredModules,
+  getStudentRegisteredModules,
+  saveExemption,
 };
 
 export default apiCalls;

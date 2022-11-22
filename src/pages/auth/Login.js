@@ -17,18 +17,42 @@ import {
 import { Form, FormGroup, Spinner, Alert } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import staffApi from "../../api/staffApi";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import actions from "../../redux/actions/Actions";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
   const [passState, setPassState] = useState(false);
   const [errorVal, setError] = useState("");
+  const [user, setUser] = useState();
+  const dispatch = useDispatch();
 
-  const onFormSubmit = (formData) => {
+  const onFormSubmit = async (formData) => {
     setLoading(true);
     const loginName = "info@softnio.com";
     const pass = "123456";
-    if (formData.name === loginName && formData.passcode === pass) {
-      localStorage.setItem("accessToken", "token");
+
+    const loginDetails = {
+      username: formData.name,
+      password: formData.passcode,
+    };
+
+    const res = await staffApi.login(loginDetails);
+
+    if (!res.ok) {
+      // alert("Invalid username and password");
+      setLoading(false);
+      setError("InvalId username or password");
+      // setTimeout(() => {
+      //   setError("Cannot login with credentials");
+      //   setLoading(false);
+      // }, 2000);
+    } else {
+      localStorage.setItem("accessToken", JSON.stringify(res.data));
+
+      // localStorage.setItem("accessToken", user);
       setTimeout(() => {
         window.history.pushState(
           `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
@@ -37,12 +61,16 @@ const Login = () => {
         );
         window.location.reload();
       }, 2000);
-    } else {
-      setTimeout(() => {
-        setError("Cannot login with credentials");
-        setLoading(false);
-      }, 2000);
     }
+
+    console.log(res.data);
+
+    // setUser(res.data);
+
+    // setTimeout(() => {
+    //   setError("Cannot login with credentials");
+    //   setLoading(false);
+    // }, 2000);
   };
 
   const { errors, register, handleSubmit } = useForm();
@@ -54,8 +82,23 @@ const Login = () => {
         <Block className="nk-block-middle nk-auth-body  wide-xs">
           <div className="brand-logo pb-4 text-center">
             <Link to={process.env.PUBLIC_URL + "/"} className="logo-link">
-              <img className="logo-light logo-img logo-img-lg" src={Logo} alt="logo" />
-              <img className="logo-dark logo-img logo-img-lg" src={LogoDark} alt="logo-dark" />
+              <span
+                style={{
+                  fontSize: 25,
+                }}
+              >
+                Tredumo
+              </span>
+              {/* <img
+                className="logo-light logo-img logo-img-lg"
+                src={Logo}
+                alt="logo"
+              />
+              <img
+                className="logo-dark logo-img logo-img-lg"
+                src={LogoDark}
+                alt="logo-dark" */}
+              {/* /> */}
             </Link>
           </div>
 
@@ -64,7 +107,7 @@ const Login = () => {
               <BlockContent>
                 <BlockTitle tag="h4">Sign-In</BlockTitle>
                 <BlockDes>
-                  <p>Access Dashlite using your email and passcode.</p>
+                  <p>Access Tredumo using your username and passcode.</p>
                 </BlockDes>
               </BlockContent>
             </BlockHead>
@@ -93,7 +136,9 @@ const Login = () => {
                     placeholder="Enter your email address or username"
                     className="form-control-lg form-control"
                   />
-                  {errors.name && <span className="invalid">{errors.name.message}</span>}
+                  {errors.name && (
+                    <span className="invalid">{errors.name.message}</span>
+                  )}
                 </div>
               </FormGroup>
               <FormGroup>
@@ -101,7 +146,10 @@ const Login = () => {
                   <label className="form-label" htmlFor="password">
                     Passcode
                   </label>
-                  <Link className="link link-primary link-sm" to={`${process.env.PUBLIC_URL}/auth-reset`}>
+                  <Link
+                    className="link link-primary link-sm"
+                    to={`${process.env.PUBLIC_URL}/auth-reset`}
+                  >
                     Forgot Code?
                   </Link>
                 </div>
@@ -112,11 +160,16 @@ const Login = () => {
                       ev.preventDefault();
                       setPassState(!passState);
                     }}
-                    className={`form-icon lg form-icon-right passcode-switch ${passState ? "is-hidden" : "is-shown"}`}
+                    className={`form-icon lg form-icon-right passcode-switch ${
+                      passState ? "is-hidden" : "is-shown"
+                    }`}
                   >
                     <Icon name="eye" className="passcode-icon icon-show"></Icon>
 
-                    <Icon name="eye-off" className="passcode-icon icon-hide"></Icon>
+                    <Icon
+                      name="eye-off"
+                      className="passcode-icon icon-hide"
+                    ></Icon>
                   </a>
                   <input
                     type={passState ? "text" : "password"}
@@ -125,18 +178,27 @@ const Login = () => {
                     defaultValue="123456"
                     ref={register({ required: "This field is required" })}
                     placeholder="Enter your passcode"
-                    className={`form-control-lg form-control ${passState ? "is-hidden" : "is-shown"}`}
+                    className={`form-control-lg form-control ${
+                      passState ? "is-hidden" : "is-shown"
+                    }`}
                   />
-                  {errors.passcode && <span className="invalid">{errors.passcode.message}</span>}
+                  {errors.passcode && (
+                    <span className="invalid">{errors.passcode.message}</span>
+                  )}
                 </div>
               </FormGroup>
               <FormGroup>
-                <Button size="lg" className="btn-block" type="submit" color="primary">
+                <Button
+                  size="lg"
+                  className="btn-block"
+                  type="submit"
+                  color="primary"
+                >
                   {loading ? <Spinner size="sm" color="light" /> : "Sign in"}
                 </Button>
               </FormGroup>
             </Form>
-            <div className="form-note-s2 text-center pt-4">
+            {/* <div className="form-note-s2 text-center pt-4">
               {" "}
               New on our platform? <Link to={`${process.env.PUBLIC_URL}/auth-register`}>Create an account</Link>
             </div>
@@ -168,7 +230,7 @@ const Login = () => {
                   Google
                 </a>
               </li>
-            </ul>
+            </ul> */}
           </PreviewCard>
         </Block>
         <AuthFooter />

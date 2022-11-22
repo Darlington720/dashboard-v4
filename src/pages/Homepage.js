@@ -80,6 +80,9 @@ import ntsImg from "../../src/assets/images/staff.png";
 import studentApi from "../api/studentApi";
 import staffApi from "../api/staffApi";
 import visitorsApi from "../api/visitorsApi";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import actions from "../redux/actions/Actions";
 
 // import {
 //   barChartData,
@@ -373,16 +376,20 @@ const ChartWidgets = () => {
   const [numOfStudentsInSLAW2de, setNumOfStudentsInSLAW2de] = useState(0);
   const [numOfStudentsInSCIAD2de, setNumOfStudentsInSCIAD2de] = useState(0);
   const [numOfStudentsInSEDU2de, setNumOfStudentsInSEDU2de] = useState(0);
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const getStudentsTotalPerSchool2de = async (school) => {
     const res = await staffApi.getstudentsTotalBySchool(school);
 
     if (!res.ok) {
-      console.log(`Failed to load the total number of students in ${school} 2de`);
+      console.log(
+        `Failed to load the total number of students in ${school} 2de`
+      );
     }
 
     // setAllStudentsInCampus(res.data);
-    console.log("All students", res.data);
+    // console.log("All students", res.data);
 
     if (school === "SBA") setNumOfStudentsInSBA2de(res.data);
 
@@ -500,6 +507,9 @@ const ChartWidgets = () => {
     getVisitorsToday();
     getNumOfAllStudents();
     getNumOfAllStaff();
+
+    dispatch(actions.saveUser(JSON.parse(localStorage.getItem("accessToken"))));
+
     // getnumOfTodaysLectures("SBA");
     schools.forEach((school) => {
       getnumOfTodaysLectures(school);
@@ -557,7 +567,12 @@ const ChartWidgets = () => {
         backgroundColor: "#9cabff",
         barPercentage: 0.8,
         categoryPercentage: 0.8,
-        data: [students2de ? students2de : 0, staff2de ? staff2de : 0, visitors2de ? visitors2de : 0, 100],
+        data: [
+          students2de ? students2de : 0,
+          staff2de ? staff2de : 0,
+          visitors2de ? visitors2de : 0,
+          100,
+        ],
       },
     ],
   };
@@ -612,6 +627,7 @@ const ChartWidgets = () => {
       <Content page="component">
         <BlockHead size="lg" wide="sm">
           <BlockHeadContent>
+            {console.log("User loged in", user)}
             <BlockTitle tag="h5" className="fw-normal">
               Tredumo Dashboard
             </BlockTitle>
@@ -797,7 +813,11 @@ const ChartWidgets = () => {
                       </DropdownToggle>
                       <DropdownMenu right className=" dropdown-menu-xs">
                         <ul className="link-list-opt no-bdr">
-                          <li className={studentsPerSchool === "Today" ? "active" : ""}>
+                          <li
+                            className={
+                              studentsPerSchool === "Today" ? "active" : ""
+                            }
+                          >
                             <DropdownItem
                               tag="a"
                               href="#dropdownitem"
@@ -809,7 +829,11 @@ const ChartWidgets = () => {
                               <span>Today</span>
                             </DropdownItem>
                           </li>
-                          <li className={schoolChosen === "Yesterday" ? "active" : ""}>
+                          <li
+                            className={
+                              schoolChosen === "Yesterday" ? "active" : ""
+                            }
+                          >
                             <DropdownItem
                               tag="a"
                               href="#dropdownitem"
@@ -894,10 +918,15 @@ const ChartWidgets = () => {
               <Col md={6}>
                 <PreviewCard>
                   <div className="card-head">
-                    <h6 className="title">Total Courses Taught Vs Missed - Today</h6>
+                    <h6 className="title">
+                      Total Courses Taught Vs Missed - Today
+                    </h6>
                   </div>
                   <div className="nk-ck-sm">
-                    <BarChartExample stacked data={barChartMultipleTotalCoursesMissedAndTaught} />
+                    <BarChartExample
+                      stacked
+                      data={barChartMultipleTotalCoursesMissedAndTaught}
+                    />
                   </div>
                 </PreviewCard>
               </Col>
@@ -997,7 +1026,9 @@ const ChartWidgets = () => {
 
                   <div className="card-title-group">
                     <div className="card-title card-title-sm">
-                      <h6 className="title">Online Lectures Vs Physical Lectures</h6>
+                      <h6 className="title">
+                        Online Lectures Vs Physical Lectures
+                      </h6>
                     </div>
                     <UncontrolledDropdown>
                       <DropdownToggle className="dropdown-toggle dropdown-indicator btn btn-sm btn-outline-light btn-white">
@@ -1005,7 +1036,9 @@ const ChartWidgets = () => {
                       </DropdownToggle>
                       <DropdownMenu right className=" dropdown-menu-xs">
                         <ul className="link-list-opt no-bdr">
-                          <li className={schoolChosen === "SCI" ? "active" : ""}>
+                          <li
+                            className={schoolChosen === "SCI" ? "active" : ""}
+                          >
                             <DropdownItem
                               tag="a"
                               href="#dropdownitem"
@@ -1017,7 +1050,9 @@ const ChartWidgets = () => {
                               <span>SCI</span>
                             </DropdownItem>
                           </li>
-                          <li className={schoolChosen === "SBA" ? "active" : ""}>
+                          <li
+                            className={schoolChosen === "SBA" ? "active" : ""}
+                          >
                             <DropdownItem
                               tag="a"
                               href="#dropdownitem"
@@ -1029,7 +1064,9 @@ const ChartWidgets = () => {
                               <span>SBA</span>
                             </DropdownItem>
                           </li>
-                          <li className={schoolChosen === "SCIAD" ? "active" : ""}>
+                          <li
+                            className={schoolChosen === "SCIAD" ? "active" : ""}
+                          >
                             <DropdownItem
                               tag="a"
                               href="#dropdownitem"
@@ -1041,7 +1078,9 @@ const ChartWidgets = () => {
                               <span>SCIAD</span>
                             </DropdownItem>
                           </li>
-                          <li className={schoolChosen === "SCOS" ? "active" : ""}>
+                          <li
+                            className={schoolChosen === "SCOS" ? "active" : ""}
+                          >
                             <DropdownItem
                               tag="a"
                               href="#dropdownitem"
@@ -1053,7 +1092,9 @@ const ChartWidgets = () => {
                               <span>SCOS</span>
                             </DropdownItem>
                           </li>
-                          <li className={schoolChosen === "SOSS" ? "active" : ""}>
+                          <li
+                            className={schoolChosen === "SOSS" ? "active" : ""}
+                          >
                             <DropdownItem
                               tag="a"
                               href="#dropdownitem"
@@ -1065,7 +1106,9 @@ const ChartWidgets = () => {
                               <span>SOSS</span>
                             </DropdownItem>
                           </li>
-                          <li className={schoolChosen === "SLAW" ? "active" : ""}>
+                          <li
+                            className={schoolChosen === "SLAW" ? "active" : ""}
+                          >
                             <DropdownItem
                               tag="a"
                               href="#dropdownitem"
@@ -1181,7 +1224,9 @@ const ChartWidgets = () => {
                   }}
                 >
                   <div className="card-head">
-                    <h6 className="title">Lectures - Weekly (Ended and Missed)</h6>
+                    <h6 className="title">
+                      Lectures - Weekly (Ended and Missed)
+                    </h6>
                   </div>
                   <div className="nk-ck-sm">
                     <BarChartExample data={barChartMultiple} />
@@ -1226,7 +1271,9 @@ const ChartWidgets = () => {
 
                   <div className="card-title-group">
                     <div className="card-title card-title-sm">
-                      <h6 className="title">Online Lectures Vs Physical Lectures</h6>
+                      <h6 className="title">
+                        Online Lectures Vs Physical Lectures
+                      </h6>
                     </div>
                     {/* <UncontrolledDropdown>
                       <DropdownToggle className="dropdown-toggle dropdown-indicator btn btn-sm btn-outline-light btn-white">
