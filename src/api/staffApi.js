@@ -64,6 +64,9 @@ const login = (loginDetails) =>
 const getExamTimetable = (data) =>
   mainClient.apiClient.post("/api/examTT", data);
 
+const removeInvigilator = (data) =>
+  mainClient.apiClient.post("/api/removeInvigilator", data);
+
 const apiCalls = {
   getNumAllStaff,
   getAllStaffToday,
@@ -88,6 +91,7 @@ const apiCalls = {
   getFullInvigilatorData,
   login,
   getExamTimetable,
+  removeInvigilator,
 };
 
 export default apiCalls;

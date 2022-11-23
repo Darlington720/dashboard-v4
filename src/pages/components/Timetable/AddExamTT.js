@@ -1036,6 +1036,14 @@ function Contraints() {
                           <DatePicker
                             selected={timetable[index].date}
                             onChange={(date) => {
+                              const myDate =
+                                new Date(date).getFullYear() +
+                                "-" +
+                                (new Date(date).getMonth() + 1) +
+                                "-" +
+                                new Date(date).getDate();
+
+                              console.log("Dte", myDate);
                               timetable[index].date = date;
                               setTimetable([...timetable]);
                             }}

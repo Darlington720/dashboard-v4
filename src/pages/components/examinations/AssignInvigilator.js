@@ -28,6 +28,7 @@ import {
   faEye,
   faArrowDown,
   faArrowUp,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import Swal from "sweetalert2";
@@ -231,7 +232,13 @@ function statusFormatter(cell, row) {
         }
         // className="badge-dot"
       >
-        {"Not Started"}
+        {row.status === 0
+          ? "Not Started"
+          : row.status === 1
+          ? "in progress"
+          : row.status === 2
+          ? "Ended"
+          : "Not Started"}
       </Badge>
       {/* <Badge className="badge-dot" color="primary">
         Primary
@@ -255,6 +262,7 @@ function Contraints() {
   const [invigilators, setInvigilators] = useState([]);
   const [exams, setExams] = useState([]);
   const [rooms, setRooms] = useState();
+  const [newRoomName, setNewRoomName] = useState("");
   const [invigilatorData, setInvigilatorData] = useState();
   const dispatch = useDispatch();
 
@@ -295,6 +303,67 @@ function Contraints() {
     setInvigilatorData(res.data);
   };
 
+  function deleteActionFormatter(cell, row) {
+    return (
+      <div
+        style={{
+          // backgroundColor: "red",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
+        <FontAwesomeIcon
+          icon={faTrash}
+          color="#000"
+          size="lg"
+          style={{
+            cursor: "pointer",
+          }}
+          // onClick={() => handleView(row)}
+          onClick={async () => {
+            // toggleInvModal();
+            // const dataToBeSent = {
+            //   date: row.assigned_date,
+            //   room: row.room_id,
+            //   session: row.session_id,
+            // };
+
+            // getFullInvigilatorData(dataToBeSent);
+            console.log("Pressed ", row);
+
+            if (
+              window.confirm(
+                `Are you sure you want to remove ${row.staff_name} from invigilating ${row.room_name}???`
+              )
+            ) {
+              const res = await staffApi.removeInvigilator(row);
+
+              if (!res.ok) {
+                console.log("Failed to remove invigilator", res.data);
+                alert("Failed to remove invilator");
+              }
+
+              console.log(res.data);
+
+              if (res.data == "success") {
+                alert("Sucessfully removed invigilator from room");
+                const dataToBeSent = {
+                  date: row.assigned_date,
+                  room: row.room_id,
+                  session: row.session_id,
+                };
+
+                getFullInvigilatorData(dataToBeSent);
+              }
+              // console.log("Time to delete");
+            }
+          }}
+        ></FontAwesomeIcon>
+      </div>
+    );
+  }
+
   function actionFormatter(cell, row) {
     return (
       <div
@@ -328,6 +397,333 @@ function Contraints() {
       </div>
     );
   }
+
+  const dataTableColumns = [
+    {
+      dataField: "id",
+      text: "ID",
+      sort: true,
+      // width: "100px",
+      formatter: columnFormatter,
+      headerStyle: (column, colIndex) => {
+        return {
+          width: "80px",
+        };
+      },
+      // headerFormatter: headerFormatter,
+      sortCaret: (order, column) => {
+        if (!order)
+          return (
+            <span>
+              &nbsp;&nbsp;{" "}
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </span>
+          );
+        else if (order === "asc")
+          return (
+            <span>
+              &nbsp;&nbsp;
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+              <font color="#000">
+                <FontAwesomeIcon
+                  icon={faArrowUp}
+                  // color="#000"
+                  size="sm"
+                  // style={{
+                  //   cursor: "pointer",
+                  // }}
+                  // onClick={() => handleView(row)}
+                  //onClick={() => {console.log("row clicked", row)}}
+                ></FontAwesomeIcon>
+              </font>
+            </span>
+          );
+        else if (order === "desc")
+          return (
+            <span>
+              &nbsp;&nbsp;
+              <font color="#000">
+                <FontAwesomeIcon
+                  icon={faArrowDown}
+                  // color="#000"
+                  size="sm"
+                  // style={{
+                  //   cursor: "pointer",
+                  // }}
+                  // onClick={() => handleView(row)}
+                  //onClick={() => {console.log("row clicked", row)}}
+                ></FontAwesomeIcon>
+              </font>
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </span>
+          );
+        return null;
+      },
+    },
+    {
+      dataField: "staff_name",
+      text: "Invigilator Name",
+      sort: true,
+      sortCaret: (order, column) => {
+        if (!order)
+          return (
+            <span>
+              &nbsp;&nbsp;{" "}
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </span>
+          );
+        else if (order === "asc")
+          return (
+            <span>
+              &nbsp;&nbsp;
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+              <font color="#000">
+                <FontAwesomeIcon
+                  icon={faArrowUp}
+                  // color="#000"
+                  size="sm"
+                  // style={{
+                  //   cursor: "pointer",
+                  // }}
+                  // onClick={() => handleView(row)}
+                  //onClick={() => {console.log("row clicked", row)}}
+                ></FontAwesomeIcon>
+              </font>
+            </span>
+          );
+        else if (order === "desc")
+          return (
+            <span>
+              &nbsp;&nbsp;
+              <font color="#000">
+                <FontAwesomeIcon
+                  icon={faArrowDown}
+                  // color="#000"
+                  size="sm"
+                  // style={{
+                  //   cursor: "pointer",
+                  // }}
+                  // onClick={() => handleView(row)}
+                  //onClick={() => {console.log("row clicked", row)}}
+                ></FontAwesomeIcon>
+              </font>
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </span>
+          );
+        return null;
+      },
+    },
+
+    {
+      dataField: "status",
+      text: "Status",
+      sort: true,
+      headerStyle: (column, colIndex) => {
+        return {
+          width: "120px",
+        };
+      },
+      formatter: statusFormatter,
+      sortCaret: (order, column) => {
+        if (!order)
+          return (
+            <span>
+              &nbsp;&nbsp;{" "}
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </span>
+          );
+        else if (order === "asc")
+          return (
+            <span>
+              &nbsp;&nbsp;
+              <FontAwesomeIcon
+                icon={faArrowDown}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+              <font color="#000">
+                <FontAwesomeIcon
+                  icon={faArrowUp}
+                  // color="#000"
+                  size="sm"
+                  // style={{
+                  //   cursor: "pointer",
+                  // }}
+                  // onClick={() => handleView(row)}
+                  //onClick={() => {console.log("row clicked", row)}}
+                ></FontAwesomeIcon>
+              </font>
+            </span>
+          );
+        else if (order === "desc")
+          return (
+            <span>
+              &nbsp;&nbsp;
+              <font color="#000">
+                <FontAwesomeIcon
+                  icon={faArrowDown}
+                  // color="#000"
+                  size="sm"
+                  // style={{
+                  //   cursor: "pointer",
+                  // }}
+                  // onClick={() => handleView(row)}
+                  //onClick={() => {console.log("row clicked", row)}}
+                ></FontAwesomeIcon>
+              </font>
+              <FontAwesomeIcon
+                icon={faArrowUp}
+                // color="#000"
+                size="sm"
+                // style={{
+                //   cursor: "pointer",
+                // }}
+                // onClick={() => handleView(row)}
+                //onClick={() => {console.log("row clicked", row)}}
+              ></FontAwesomeIcon>
+            </span>
+          );
+        return null;
+      },
+    },
+
+    {
+      dataField: "action",
+      text: "Action",
+      formatter: deleteActionFormatter,
+      headerStyle: (column, colIndex) => {
+        return {
+          width: "80px",
+        };
+      },
+      // sort: true,
+      // name: "Action",
+      button: true,
+      // cell: (row) => (
+      //   <>
+      //     <div
+      //       style={{
+      //         // backgroundColor: "red",
+      //         display: "flex",
+      //         alignItems: "flex-end",
+      //         justifyContent: "flex-end",
+      //       }}
+      //     >
+      //       <Link to={`${process.env.PUBLIC_URL}/lecture-details`} className="edit-button" style={{ color: "black" }}>
+      //         <FontAwesomeIcon
+      //           icon={faEye}
+      //           color="#000"
+      //           size="lg"
+      //           style={{
+      //             cursor: "pointer",
+      //           }}
+      //           onClick={() => handleView(row)}
+      //           //onClick={() => {console.log("row clicked", row)}}
+      //         ></FontAwesomeIcon>
+      //       </Link>
+      //     </div>
+      //   </>
+      // ),
+    },
+  ];
 
   const dataTableColumns2 = [
     {
@@ -976,14 +1372,6 @@ function Contraints() {
       //   </>
       // ),
     },
-
-    // {
-    //   name: "Action",
-    //   selector: (row) => row.lastLogin,
-    //   sortable: true,
-    //   cell: (row) => <span>{row.lastLogin}</span>,
-    //   hide: "lg",
-    // },
   ];
 
   const getRooms = async () => {
@@ -1061,6 +1449,24 @@ function Contraints() {
     setConstraints(arr);
   };
 
+  const handleAddRoom = async () => {
+    const dataToBeSent = {
+      roomName: newRoomName,
+    };
+    const res = await roomsApi.addRoom(dataToBeSent);
+
+    if (!res.ok) {
+      alert("Failed to store room in the db");
+    }
+
+    if (res.data == "success") {
+      alert("Success");
+      getRooms();
+      setNewRoomName("");
+      toggleTop();
+    }
+  };
+
   const getInvigilators = async () => {
     setLoading(true);
     const res = await staffApi.getInvigilators();
@@ -1114,6 +1520,7 @@ function Contraints() {
   const InvigilatorDetailsModal = () => {
     return (
       <Modal
+        size="lg"
         isOpen={invModalTop}
         toggle={toggleInvModal}
         className="modal-dialog-top"
@@ -1130,52 +1537,6 @@ function Contraints() {
           Details
         </ModalHeader>
         <ModalBody>
-          <div
-            style={{
-              display: "flex",
-            }}
-          >
-            <span
-              style={{
-                fontSize: 16,
-                width: "20%",
-              }}
-            >
-              Invigilators
-            </span>
-
-            <span
-              style={{
-                fontSize: 16,
-                width: "2%",
-              }}
-            >
-              :
-            </span>
-            <span
-              style={{
-                fontSize: 16,
-                width: "78%",
-                textTransform: "capitalize",
-              }}
-            >
-              {invigilatorData
-                ? invigilatorData.invigilators.map(
-                    (inv) => `${inv.title} ${inv.staff_name}, `
-                  )
-                : "Loading"}
-            </span>
-          </div>
-          <div
-            style={{
-              width: "100%",
-              backgroundColor: "lightgray",
-              height: 1,
-              marginTop: 5,
-              marginBottom: 5,
-            }}
-          ></div>
-
           <div
             style={{
               display: "flex",
@@ -1251,7 +1612,7 @@ function Contraints() {
                 width: "78%",
               }}
             >
-              {invigilatorData
+              {invigilatorData && invigilatorData.invigilators[0]
                 ? invigilatorData.invigilators[0].room_name
                 : "Loading"}
             </span>
@@ -1295,7 +1656,7 @@ function Contraints() {
                 width: "78%",
               }}
             >
-              {invigilatorData
+              {invigilatorData && invigilatorData.invigilators[0]
                 ? new Date(
                     invigilatorData.invigilators[0].assigned_date
                   ).getFullYear() +
@@ -1350,7 +1711,7 @@ function Contraints() {
                 width: "78%",
               }}
             >
-              {invigilatorData
+              {invigilatorData && invigilatorData.invigilators[0]
                 ? invigilatorData.invigilators[0].session_name
                 : "Loading"}
             </span>
@@ -1394,7 +1755,7 @@ function Contraints() {
                 width: "78%",
               }}
             >
-              {invigilatorData
+              {invigilatorData && invigilatorData.invigilators[0]
                 ? invigilatorData.invigilators[0].status == 0
                   ? "Not Started"
                   : invigilatorData.invigilators[0].status == 1
@@ -1414,6 +1775,46 @@ function Contraints() {
               marginBottom: 5,
             }}
           ></div>
+
+          <span
+            style={{
+              fontSize: 16,
+              width: "20%",
+            }}
+          >
+            Invigilators
+          </span>
+          <ToolkitProvider
+            keyField="c_unit_id"
+            exportCSV
+            data={invigilatorData ? invigilatorData.invigilators : []}
+            columns={dataTableColumns}
+            search
+          >
+            {(props) => (
+              <div>
+                <BootstrapTable
+                  striped
+                  hover
+                  condensed
+                  loading={loading}
+                  {...props.baseProps}
+                  // pagination={paginationFactory()}
+                  // noDataIndication={"Table is empty"}
+                  // overlay={overlayFactory({
+                  //   spinner: true,
+                  //   styles: {
+                  //     overlay: (base) => ({
+                  //       ...base,
+                  //       background: "lightblue",
+                  //     }),
+                  //   },
+                  // })}
+                  // // expandRow={expandRow}
+                />
+              </div>
+            )}
+          </ToolkitProvider>
         </ModalBody>
         <ModalFooter className="bg-light">
           <span
@@ -1438,7 +1839,7 @@ function Contraints() {
     getInvigilators();
   }, []);
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     const dataToBeSent = {
       room: selectedItem,
       invigilators: selectedInvigilators,
@@ -1450,19 +1851,37 @@ function Contraints() {
       assigned_by: 1,
     };
 
-    setRooms([]);
-    setInvigilators([]);
-    setExamSessions([]);
-    setExams([]);
-    // setInvigilators([]);
-    setSelectedItem("");
-    setSelectedIngilators([]);
-    setSelectedExamSession("");
-    setStartDate(new Date());
+    const res = await staffApi.addInvigilators(dataToBeSent);
+
+    if (!res.ok) {
+      console.log("Failed to add invigilator data to the database", res.data);
+    }
+
+    if (res.ok) {
+      Swal.fire({
+        icon: "success",
+        title: "Success",
+        text: "Data Saved Successfully",
+        focusConfirm: false,
+      });
+
+      // setRooms([]);
+      // setInvigilators([]);
+      // setExamSessions([]);
+      // setExams([]);
+      // setInvigilators([]);
+      setSelectedItem("");
+      setSelectedIngilators([]);
+      setSelectedExamSession("");
+      setStartDate(new Date());
+      setExams([]);
+
+      getInvigilators();
+    }
 
     console.log(dataToBeSent);
 
-    addInvigilators(dataToBeSent);
+    // addInvigilators(dataToBeSent);
   };
 
   return (
@@ -1560,7 +1979,7 @@ function Contraints() {
                       isMulti
                       maxMenuHeight={200}
                       value={exams}
-                      onChange={(value) => setSelectedIngilators(value)}
+                      // onChange={(value) => setSelectedIngilat(value)}
                     />
                   </div>
                 </FormGroup>
@@ -1605,7 +2024,6 @@ function Contraints() {
 
             <Row
               style={{
-                // marginBottom: 10,
                 marginTop: 10,
               }}
             >
@@ -1720,6 +2138,8 @@ function Contraints() {
                 <div className="form-control-wrap">
                   <input
                     className="form-control"
+                    value={newRoomName}
+                    onChange={(e) => setNewRoomName(e.target.value)}
                     type="text"
                     id="default-0"
                     placeholder="Room Name"
@@ -1735,7 +2155,7 @@ function Contraints() {
                 <Button
                   color="primary"
                   className="eg-swal-default"
-                  onClick={toggleTop}
+                  onClick={handleAddRoom}
                   style={{
                     marginTop: -10,
                     marginBottom: -15,

@@ -8,6 +8,7 @@ const menu = [
       "lecturer",
       "Administrative Assistant",
       "SENIOR ASSISTANT ACADEMIC REGISTRAR",
+      "Exams Officer",
     ],
   },
 
@@ -253,6 +254,7 @@ const menu = [
       "Administrative Assistant",
       "Academic Registrar",
       "SENIOR ASSISTANT ACADEMIC REGISTRAR",
+      "EXAMS OFFICER",
     ],
     active: false,
     subMenu: [
@@ -294,6 +296,8 @@ const menu = [
       "Vice Chancellor",
       "Academic Registrar",
       "SENIOR ASSISTANT ACADEMIC REGISTRAR",
+      "Administrative Assistant",
+      "EXAMS OFFICER",
     ],
     active: false,
     subMenu: [

@@ -26,7 +26,10 @@ const User = () => {
         }}
       >
         <div className="user-toggle">
-          <UserAvatar className="sm" image={`${urls.baseUrl1}image/NUA213`} />
+          <UserAvatar
+            className="sm"
+            image={`${urls.baseUrl1}image/${user ? user.stu_no : "NUA213"}`}
+          />
           <div className="user-info d-none d-md-block">
             <div className="user-status">{user ? user.role : "VC"}</div>
             <div className="user-name dropdown-indicator">
@@ -38,7 +41,10 @@ const User = () => {
       <DropdownMenu right className="dropdown-menu-md dropdown-menu-s1">
         <div className="dropdown-inner user-card-wrap bg-lighter d-none d-md-block">
           <div className="user-card sm">
-            <UserAvatar className="sm" image={`${urls.baseUrl1}image/NUA213`} />
+            <UserAvatar
+              className="sm"
+              image={`${urls.baseUrl1}image/${user ? user.stu_no : "NUA213"}`}
+            />
             {/* <div className="user-avatar">
               <span>AB</span>
             </div> */}

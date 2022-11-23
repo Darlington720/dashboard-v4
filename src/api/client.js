@@ -2,7 +2,7 @@ import { create } from "apisauce";
 // import { apiClient } from "./apiConstants";
 
 const apiClient = create({
-  baseURL: "http://192.168.231.190:9000/",
+  baseURL: "http://199.241.139.118:9000/",
 });
 
 const apiClient2 = create({
