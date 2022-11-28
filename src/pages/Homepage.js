@@ -95,51 +95,6 @@ import actions from "../redux/actions/Actions";
 //   polarChartData,
 // } from "./components/charts/ChartData";
 
-const SessionDoughnut = ({ state, className }) => {
-  const [data, setData] = useState(deviceStatusData);
-  useEffect(() => {
-    let filteredData;
-    if (state === "7") {
-      filteredData = deviceStatusDataSet2;
-    } else if (state === "15") {
-      filteredData = deviceStatusDataSet3;
-    } else {
-      filteredData = deviceStatusDataSet4;
-    }
-    setData(filteredData);
-  }, [state]);
-  return (
-    <Doughnut
-      className={className}
-      data={data}
-      options={{
-        legend: {
-          display: false,
-        },
-        rotation: -1.5,
-        cutoutPercentage: 70,
-        maintainAspectRatio: false,
-        tooltips: {
-          enabled: true,
-          backgroundColor: "#fff",
-          borderColor: "#eff6ff",
-          borderWidth: 2,
-          titleFontSize: 13,
-          titleFontColor: "#6783b8",
-          titleMarginBottom: 6,
-          bodyFontColor: "#9eaecf",
-          bodyFontSize: 12,
-          bodySpacing: 4,
-          yPadding: 10,
-          xPadding: 10,
-          footerMarginTop: 0,
-          displayColors: false,
-        },
-      }}
-    ></Doughnut>
-  );
-};
-
 export const TCDoughnut = ({ state, className }) => {
   const [data, setData] = useState(TrafficChannelDoughnutData);
   // useEffect(() => {
@@ -277,73 +232,6 @@ const PieChartExample = ({ data }) => {
     />
   );
 };
-
-// const BarChartExample = ({ data, stacked }) => {
-//   return (
-//     <Bar
-//       data={data}
-//       options={{
-//         legend: {
-//           display: false,
-//           labels: {
-//             boxWidth: 30,
-//             padding: 20,
-//             fontColor: "#6783b8",
-//           },
-//         },
-//         maintainAspectRatio: false,
-//         tooltips: {
-//           enabled: true,
-//           backgroundColor: "#eff6ff",
-//           titleFontSize: 13,
-//           titleFontColor: "#6783b8",
-//           titleMarginBottom: 6,
-//           bodyFontColor: "#9eaecf",
-//           bodyFontSize: 12,
-//           bodySpacing: 4,
-//           yPadding: 10,
-//           xPadding: 10,
-//           footerMarginTop: 0,
-//           displayColors: false,
-//         },
-//         scales: {
-//           yAxes: [
-//             {
-//               display: true,
-//               stacked: stacked ? true : false,
-//               ticks: {
-//                 beginAtZero: true,
-//                 fontSize: 12,
-//                 fontColor: "#9eaecf",
-//                 padding: 5,
-//               },
-//               gridLines: {
-//                 tickMarkLength: 0,
-//               },
-//             },
-//           ],
-//           xAxes: [
-//             {
-//               display: true,
-//               stacked: stacked ? true : false,
-//               ticks: {
-//                 fontSize: 12,
-//                 fontColor: "#9eaecf",
-//                 source: "auto",
-//                 padding: 5,
-//               },
-//               gridLines: {
-//                 color: "transparent",
-//                 tickMarkLength: 10,
-//                 zeroLineColor: "transparent",
-//               },
-//             },
-//           ],
-//         },
-//       }}
-//     />
-//   );
-// };
 
 const schools = ["SBA", "SCI", "SLAW", "SCOS", "SOSS", "SCIAD", "SEDU"];
 

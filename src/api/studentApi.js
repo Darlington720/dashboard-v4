@@ -3,14 +3,22 @@ import mainClient from "./client";
 const getStudent = (studentNo) =>
   mainClient.apiClient.get(`/student/${studentNo}`);
 
-const getStudentRegData = (studentNo) =>
-  mainClient.apiClient2.post("/bridge", {
-    action: "portal",
-    method: "load_reg_std",
-    data: [{ stdno: `${studentNo}`, inst_code: "nkumba" }],
-    type: "rpc",
-    tid: 9,
-  });
+// const getStudentRegData = (studentNo) =>
+//   mainClient.apiClient2.post(
+//     "/bridge",
+//     {
+//       action: "portal",
+//       method: "load_reg_std",
+//       data: [{ stdno: `${studentNo}`, inst_code: "nkumba" }],
+//       type: "rpc",
+//       tid: 9,
+//     },
+//     { headers: { "Access-Control-Allow-Origin": "*" } }
+//   );
+
+const getStudentRegData = (stdno) =>
+  mainClient.apiClient.get(`/nkumbastudentbiodata/${stdno}`);
+
 const addStudent = (student) =>
   mainClient.apiClient.post("/studentReg", student);
 const signOutStudent = (studentNo) =>
@@ -57,25 +65,28 @@ const getVoters = (campus_id) =>
 const getMyRegisteredModules = (stdno) =>
   mainClient.apiClient.get(`/api/getStudentRegisteredModules/${stdno}`);
 
-const getStudentRegisteredModules = (stdno, studyYr, sem, progcode, progvsn) =>
-  mainClient.apiClient2.post("/bridge", {
-    action: "portal",
-    method: "load_modules",
-    data: [
-      {
-        stdno: `${stdno}`,
-        study_yr: `${studyYr}`,
-        sem: `${sem}`,
-        progcode: `${progcode}`,
-        progvsn: `${progvsn}`,
-        page: 1,
-        start: 0,
-        limit: 20,
-      },
-    ],
-    type: "rpc",
-    tid: 19,
-  });
+// const getStudentRegisteredModules = (stdno, studyYr, sem, progcode, progvsn) =>
+//   mainClient.apiClient2.post("/bridge", {
+//     action: "portal",
+//     method: "load_modules",
+//     data: [
+//       {
+//         stdno: `${stdno}`,
+//         study_yr: `${studyYr}`,
+//         sem: `${sem}`,
+//         progcode: `${progcode}`,
+//         progvsn: `${progvsn}`,
+//         page: 1,
+//         start: 0,
+//         limit: 20,
+//       },
+//     ],
+//     type: "rpc",
+//     tid: 19,
+//   });
+
+const getStudentRegisteredModules = (data) =>
+  mainClient.apiClient.post("/nkumbaStudentRegisteredModules", data);
 
 const saveExemption = (data) =>
   mainClient.apiClient.post("/api/saveExemption", data);

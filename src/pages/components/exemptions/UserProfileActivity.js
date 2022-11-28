@@ -387,25 +387,7 @@ const UserProfileActivityPage = ({ biodata }) => {
         </NavItem> */}
       </Nav>
       <TabContent activeTab={activeTab}>
-        <TabPane tabId="2">
-          <ReactDataTable
-            data={DataTableData}
-            columns={dataTableColumns}
-            pagination
-            className="nk-tb-list"
-          />
-        </TabPane>
-        <TabPane tabId="3">
-          <ReactDataTable
-            data={DataTableData}
-            columns={dataTableColumns}
-            pagination
-            className="nk-tb-list"
-          />
-        </TabPane>
-        {/* <TabPane tabId="4">
-          <p> Some text for tab 4 </p>
-        </TabPane> */}
+ 
 
         <TabPane tabId="1">
           {/* <p> Some text for tab 1 </p> */}

@@ -1761,7 +1761,7 @@ function Contraints() {
                   : invigilatorData.invigilators[0].status == 1
                   ? "in progress"
                   : invigilatorData.invigilators[0].status == 2
-                  ? "Finished"
+                  ? "Ended"
                   : "Undefined"
                 : "Loading"}
             </span>

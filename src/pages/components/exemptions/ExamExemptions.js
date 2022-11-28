@@ -133,7 +133,7 @@ const ModuleCard = ({
   );
 };
 const InvoiceList = () => {
-  const [data, setData] = useState(invoiceData);
+  // const [data, setData] = useState(invoiceData);
   const [onSearch, setonSearch] = useState(true);
   const [onSearchText, setSearchText] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -168,23 +168,20 @@ const InvoiceList = () => {
     if (activeTab !== tab) setActivetab(tab);
   };
 
-  const getStudentsRegisteredModules = async (
-    stu_no,
-    study_yr,
-    sem,
-    progcode,
-    progvsn
-  ) => {
+  const getStudentsRegisteredModules = async (stuData) => {
     setUnitsLoading(true);
-    const res = await studentApi.getStudentRegisteredModules(
-      stu_no,
-      study_yr,
-      sem,
-      progcode,
-      progvsn
-    );
 
-    const res2 = await studentApi.getMyRegisteredModules(stu_no);
+    const dataToBeSent = {
+      stdno: stuData.stdno,
+      studyYr: stuData.study_yr,
+      sem: stuData.current_sem,
+      progcode: stuData.progcode,
+      progvsn: stuData.progversion,
+    };
+    console.log("Data am sending", dataToBeSent);
+    const res = await studentApi.getStudentRegisteredModules(dataToBeSent);
+
+    const res2 = await studentApi.getMyRegisteredModules(stuData.stdno);
 
     setUnitsLoading(false);
 
@@ -201,6 +198,7 @@ const InvoiceList = () => {
 
     if (!res.data.result.success) {
       alert("Sytem error, please try again later");
+      console.log("error", res.data);
     }
 
     let myCourseUnits = [];
@@ -225,16 +223,6 @@ const InvoiceList = () => {
         }
       });
     }
-
-    // var module_codes = new Set(
-    //   res.data.result.data.map(
-    //     (module) => module.module_code && module.selected
-    //   )
-    // );
-    // var merged = [
-    //   ...res.data.result.data,
-    //   ...res2.data.filter((d) => !module_codes.has(d.module_code)),
-    // ];
 
     for (var i = 0, l = myCourseUnits.length; i < l; i++) {
       for (var j = 0, ll = res2.data.length; j < ll; j++) {
@@ -268,13 +256,14 @@ const InvoiceList = () => {
 
     console.log(res.data);
     setRegData(res.data.result.biodata);
-    getStudentsRegisteredModules(
-      res.data.result.biodata.stdno,
-      res.data.result.biodata.study_yr,
-      res.data.result.biodata.current_sem,
-      res.data.result.biodata.progcode,
-      res.data.result.biodata.progversion
-    );
+    const myData = {
+      stdno: res.data.result.biodata.stdno,
+      study_yr: res.data.result.biodata.study_yr,
+      current_sem: res.data.result.biodata.current_sem,
+      progcode: res.data.result.biodata.progcode,
+      progversion: res.data.result.biodata.progversion,
+    };
+    getStudentsRegisteredModules(myData);
     setAllStudentData(res.data.result);
   };
 
@@ -361,16 +350,6 @@ const InvoiceList = () => {
     setStudyTimes(tempArr);
     // successAlert();
   };
-
-  useEffect(() => {
-    // console.log("StudentInfo", studentInfo);
-    // console.log("Registration status", studentInfo[0].registration_status);
-  }, []);
-
-  // Get current list, pagination
-  const indexOfLastItem = currentPage * itemPerPage;
-  const indexOfFirstItem = indexOfLastItem - itemPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   return (
     <React.Fragment>
@@ -1261,12 +1240,20 @@ const InvoiceList = () => {
                                                       `${regData.name} can now sit for ${myModule.module_title}`,
                                                       "success"
                                                     );
+
+                                                    const myData2 = {
+                                                      stdno: regData.stdno,
+                                                      study_yr:
+                                                        regData.study_yr,
+                                                      current_sem:
+                                                        regData.current_sem,
+                                                      progcode:
+                                                        regData.progcode,
+                                                      progversion:
+                                                        regData.progversion,
+                                                    };
                                                     getStudentsRegisteredModules(
-                                                      regData.stdno,
-                                                      regData.study_yr,
-                                                      regData.current_sem,
-                                                      regData.progcode,
-                                                      regData.progversion
+                                                      myData2
                                                     );
                                                   }
                                                   // console.log(
