@@ -29,6 +29,7 @@ import visitorsToday from "../pages/components/visitorsToday/DataTable";
 import Rooms from "../pages/components/examinations/Rooms";
 import ExamsTimetable from "../pages/components/Timetable/ExamsTimetable";
 import ExamExemptions from "../pages/components/exemptions/ExamExemptions";
+import FinanceUpload from "../pages/components/upload/FinanceUpload";
 import VotersList from "../pages/components/Voting/VotersList";
 import VotersListKmp from "../pages/components/Voting/VisitorsListKmp";
 import AddExamsTT from "../pages/components/Timetable/AddExamTT";
@@ -748,6 +749,11 @@ const Pages = () => {
           exact
           path={`${process.env.PUBLIC_URL}/exam-exemptions`}
           component={ExamExemptions}
+        ></Route>
+        <Route
+          exact
+          path={`${process.env.PUBLIC_URL}/finance-file-upload`}
+          component={FinanceUpload}
         ></Route>
         <Route
           exact

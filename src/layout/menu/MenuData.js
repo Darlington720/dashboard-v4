@@ -338,6 +338,19 @@ const menu = [
     ],
   },
   {
+    icon: "view-col",
+    text: "Pricing Table",
+    link: "/pricing-table",
+  },
+  {
+    icon: "img",
+    text: "Image Gallery",
+    link: "/image-gallery",
+  },
+  {
+    heading: "Misc Pages",
+  },
+  {
     icon: "tile-thumb",
     text: "Exemptions",
     access: [
@@ -383,19 +396,59 @@ const menu = [
       // },
     ],
   },
-  // {
-  //   icon: "view-col",
-  //   text: "Pricing Table",
-  //   link: "/pricing-table",
-  // },
-  // {
-  //   icon: "img",
-  //   text: "Image Gallery",
-  //   link: "/image-gallery",
-  // },
-  // {
-  //   heading: "Misc Pages",
-  // },
+
+  {
+    icon: "view-col",
+    text: "Upload",
+    access: [
+      "Vice Chancellor",
+      "Academic Registrar",
+      "SENIOR ASSISTANT ACADEMIC REGISTRAR",
+    ],
+    active: false,
+    subMenu: [
+      {
+        text: "Finance Upload",
+        // link: "/project-card",
+        link: "/finance-file-upload",
+      },
+      // {
+      //   text: "New Students Upload",
+      //   // link: "/project-card",
+      //   link: "/finance-file-upload",
+      // },
+      // {
+      //   text: "Class Timetables",
+      //   // link: "/project-card",
+      //   link: "/exam-tt",
+      // },
+      // // {
+      // //   text: "Voters List - Kampala",
+      // //   // link: "/project-card",
+      // //   link: "/voters-list-kmp",
+      // // },
+      // {
+      //   text: "Add Exam Timetable",
+      //   // link: "/project-card",
+      //   link: "/add-exam-tt",
+      // },
+      // {
+      //   text: "Add Class Timetable",
+      //   // link: "/project-card",
+      //   link: "/add-class-tt",
+      // },
+      // {
+      //   text: "Constraint List",
+      //   // link: "/project-card",
+      //   link: "/constraintsList",
+      // },
+      // {
+      //   text: "Project List",
+      //   link: "/project-list",
+      // },
+    ],
+  },
+
   // {
   //   icon: "signin",
   //   text: "Auth Pages",

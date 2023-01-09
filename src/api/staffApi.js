@@ -67,6 +67,16 @@ const getExamTimetable = (data) =>
 const removeInvigilator = (data) =>
   mainClient.apiClient.post("/api/removeInvigilator", data);
 
+const importExcelToDB = (data) =>
+  mainClient.apiClient.post("/importExceltodb", data, {
+    headers: {
+      "Content-Type": "multipart/form-data",
+    },
+  });
+
+const getLastUploadedDateAndTime = () =>
+  mainClient.apiClient.get(`/lastUploadDateForFees`);
+
 const apiCalls = {
   getNumAllStaff,
   getAllStaffToday,
@@ -92,6 +102,8 @@ const apiCalls = {
   login,
   getExamTimetable,
   removeInvigilator,
+  importExcelToDB,
+  getLastUploadedDateAndTime,
 };
 
 export default apiCalls;
