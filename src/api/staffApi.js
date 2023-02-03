@@ -48,6 +48,9 @@ const getModules = () => mainClient.apiClient.get(`/modules`);
 const addTimetable = (data) =>
   mainClient.apiClient.post("/api/addExamTimetable", data);
 
+const addLectureTimetable = (data) =>
+  mainClient.apiClient.post("/api/addClassTimetable", data);
+
 const getSchools = () => mainClient.apiClient.get(`/schools`);
 
 const getStudyTimes = () => mainClient.apiClient.get(`/study_time`);
@@ -104,6 +107,7 @@ const apiCalls = {
   removeInvigilator,
   importExcelToDB,
   getLastUploadedDateAndTime,
+  addLectureTimetable,
 };
 
 export default apiCalls;

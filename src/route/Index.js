@@ -33,6 +33,7 @@ import FinanceUpload from "../pages/components/upload/FinanceUpload";
 import VotersList from "../pages/components/Voting/VotersList";
 import VotersListKmp from "../pages/components/Voting/VisitorsListKmp";
 import AddExamsTT from "../pages/components/Timetable/AddExamTT";
+import AddClassTT from "../pages/components/Timetable/AddClassTT";
 import staffToday from "../pages/components/staffToday/DataTable";
 import Modals from "../pages/components/Modals";
 import Pagination from "../pages/components/Pagination";
@@ -709,6 +710,11 @@ const Pages = () => {
           exact
           path={`${process.env.PUBLIC_URL}/add-exam-tt`}
           component={AddExamsTT}
+        ></Route>
+        <Route
+          exact
+          path={`${process.env.PUBLIC_URL}/add-class-tt`}
+          component={AddClassTT}
         ></Route>
         <Route
           exact
