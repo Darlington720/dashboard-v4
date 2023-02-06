@@ -177,6 +177,75 @@ const years = [
   },
 ];
 
+const days = (studytime) => {
+  if (studytime == "1") {
+    return [
+      {
+        value: "1",
+        label: "Monday",
+      },
+      {
+        value: "2",
+        label: "Tuesday",
+      },
+      {
+        value: "3",
+        label: "Wednesday",
+      },
+      {
+        value: "4",
+        label: "Thursday",
+      },
+      {
+        value: "5",
+        label: "Friday",
+      },
+    ];
+  } else if (studytime == "2") {
+    return [
+      {
+        value: "6",
+        label: "Saturday",
+      },
+      {
+        value: "0",
+        label: "Sunday",
+      },
+    ];
+  } else {
+    return [
+      {
+        value: "1",
+        label: "Monday",
+      },
+      {
+        value: "2",
+        label: "Tuesday",
+      },
+      {
+        value: "3",
+        label: "Wednesday",
+      },
+      {
+        value: "4",
+        label: "Thursday",
+      },
+      {
+        value: "5",
+        label: "Friday",
+      },
+      {
+        value: "6",
+        label: "Saturday",
+      },
+      {
+        value: "0",
+        label: "Sunday",
+      },
+    ];
+  }
+};
+
 const campus = [
   {
     value: "1",
@@ -185,37 +254,6 @@ const campus = [
   {
     value: "1",
     label: "Kampala",
-  },
-];
-
-const days = [
-  {
-    value: "1",
-    label: "Monday",
-  },
-  {
-    value: "2",
-    label: "Tuesday",
-  },
-  {
-    value: "3",
-    label: "Wednesday",
-  },
-  {
-    value: "4",
-    label: "Thursday",
-  },
-  {
-    value: "5",
-    label: "Friday",
-  },
-  {
-    value: "6",
-    label: "Saturday",
-  },
-  {
-    value: "0",
-    label: "Sunday",
   },
 ];
 
@@ -947,7 +985,7 @@ function AddClassTT() {
   };
 
   useEffect(() => {
-    getConstraints();
+    //getConstraints();
     getRooms();
     getStaffMembers();
     getExamSessions();
@@ -1005,6 +1043,7 @@ function AddClassTT() {
     setUploading(false);
 
     // console.log("Resposnse", res.data);
+
     if (!res.ok) {
       // console.log("Failed to upload tt");
       // alert(`${res.data.message}`);
@@ -1177,11 +1216,12 @@ function AddClassTT() {
                         <label className="form-label">Day</label>
                         <div className="form-control-wrap">
                           <RSelect
-                            options={days}
+                            options={days(studyTime ? studyTime.value : {})}
                             value={timetable[index].day}
                             // onChange={(value) => setMonth(value)}
                             onChange={(value) => {
                               timetable[index].day = value;
+                              // console.log(value);
                               setTimetable([...timetable]);
                               // setTimetable(timetableRecords);
                             }}
@@ -1252,7 +1292,41 @@ function AddClassTT() {
                             maxMenuHeight={200}
                             value={timetable[index].courseUnit}
                             onChange={(value) => {
-                              timetable[index].courseUnit = value;
+                              let modifiedCourseUnit = {
+                                label: `${value.label}`,
+                                value: {
+                                  ...value.value,
+                                  course_code: `${value.value.course_code}-${studyTime.label}`,
+                                },
+                              };
+                              // if (
+                              //   parseInt(timetable[index].day.value) >= 1 &&
+                              //   parseInt(timetable[index].day.value) <= 5
+                              // ) {
+                              //   // do something for weekdays (Monday through Friday)
+                              //   modifiedCourseUnit = {
+                              //     label: `${value.label}`,
+                              //     value: {
+                              //       ...value.value,
+                              //       course_code: `${value.value.course_code}-DAY`,
+                              //     },
+                              //   };
+                              // } else {
+                              //   // do something for the weekend (Saturday and Sunday)
+                              //   modifiedCourseUnit = {
+                              //     label: `${value.label}`,
+                              //     value: {
+                              //       ...value.value,
+                              //       course_code: `${value.value.course_code}-WEEKEND`,
+                              //     },
+                              //   };
+                              // }
+
+                              // console.log(
+                              //   "Unit to be sent ",
+                              //   modifiedCourseUnit.value
+                              // );
+                              timetable[index].courseUnit = modifiedCourseUnit;
                               setTimetable([...timetable]);
                             }}
                           />

@@ -10,7 +10,7 @@ import TrafficDougnut from "../components/partials/analytics/traffic-dougnut/Tra
 // import SessionDevice from "../components/partials/analytics/session-devices/SessionDevice";
 import Head from "../../src/layout/head/Head";
 import RecentActivity from "../components/partials/default/recent-activity/Activity";
-import Calender from "../pages/app/calender/Calender";
+// import Calender from "../pages/app/calender/Calender";
 import { Line, Bar, Doughnut, Pie } from "react-chartjs-2";
 // import RatingWidgets from "../pages/components/widgets/RatingWidgets";
 // import RatingWidgets from "./components/widgets/RatingWidgets";

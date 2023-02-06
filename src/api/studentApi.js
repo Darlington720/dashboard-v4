@@ -29,11 +29,12 @@ const getMyStudents = (userId) =>
   mainClient.apiClient.get(`/myStudents/${userId}`);
 
 //An array of students that came in 2de
-const getAllStudents = () => mainClient.apiClient.get("/studentsToday");
+const getAllStudents = () =>
+  mainClient.apiClient.get("/api/dashboard/studentsToday");
 
 //Number of students that came in 2de
 const getTotalStudentsToday = () =>
-  mainClient.apiClient.get("/studentsTodayTotal");
+  mainClient.apiClient.get("/api/admin/studentsTodayTotal");
 
 //Number of students in the whole university
 const getNumAllStudents = () =>
@@ -44,14 +45,15 @@ const getNumOfStudentsPerSchool = (school) =>
   mainClient.apiClient.get(`/studentsPerSchool/${school}`);
 
 const getForSpecificStudent = (studentNo) =>
-  mainClient.apiClient.get(`/allstudentdetails/${studentNo}`);
+  mainClient.apiClient.get(`/api/dashboard/allstudentdetails/${studentNo}`);
 
 const getForSpecificStudentCustomReport = (student) =>
-  mainClient.apiClient.post(`/allstudentdetails/`, student);
+  mainClient.apiClient.post(`/api/dashboard/allstudentdetails/`, student);
 
 const getCustomReports = (data) =>
   mainClient.apiClient.post("/getCustomReports", data);
-const getChartData = () => mainClient.apiClient.get("/weeklyChartData");
+const getChartData = () =>
+  mainClient.apiClient.get("/api/dashboard/weeklyChartData");
 
 // const addCustomer = (customer) => mainClient.apiClient.post("/customers", customer);
 const deleteInvoice = (invoice) =>
