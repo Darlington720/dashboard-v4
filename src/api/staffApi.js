@@ -18,7 +18,7 @@ const getStaffImage = (staff_id) =>
 const getAllStaffDetails = (staff_id) =>
   mainClient.apiClient.get(`/api/dashboard/allstaffdetails/${staff_id}`);
 const getLecturerCourseUnits = (data) =>
-  mainClient.apiClient.post("/lecturerCourseunits", data);
+  mainClient.apiClient.post("/api/lecturer/lecturerCourseunits", data);
 const getEnrolledStudents = (course_id) =>
   mainClient.apiClient.get(`/getEnrolledStudents/${course_id}`);
 const getLectureData = (data) =>

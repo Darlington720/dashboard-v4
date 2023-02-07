@@ -11,7 +11,19 @@ import { findUpper } from "../../../utils/Utils";
 import urls from "../../../api/apiConstants";
 
 //import { Card, DropdownItem, UncontrolledDropdown, DropdownMenu, DropdownToggle } from "reactstrap";
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from "reactstrap";
+import {
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Card,
+  Button,
+  CardTitle,
+  CardText,
+  Row,
+  Col,
+} from "reactstrap";
 import staffApi from "../../../api/staffApi";
 const UserProfileLayout = () => {
   const studentDetails = useSelector((state) => state.student);
@@ -70,9 +82,11 @@ const UserProfileLayout = () => {
     viewChange();
     window.addEventListener("load", viewChange);
     window.addEventListener("resize", viewChange);
-    document.getElementsByClassName("nk-header")[0].addEventListener("click", function () {
-      updateSm(false);
-    });
+    document
+      .getElementsByClassName("nk-header")[0]
+      .addEventListener("click", function () {
+        updateSm(false);
+      });
     return () => {
       window.removeEventListener("resize", viewChange);
       window.removeEventListener("load", viewChange);
@@ -116,8 +130,12 @@ const UserProfileLayout = () => {
                     text={findUpper(profileName)}
                     // theme="primary"
                     size="xl"
-                    image={`${urls.baseUrl1}image/${selectedRow.staff_id}`}
-                    style={{ width: 100, height: 100, backgroundColor: "lightgray" }}
+                    image={`${urls.baseUrl1}api/lecturer/image/${selectedRow.staff_id}`}
+                    style={{
+                      width: 100,
+                      height: 100,
+                      backgroundColor: "lightgray",
+                    }}
                   >
                     {/* <div className="status dot dot-lg dot-success"></div> */}
                   </UserAvatar>
@@ -136,7 +154,9 @@ const UserProfileLayout = () => {
                       fontWeight: "bold",
                     }}
                   >
-                    {staffDetails ? `${staffDetails[0].title} ${staffDetails[0].staff_name}` : "Mr Male Vicent"}
+                    {staffDetails
+                      ? `${staffDetails[0].title} ${staffDetails[0].staff_name}`
+                      : "Mr Male Vicent"}
                   </span>
                   <span
                     style={{
@@ -145,7 +165,9 @@ const UserProfileLayout = () => {
                       textAlign: "center",
                     }}
                   >
-                    {staffDetails ? `${staffDetails[0].staff_role}` : "Administrative Assistant"}
+                    {staffDetails
+                      ? `${staffDetails[0].role}`
+                      : "Administrative Assistant"}
                   </span>
                   <span
                     style={{
@@ -251,8 +273,18 @@ const UserProfileLayout = () => {
               </Row> */}
               </div>
               <div className="card-inner card-inner-lg">
-                {sm && mobileView && <div className="toggle-overlay" onClick={() => updateSm(!sm)}></div>}
-                <UserProfileActivityPage updateSm={updateSm} sm={sm} data={staffDetails} lectures={lectures} />
+                {sm && mobileView && (
+                  <div
+                    className="toggle-overlay"
+                    onClick={() => updateSm(!sm)}
+                  ></div>
+                )}
+                <UserProfileActivityPage
+                  updateSm={updateSm}
+                  sm={sm}
+                  data={staffDetails}
+                  lectures={lectures}
+                />
               </div>
             </div>
           </Card>

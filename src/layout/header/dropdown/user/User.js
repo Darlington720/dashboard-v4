@@ -28,7 +28,9 @@ const User = () => {
         <div className="user-toggle">
           <UserAvatar
             className="sm"
-            image={`${urls.baseUrl1}image/${user ? user.stu_no : "NUA213"}`}
+            image={`${urls.baseUrl1}api/lecturer/image/${
+              user ? user.stu_no : "NUA213"
+            }`}
           />
           <div className="user-info d-none d-md-block">
             <div className="user-status">{user ? user.role : "VC"}</div>

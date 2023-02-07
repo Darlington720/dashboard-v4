@@ -74,7 +74,7 @@ const DataTablePage = () => {
           <UserAvatar
             theme={row.avatarBg}
             text={findUpper(row.staff_name)}
-            image={`${urls.baseUrl1}image/${row.staff_id}`}
+            image={`${urls.baseUrl1}api/lecturer/image/${row.staff_id}`}
           ></UserAvatar>
           <div className="user-info">
             <span className="tb-lead">
@@ -225,7 +225,12 @@ const DataTablePage = () => {
 
               <PreviewCard>
                 {/* <ReactDataTable data={DataTableData} columns={dataTableColumns} expandableRows pagination actions /> */}
-                <ReactDataTable data={stafftoday} columns={dataTableColumns} pagination className="nk-tb-list" />
+                <ReactDataTable
+                  data={stafftoday}
+                  columns={dataTableColumns}
+                  pagination
+                  className="nk-tb-list"
+                />
               </PreviewCard>
             </>
           )}
