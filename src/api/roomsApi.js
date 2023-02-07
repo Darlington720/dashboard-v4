@@ -9,7 +9,7 @@ const updateConstraint = (constraint) =>
 const getRooms = () => mainClient.apiClient.get("/rooms");
 
 const addRoom = (roomName) =>
-  mainClient.apiClient.post("/api/addRoom", roomName);
+  mainClient.apiClient.post("/api/dashboard/addRoom", roomName);
 
 const apiCalls = {
   getRooms,

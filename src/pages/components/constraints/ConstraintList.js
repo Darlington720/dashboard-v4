@@ -24,7 +24,6 @@ import ToolkitProvider, {
   Search,
   CSVExport,
 } from "react-bootstrap-table2-toolkit/dist/react-bootstrap-table2-toolkit";
-import { Row } from "reactstrap";
 import constraintsApi from "../../../api/constraintsApi";
 
 const DataTablePage = () => {
@@ -105,37 +104,8 @@ const DataTablePage = () => {
                 </div>
               )}
             </ToolkitProvider>
-            {/* <BootstrapTable
-              // bootstrap4
-              keyField="id"
-              striped
-              hover
-              condensed
-              data={DataTableData}
-              columns={dataTableColumns}
-              pagination={paginationFactory()}
-            /> */}
-            {/* <ReactDataTable data={DataTableData} columns={dataTableColumns} expandableRows pagination actions /> */}
           </PreviewCard>
         </Block>
-
-        {/* <Block size="lg">
-          <BlockHead>
-            <BlockHeadContent>
-              <BlockTitle tag="h4">DataTable with custom markup</BlockTitle>
-            </BlockHeadContent>
-          </BlockHead>
-
-          <PreviewCard>
-            <ReactDataTable
-              data={userData}
-              columns={dataTableColumns2}
-              pagination
-              className="nk-tb-list"
-              selectableRows
-            />
-          </PreviewCard>
-        </Block> */}
       </Content>
     </React.Fragment>
   );

@@ -1,7 +1,8 @@
 import mainClient from "./client";
 
 //An array of vistors in campus
-const getVisitorsToday = () => mainClient.apiClient.get(`/visitorData`);
+const getVisitorsToday = () =>
+  mainClient.apiClient.get(`/api/admin/visitorData`);
 
 //Number of visitors that came in the university 2de
 const numOfVisitorsToday = () =>

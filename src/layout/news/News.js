@@ -16,7 +16,14 @@ const News = () => {
       console.log("Failed to fetch the constraints");
     }
 
+    // console.log("response", res.data);
+
     setConstraints(res.data);
+    dispatch(
+      actions.percentage(
+        res.data[0].c_percentage
+      )
+    );
     // console.log("Current constraint---", constraints);
   };
 
@@ -32,7 +39,7 @@ const News = () => {
           : 0
       )
     );
-  }, [constraints]);
+  }, []);
 
   return (
     <div className="nk-news-list">

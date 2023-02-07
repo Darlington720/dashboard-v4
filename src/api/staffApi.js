@@ -43,7 +43,8 @@ const getExamSessions = () => mainClient.apiClient.get(`/exam_sessions`);
 const addInvigilators = (data) =>
   mainClient.apiClient.post(`/api/addinvigilator/`, data);
 
-const getInvigilators = () => mainClient.apiClient.get(`/invigilator_sammary`);
+const getInvigilators = () =>
+  mainClient.apiClient.get(`/api/dashboard/invigilator_sammary`);
 
 const getModules = () => mainClient.apiClient.get(`/modules`);
 
@@ -73,7 +74,7 @@ const removeInvigilator = (data) =>
   mainClient.apiClient.post("/api/removeInvigilator", data);
 
 const importExcelToDB = (data) =>
-  mainClient.apiClient.post("/api/upload/importExceltodb", data, {
+  mainClient.apiClient.post("/api/importExceltodb", data, {
     headers: {
       "Content-Type": "multipart/form-data",
     },

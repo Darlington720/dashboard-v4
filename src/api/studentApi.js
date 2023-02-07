@@ -62,7 +62,7 @@ const deleteInvoice = (invoice) =>
 //   mainClient.apiClient.post("/updateCustomer", customer);
 
 const getVoters = (campus_id) =>
-  mainClient.apiClient.get(`/voters/${campus_id}`);
+  mainClient.apiClient.get(`/api/voting/voters/${campus_id}`);
 
 const getMyRegisteredModules = (stdno) =>
   mainClient.apiClient.get(`/api/getStudentRegisteredModules/${stdno}`);
