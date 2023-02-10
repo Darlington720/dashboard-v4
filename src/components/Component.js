@@ -1,7 +1,7 @@
 import Accordian from "./partials/accordian/Preview";
 import Button from "./button/Button";
 import Icon from "./icon/Icon";
-import NioIconCard from "./partials/nioIcon/NioIcon";
+// import NioIconCard from "./partials/nioIcon/NioIcon";
 import TooltipComponent from "./tooltip/Tooltip";
 import Table from "./table/Table";
 import UserAvatar from "./user/UserAvatar";
@@ -12,7 +12,7 @@ import Sidebar from "./sidebar/Sidebar";
 import ReactDataTable from "./table/ReactDataTable";
 import RSelect from "./select/ReactSelect";
 import InputSwitch from "./input/switch/Switch";
-import OutlinedInput from "./input/outlined-input/OutlinedInput";
+// import OutlinedInput from "./input/outlined-input/OutlinedInput";
 import Progress from "./progress/Progress";
 import NSComponent from "./number-spinner/NumberSpinner";
 import Knob from "./knob/Knob";
@@ -32,10 +32,27 @@ import { LinkList, LinkItem } from "./links/Links";
 import { Row, Col } from "./grid/Grid";
 import { OverlineTitle } from "./text/Text";
 import { SpecialTable, OrderTable, LoginLogTable } from "./table/SpecialTable";
-import { PreviewCard, PreviewAltCard, PreviewTable, CodeBlock } from "./preview/Preview";
-import { LineChartExample, BarChartExample, PieChartExample, DoughnutExample, PolarExample } from "./charts/Chart";
-import { EmailHeader, EmailBody, EmailBodyContent, EmailWrapper, EmailFooter } from "./email/Email";
-import { ProjectCard, ProjectBody, ProjectHead } from "./partials/project-card/ProjectCard";
+import {
+  PreviewCard,
+  PreviewAltCard,
+  PreviewTable,
+  CodeBlock,
+} from "./preview/Preview";
+import {
+  LineChartExample,
+  BarChartExample,
+  PieChartExample,
+  DoughnutExample,
+  PolarExample,
+} from "./charts/Chart";
+import {
+  EmailHeader,
+  EmailBody,
+  EmailBodyContent,
+  EmailWrapper,
+  EmailFooter,
+} from "./email/Email";
+// import { ProjectCard, ProjectBody, ProjectHead } from "./partials/project-card/ProjectCard";
 import {
   DataTable,
   DataTableBody,
@@ -75,7 +92,7 @@ export {
   BackTo,
   BlockBetween,
   Icon,
-  OutlinedInput,
+  // OutlinedInput,
   Table,
   Row,
   Col,
@@ -92,10 +109,10 @@ export {
   EmailBodyContent,
   EmailWrapper,
   EmailFooter,
-  NioIconCard,
-  ProjectCard,
-  ProjectBody,
-  ProjectHead,
+  // NioIconCard,
+  // ProjectCard,
+  // ProjectBody,
+  // ProjectHead,
   DataTableRow,
   DataTableItem,
   DataTableHead,

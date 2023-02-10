@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/static/css/main.ac7e206a.css",
-    "main.js": "/static/js/main.a0c6dcc3.js",
-    "static/js/621.54b8333c.chunk.js": "/static/js/621.54b8333c.chunk.js",
+    "main.js": "/static/js/main.b2e346f4.js",
+    "static/js/621.16ddda5d.chunk.js": "/static/js/621.16ddda5d.chunk.js",
     "static/js/787.3ff4428e.chunk.js": "/static/js/787.3ff4428e.chunk.js",
     "static/media/Nioicon.svg": "/static/media/Nioicon.a19492c31086675e024f.svg",
     "static/media/Nioicon.eot": "/static/media/Nioicon.eab00b4717a1c8fb3c96.eot",
@@ -32,7 +32,6 @@
     "static/media/Roboto-Bold.woff2": "/static/media/Roboto-Bold.6cd35edfbc0d7a417131.woff2",
     "static/media/Roboto-Regular.woff2": "/static/media/Roboto-Regular.a25806274237d06e00a6.woff2",
     "static/media/Roboto-Light.woff2": "/static/media/Roboto-Light.d537674e9e217fa53a13.woff2",
-    "static/media/nts.png": "/static/media/nts.bcfddc2a3404a2218426.png",
     "static/media/Nunito-Bold.woff": "/static/media/Nunito-Bold.96c334093cfb13c7391f.woff",
     "static/media/Nunito-Regular.woff": "/static/media/Nunito-Regular.1fabf212467e5ff96044.woff",
     "static/media/logo-dark2x.png": "/static/media/logo-dark2x.cbb0b695c78f6b7938c2.png",
@@ -47,12 +46,12 @@
     "static/media/tinymce-mobile.woff?8x92w3": "/static/media/tinymce-mobile.58fc024c65dca91a1dad.woff",
     "index.html": "/index.html",
     "main.ac7e206a.css.map": "/static/css/main.ac7e206a.css.map",
-    "main.a0c6dcc3.js.map": "/static/js/main.a0c6dcc3.js.map",
-    "621.54b8333c.chunk.js.map": "/static/js/621.54b8333c.chunk.js.map",
+    "main.b2e346f4.js.map": "/static/js/main.b2e346f4.js.map",
+    "621.16ddda5d.chunk.js.map": "/static/js/621.16ddda5d.chunk.js.map",
     "787.3ff4428e.chunk.js.map": "/static/js/787.3ff4428e.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ac7e206a.css",
-    "static/js/main.a0c6dcc3.js"
+    "static/js/main.b2e346f4.js"
   ]
 }

@@ -1,35 +1,17 @@
 import React, { useState, useEffect } from "react";
 import Content from "../../src/layout/content/Content";
-// import ActiveUser from "../components/partials/analytics/active-user/ActiveUser";
-import OrderOverview from "../components/partials/crypto/order-overview/OrderOverview";
-import UserActivity from "../components/partials/crypto/user-activity/UserActivity";
-// import SalesOverview from "../components/partials/default/sales-overview/SalesOverview";
-import AudienceOverview from "../components/partials/analytics/audience-overview/AudienceOverview";
-// import TrafficChannel from "../components/partials/analytics/traffic-channel/Traffic";
-import TrafficDougnut from "../components/partials/analytics/traffic-dougnut/TrafficDoughnut";
-// import SessionDevice from "../components/partials/analytics/session-devices/SessionDevice";
+
 import Head from "../../src/layout/head/Head";
-import RecentActivity from "../components/partials/default/recent-activity/Activity";
-// import Calender from "../pages/app/calender/Calender";
+
 import { Line, Bar, Doughnut, Pie } from "react-chartjs-2";
-// import RatingWidgets from "../pages/components/widgets/RatingWidgets";
-// import RatingWidgets from "./components/widgets/RatingWidgets";
-// import "../../src/components/mystyles.css";
+
 import {
   Block,
   BlockHead,
-  BlockDes,
   BlockHeadContent,
   BlockTitle,
   PreviewCard,
-  Icon,
-  PreviewAltCard,
-  // LineChartExample,
-  // BackTo,
   BarChartExample,
-  // PieChartExample,
-  // DoughnutExample,
-  // PolarExample,
 } from "../components/Component";
 
 import {
@@ -57,24 +39,9 @@ import {
   DropdownItem,
 } from "reactstrap";
 import AppCard from "../components/mycards/AppCard";
-import {
-  analyticOvData,
-  analyticAuData,
-  worldMap,
-  analyticOvDataSet2,
-  analyticOvDataSet3,
-  TrafficChannelDoughnutData,
-  TrafficChannelDoughnutData2,
-  TrafficChannelDoughnutData3,
-  TrafficChannelDoughnutData4,
-  deviceStatusData,
-  deviceStatusDataSet2,
-  deviceStatusDataSet3,
-  deviceStatusDataSet4,
-} from "./AnalyticsData";
+import { TrafficChannelDoughnutData } from "./AnalyticsData";
 import stuImg from "../../src/assets/images/stu.png";
 import visitorImg from "../../src/assets/images/ntsw.png";
-import staffImg from "../../src/assets/images/nts.png";
 import ntsImg from "../../src/assets/images/staff.png";
 
 import studentApi from "../api/studentApi";
