@@ -16,9 +16,6 @@ import { Form, FormGroup, Spinner, Alert } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { Link, useHistory } from "react-router-dom";
 import staffApi from "../../api/staffApi";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import actions from "../../redux/actions/Actions";
 
 const Login = () => {
   const [loading, setLoading] = useState(false);
@@ -26,7 +23,6 @@ const Login = () => {
   const [errorVal, setError] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState();
-  const dispatch = useDispatch();
   const history = useHistory();
 
   const onFormSubmit = async (formData) => {
@@ -40,10 +36,11 @@ const Login = () => {
     };
 
     const res = await staffApi.login(loginDetails);
+    setLoading(false);
 
     if (!res.ok) {
       // alert("Invalid username and password");
-      setLoading(false);
+
       setError("InvalId username or password");
       // setTimeout(() => {
       //   setError("Cannot login with credentials");
@@ -51,21 +48,28 @@ const Login = () => {
       // }, 2000);
     } else {
       localStorage.setItem("accessToken", JSON.stringify(res.data));
-      // navigate("/");
-      // setIsAuthenticated(true);
-      history.replace("/");
       // localStorage.setItem("accessToken", user);
-      // setTimeout(() => {
-      //   window.history.pushState(
-      //     `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
-      //     "auth-login",
-      //     `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
-      //   );
-      //   // window.location.reload();
-      // }, 2000);
-    }
+      // history.replace("/");
+      // navigate("/");
+      // history.replace("/");
+      // setIsAuthenticated(true);
+      window.history.pushState(
+        `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
+        "auth-login",
+        `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
+      );
+      window.location.reload();
 
-    console.log(res.data);
+      // setTimeout(() => {
+      //   // window.history.pushState(
+      //   //   `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
+      //   //   "auth-login",
+      //   //   `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
+      //   // );
+
+      // }, 2000);
+      console.log(res.data);
+    }
 
     // setUser(res.data);
 
@@ -77,6 +81,7 @@ const Login = () => {
 
   // useEffect(() => {
   //   if (isAuthenticated) {
+  //     history.push("/");
   //   }
   // }, [isAuthenticated, history]);
 
