@@ -5,16 +5,16 @@ import { Icon } from "../../../../components/Component";
 import { LinkList, LinkItem } from "../../../../components/links/Links";
 import urls from "../../../../api/apiConstants";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const User = () => {
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen((prevState) => !prevState);
   const user = useSelector((state) => state.user);
-  // const hsitory = useHistory();
+  const history = useHistory();
   const handleSignout = () => {
     localStorage.removeItem("accessToken");
-    // history.push("/auth-login");
+    history.replace("/auth-login");
   };
 
   return (
@@ -91,7 +91,7 @@ const User = () => {
         </div>
         <div className="dropdown-inner">
           <LinkList>
-            <Link to={`/auth-login`} onClick={handleSignout}>
+            <Link to="#" onClick={handleSignout}>
               <Icon name="signout"></Icon>
               <span>Sign Out</span>
             </Link>

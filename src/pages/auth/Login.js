@@ -53,7 +53,7 @@ const Login = () => {
       localStorage.setItem("accessToken", JSON.stringify(res.data));
       // navigate("/");
       // setIsAuthenticated(true);
-      history.push("/");
+      history.replace("/");
       // localStorage.setItem("accessToken", user);
       // setTimeout(() => {
       //   window.history.pushState(
