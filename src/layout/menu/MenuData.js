@@ -263,11 +263,11 @@ const menu = [
         // link: "/project-card",
         link: "/assign-inv",
       },
-      {
-        text: "Examination Reports",
-        // link: "/project-card",
-        link: "/exam-reports",
-      },
+      // {
+      //   text: "Examination Reports",
+      //   // link: "/project-card",
+      //   link: "/exam-reports",
+      // },
       // {
       //   text: "Voters List - Kampala",
       //   // link: "/project-card",
@@ -298,6 +298,7 @@ const menu = [
       "SENIOR ASSISTANT ACADEMIC REGISTRAR",
       "Administrative Assistant",
       "EXAMS OFFICER",
+      "ADMIN ASSISTANT",
     ],
     active: false,
     subMenu: [
@@ -306,11 +307,11 @@ const menu = [
         // link: "/project-card",
         link: "/exam-tt",
       },
-      {
-        text: "Class Timetables",
-        // link: "/project-card",
-        link: "/class-tt",
-      },
+      // {
+      //   text: "Class Timetables",
+      //   // link: "/project-card",
+      //   link: "/class-tt",
+      // },
       // {
       //   text: "Voters List - Kampala",
       //   // link: "/project-card",

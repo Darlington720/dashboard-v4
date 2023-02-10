@@ -605,278 +605,288 @@ const ChartWidgets = () => {
             />
           </div>
 
-          <div
-            style={{
-              marginBottom: 10,
-            }}
-          >
-            <Row className="g-gs">
-              <Col md={4}>
-                <PreviewCard>
-                  <div className="card-head">
-                    <h6 className="title">Total Access</h6>
-                  </div>
-                  <div className="nk-ck-sm">
-                    <BarChartExample data={barChartDataTotalAccess} />
-                  </div>
-                </PreviewCard>
-              </Col>
-              <Col md={4}>
-                <PreviewCard>
-                  <div className="card-head">
-                    <h6 className="title">Per Day</h6>
-                  </div>
-                  <div className="nk-ck-sm">
-                    <BarChartExample data={barChartDataTotalAccessPerDay} />
-                  </div>
-                </PreviewCard>
-              </Col>
-              <Col md={4}>
-                <PreviewCard>
-                  <div className="card-head">
-                    <h6 className="title">Per Week</h6>
-                  </div>
-                  <div className="nk-ck-sm">
-                    <BarChartExample data={barChartDataTotalAccessTest} />
-                  </div>
-                </PreviewCard>
-              </Col>
-              {/* <Col md={6}>
-                <PreviewCard>
-                  <div className="card-head">
-                    <h6 className="title">Straight Chart</h6>
-                  </div>
-                  <div className="nk-ck-sm">
-                    <LineChartExample legend={false} data={straightLineChart} />
-                  </div>
-                </PreviewCard>
-              </Col> */}
-            </Row>
-          </div>
-          {/* </Block> */}
-
-          {/* <Block size="lg"> */}
-          {/* <BlockHead>
-              <BlockHeadContent>
-                <BlockTitle tag="h4">Filled Line Chart</BlockTitle>
-                <BlockDes>
-                  <p>Alternatively, you can use line chart with some background to display more visually.</p>
-                </BlockDes>
-              </BlockHeadContent>
-            </BlockHead> */}
-          <div
-            style={{
-              marginBottom: 10,
-            }}
-          >
-            <Row className="g-gs">
-              <Col md={6}>
-                {/* <PreviewCard > */}
-                <Card
-                  className={`card-bordered`}
-                  style={{
-                    // backgroundColor: "red",
-                    // display: "flex",
-                    // justifyContent: "center",
-                    padding: "10px",
-                    // paddingTop: "10px",
-                    // marginRight: 10,
-                    // marginBottom: 10,
-                    height: 260,
-                    width: "100%",
-                  }}
-                >
-                  <div className="card-head">
-                    <h6
-                      className="title"
-                      style={{
-                        marginTop: 10,
-                      }}
-                    >
-                      Students Per School - {studentsPerSchool}
-                    </h6>
-                    <UncontrolledDropdown>
-                      <DropdownToggle className="dropdown-toggle dropdown-indicator btn btn-sm btn-outline-light btn-white">
-                        {studentsPerSchool}
-                      </DropdownToggle>
-                      <DropdownMenu right className=" dropdown-menu-xs">
-                        <ul className="link-list-opt no-bdr">
-                          <li
-                            className={
-                              studentsPerSchool === "Today" ? "active" : ""
-                            }
-                          >
-                            <DropdownItem
-                              tag="a"
-                              href="#dropdownitem"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setStudentssPerSchool("Today");
-                              }}
-                            >
-                              <span>Today</span>
-                            </DropdownItem>
-                          </li>
-                          <li
-                            className={
-                              schoolChosen === "Yesterday" ? "active" : ""
-                            }
-                          >
-                            <DropdownItem
-                              tag="a"
-                              href="#dropdownitem"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setStudentssPerSchool("Yesterday");
-                              }}
-                            >
-                              <span>Yesterday</span>
-                            </DropdownItem>
-                          </li>
-                        </ul>
-                      </DropdownMenu>
-                    </UncontrolledDropdown>
-                  </div>
+          {user
+            ? user.role === "Vice Chancellor" && (
+                <>
                   <div
-                    className="nk-ck-sm"
-                    // style={{
-                    //   marginTop: 10,
-                    //   // backgroundColor: "red",
-                    // }}
-                  >
-                    {/* <LineChartExample legend={false} data={filledLineChart} /> */}
-                    <BarChartExample data={barChartDataTotalStudents2de} />
-                  </div>
-                </Card>
-                {/* </PreviewCard> */}
-              </Col>
-              <Col md={6}>
-                <Card
-                  className={`card-bordered`}
-                  style={{
-                    // backgroundColor: "red",
-                    // display: "flex",
-                    // justifyContent: "center",
-                    padding: 20,
-                    // paddingTop: "10px",
-                    // marginRight: 10,
-                    // marginBottom: 10,
-                    height: 260,
-                    width: "100%",
-                  }}
-                >
-                  <div className="card-head">
-                    <h6 className="title">Attendance - Weekly </h6>
-                  </div>
-                  <div className="nk-ck-sm">
-                    <LineChartExample legend={false} data={filledLineChart} />
-                  </div>
-                </Card>
-              </Col>
-              {/* <Col md={6}>
-                <PreviewCard>
-                  <div className="card-head">
-                    <h6 className="title">Straight Chart</h6>
-                  </div>
-                  <div className="nk-ck-sm">
-                    <LineChartExample legend={false} data={straightLineChart} />
-                  </div>
-                </PreviewCard>
-              </Col> */}
-            </Row>
-          </div>
-
-          <div
-            style={{
-              marginBottom: 10,
-            }}
-          >
-            <Row className="g-gs">
-              <Col md={6}>
-                <PreviewCard>
-                  <div className="card-head">
-                    <h6 className="title">Total Courses Today</h6>
-                  </div>
-                  <div className="nk-ck-sm">
-                    {/* <LineChartExample legend={false} data={filledLineChart} /> */}
-                    <BarChartExample data={barChartDataTotalCourses2de} />
-                  </div>
-                </PreviewCard>
-              </Col>
-              <Col md={6}>
-                <PreviewCard>
-                  <div className="card-head">
-                    <h6 className="title">
-                      Total Courses Taught Vs Missed - Today
-                    </h6>
-                  </div>
-                  <div className="nk-ck-sm">
-                    <BarChartExample
-                      stacked
-                      data={barChartMultipleTotalCoursesMissedAndTaught}
-                    />
-                  </div>
-                </PreviewCard>
-              </Col>
-              {/* <Col md={6}>
-                <PreviewCard>
-                  <div className="card-head">
-                    <h6 className="title">Straight Chart</h6>
-                  </div>
-                  <div className="nk-ck-sm">
-                    <LineChartExample legend={false} data={straightLineChart} />
-                  </div>
-                </PreviewCard>
-              </Col> */}
-            </Row>
-          </div>
-
-          <div
-            style={{
-              marginBottom: 10,
-            }}
-          >
-            <Row className="g-gs">
-              <Col md={6}>
-                {/* <PreviewCard > */}
-                <Card
-                  className={`card-bordered`}
-                  style={{
-                    // backgroundColor: "red",
-                    // display: "flex",
-                    // justifyContent: "center",
-                    padding: "10px",
-                    // paddingTop: "10px",
-                    // marginRight: 10,
-                    // marginBottom: 10,
-                    height: 290,
-                    width: "100%",
-                  }}
-                >
-                  <div className="card-head">
-                    <h6
-                      className="title"
-                      style={{
-                        marginTop: 10,
-                      }}
-                    >
-                      Most Absentees Per Week
-                    </h6>
-                  </div>
-                  <div
-                    className="nk-ck-sm"
                     style={{
-                      marginTop: 10,
-                      // backgroundColor: "red",
+                      marginBottom: 10,
                     }}
                   >
-                    {/* <LineChartExample legend={false} data={filledLineChart} /> */}
-                    <BarChartExample data={barChartDataTotalCourses2deTest} />
+                    <Row className="g-gs">
+                      <Col md={4}>
+                        <PreviewCard>
+                          <div className="card-head">
+                            <h6 className="title">Total Access</h6>
+                          </div>
+                          <div className="nk-ck-sm">
+                            <BarChartExample data={barChartDataTotalAccess} />
+                          </div>
+                        </PreviewCard>
+                      </Col>
+                      <Col md={4}>
+                        <PreviewCard>
+                          <div className="card-head">
+                            <h6 className="title">Per Day</h6>
+                          </div>
+                          <div className="nk-ck-sm">
+                            <BarChartExample
+                              data={barChartDataTotalAccessPerDay}
+                            />
+                          </div>
+                        </PreviewCard>
+                      </Col>
+                      <Col md={4}>
+                        <PreviewCard>
+                          <div className="card-head">
+                            <h6 className="title">Per Week</h6>
+                          </div>
+                          <div className="nk-ck-sm">
+                            <BarChartExample
+                              data={barChartDataTotalAccessTest}
+                            />
+                          </div>
+                        </PreviewCard>
+                      </Col>
+                      {/* <Col md={6}>
+                <PreviewCard>
+                  <div className="card-head">
+                    <h6 className="title">Straight Chart</h6>
                   </div>
-                </Card>
-                {/* </PreviewCard> */}
-              </Col>
-              {/* <Col md={6}>
+                  <div className="nk-ck-sm">
+                    <LineChartExample legend={false} data={straightLineChart} />
+                  </div>
+                </PreviewCard>
+              </Col> */}
+                    </Row>
+                  </div>
+
+                  <div
+                    style={{
+                      marginBottom: 10,
+                    }}
+                  >
+                    <Row className="g-gs">
+                      <Col md={6}>
+                        {/* <PreviewCard > */}
+                        <Card
+                          className={`card-bordered`}
+                          style={{
+                            // backgroundColor: "red",
+                            // display: "flex",
+                            // justifyContent: "center",
+                            padding: "10px",
+                            // paddingTop: "10px",
+                            // marginRight: 10,
+                            // marginBottom: 10,
+                            height: 260,
+                            width: "100%",
+                          }}
+                        >
+                          <div className="card-head">
+                            <h6
+                              className="title"
+                              style={{
+                                marginTop: 10,
+                              }}
+                            >
+                              Students Per School - {studentsPerSchool}
+                            </h6>
+                            <UncontrolledDropdown>
+                              <DropdownToggle className="dropdown-toggle dropdown-indicator btn btn-sm btn-outline-light btn-white">
+                                {studentsPerSchool}
+                              </DropdownToggle>
+                              <DropdownMenu right className=" dropdown-menu-xs">
+                                <ul className="link-list-opt no-bdr">
+                                  <li
+                                    className={
+                                      studentsPerSchool === "Today"
+                                        ? "active"
+                                        : ""
+                                    }
+                                  >
+                                    <DropdownItem
+                                      tag="a"
+                                      href="#dropdownitem"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        setStudentssPerSchool("Today");
+                                      }}
+                                    >
+                                      <span>Today</span>
+                                    </DropdownItem>
+                                  </li>
+                                  <li
+                                    className={
+                                      schoolChosen === "Yesterday"
+                                        ? "active"
+                                        : ""
+                                    }
+                                  >
+                                    <DropdownItem
+                                      tag="a"
+                                      href="#dropdownitem"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        setStudentssPerSchool("Yesterday");
+                                      }}
+                                    >
+                                      <span>Yesterday</span>
+                                    </DropdownItem>
+                                  </li>
+                                </ul>
+                              </DropdownMenu>
+                            </UncontrolledDropdown>
+                          </div>
+                          <div
+                            className="nk-ck-sm"
+                            // style={{
+                            //   marginTop: 10,
+                            //   // backgroundColor: "red",
+                            // }}
+                          >
+                            {/* <LineChartExample legend={false} data={filledLineChart} /> */}
+                            <BarChartExample
+                              data={barChartDataTotalStudents2de}
+                            />
+                          </div>
+                        </Card>
+                        {/* </PreviewCard> */}
+                      </Col>
+                      <Col md={6}>
+                        <Card
+                          className={`card-bordered`}
+                          style={{
+                            // backgroundColor: "red",
+                            // display: "flex",
+                            // justifyContent: "center",
+                            padding: 20,
+                            // paddingTop: "10px",
+                            // marginRight: 10,
+                            // marginBottom: 10,
+                            height: 260,
+                            width: "100%",
+                          }}
+                        >
+                          <div className="card-head">
+                            <h6 className="title">Attendance - Weekly </h6>
+                          </div>
+                          <div className="nk-ck-sm">
+                            <LineChartExample
+                              legend={false}
+                              data={filledLineChart}
+                            />
+                          </div>
+                        </Card>
+                      </Col>
+                      {/* <Col md={6}>
+                <PreviewCard>
+                  <div className="card-head">
+                    <h6 className="title">Straight Chart</h6>
+                  </div>
+                  <div className="nk-ck-sm">
+                    <LineChartExample legend={false} data={straightLineChart} />
+                  </div>
+                </PreviewCard>
+              </Col> */}
+                    </Row>
+                  </div>
+
+                  <div
+                    style={{
+                      marginBottom: 10,
+                    }}
+                  >
+                    <Row className="g-gs">
+                      <Col md={6}>
+                        <PreviewCard>
+                          <div className="card-head">
+                            <h6 className="title">Total Courses Today</h6>
+                          </div>
+                          <div className="nk-ck-sm">
+                            {/* <LineChartExample legend={false} data={filledLineChart} /> */}
+                            <BarChartExample
+                              data={barChartDataTotalCourses2de}
+                            />
+                          </div>
+                        </PreviewCard>
+                      </Col>
+                      <Col md={6}>
+                        <PreviewCard>
+                          <div className="card-head">
+                            <h6 className="title">
+                              Total Courses Taught Vs Missed - Today
+                            </h6>
+                          </div>
+                          <div className="nk-ck-sm">
+                            <BarChartExample
+                              stacked
+                              data={barChartMultipleTotalCoursesMissedAndTaught}
+                            />
+                          </div>
+                        </PreviewCard>
+                      </Col>
+                      {/* <Col md={6}>
+                <PreviewCard>
+                  <div className="card-head">
+                    <h6 className="title">Straight Chart</h6>
+                  </div>
+                  <div className="nk-ck-sm">
+                    <LineChartExample legend={false} data={straightLineChart} />
+                  </div>
+                </PreviewCard>
+              </Col> */}
+                    </Row>
+                  </div>
+
+                  <div
+                    style={{
+                      marginBottom: 10,
+                    }}
+                  >
+                    <Row className="g-gs">
+                      <Col md={6}>
+                        {/* <PreviewCard > */}
+                        <Card
+                          className={`card-bordered`}
+                          style={{
+                            // backgroundColor: "red",
+                            // display: "flex",
+                            // justifyContent: "center",
+                            padding: "10px",
+                            // paddingTop: "10px",
+                            // marginRight: 10,
+                            // marginBottom: 10,
+                            height: 290,
+                            width: "100%",
+                          }}
+                        >
+                          <div className="card-head">
+                            <h6
+                              className="title"
+                              style={{
+                                marginTop: 10,
+                              }}
+                            >
+                              Most Absentees Per Week
+                            </h6>
+                          </div>
+                          <div
+                            className="nk-ck-sm"
+                            style={{
+                              marginTop: 10,
+                              // backgroundColor: "red",
+                            }}
+                          >
+                            {/* <LineChartExample legend={false} data={filledLineChart} /> */}
+                            <BarChartExample
+                              data={barChartDataTotalCourses2deTest}
+                            />
+                          </div>
+                        </Card>
+                        {/* </PreviewCard> */}
+                      </Col>
+                      {/* <Col md={6}>
                 <PreviewCard>
                   <div className="card-head">
                     <h6 className="title">Total Courses Taught Vs Missed</h6>
@@ -887,241 +897,253 @@ const ChartWidgets = () => {
                 </PreviewCard>
               </Col> */}
 
-              <Col
-                md="6"
-                style={{
-                  height: "100%",
-                  // backgroundColor: "green",
-                }}
-              >
-                {/* <PreviewAltCard> */}
-                <Card
-                  className={`card-bordered`}
-                  style={{
-                    // backgroundColor: "red",
-                    // display: "flex",
-                    // justifyContent: "center",
-                    paddingLeft: "10px",
-                    paddingTop: "10px",
-                    paddingRight: "10px",
-                    // marginRight: 10,
-                    // marginBottom: 10,
-                    height: 290,
-                    width: "100%",
-                  }}
-                >
-                  {/* <SessionDevice /> */}
+                      <Col
+                        md="6"
+                        style={{
+                          height: "100%",
+                          // backgroundColor: "green",
+                        }}
+                      >
+                        {/* <PreviewAltCard> */}
+                        <Card
+                          className={`card-bordered`}
+                          style={{
+                            // backgroundColor: "red",
+                            // display: "flex",
+                            // justifyContent: "center",
+                            paddingLeft: "10px",
+                            paddingTop: "10px",
+                            paddingRight: "10px",
+                            // marginRight: 10,
+                            // marginBottom: 10,
+                            height: 290,
+                            width: "100%",
+                          }}
+                        >
+                          {/* <SessionDevice /> */}
 
-                  <div className="card-title-group">
-                    <div className="card-title card-title-sm">
-                      <h6 className="title">
-                        Online Lectures Vs Physical Lectures
-                      </h6>
-                    </div>
-                    <UncontrolledDropdown>
-                      <DropdownToggle className="dropdown-toggle dropdown-indicator btn btn-sm btn-outline-light btn-white">
-                        {schoolChosen}
-                      </DropdownToggle>
-                      <DropdownMenu right className=" dropdown-menu-xs">
-                        <ul className="link-list-opt no-bdr">
-                          <li
-                            className={schoolChosen === "SCI" ? "active" : ""}
+                          <div className="card-title-group">
+                            <div className="card-title card-title-sm">
+                              <h6 className="title">
+                                Online Lectures Vs Physical Lectures
+                              </h6>
+                            </div>
+                            <UncontrolledDropdown>
+                              <DropdownToggle className="dropdown-toggle dropdown-indicator btn btn-sm btn-outline-light btn-white">
+                                {schoolChosen}
+                              </DropdownToggle>
+                              <DropdownMenu right className=" dropdown-menu-xs">
+                                <ul className="link-list-opt no-bdr">
+                                  <li
+                                    className={
+                                      schoolChosen === "SCI" ? "active" : ""
+                                    }
+                                  >
+                                    <DropdownItem
+                                      tag="a"
+                                      href="#dropdownitem"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        setSchoolChosen("SCI");
+                                      }}
+                                    >
+                                      <span>SCI</span>
+                                    </DropdownItem>
+                                  </li>
+                                  <li
+                                    className={
+                                      schoolChosen === "SBA" ? "active" : ""
+                                    }
+                                  >
+                                    <DropdownItem
+                                      tag="a"
+                                      href="#dropdownitem"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        setSchoolChosen("SBA");
+                                      }}
+                                    >
+                                      <span>SBA</span>
+                                    </DropdownItem>
+                                  </li>
+                                  <li
+                                    className={
+                                      schoolChosen === "SCIAD" ? "active" : ""
+                                    }
+                                  >
+                                    <DropdownItem
+                                      tag="a"
+                                      href="#dropdownitem"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        setSchoolChosen("SCIAD");
+                                      }}
+                                    >
+                                      <span>SCIAD</span>
+                                    </DropdownItem>
+                                  </li>
+                                  <li
+                                    className={
+                                      schoolChosen === "SCOS" ? "active" : ""
+                                    }
+                                  >
+                                    <DropdownItem
+                                      tag="a"
+                                      href="#dropdownitem"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        setSchoolChosen("SCOS");
+                                      }}
+                                    >
+                                      <span>SCOS</span>
+                                    </DropdownItem>
+                                  </li>
+                                  <li
+                                    className={
+                                      schoolChosen === "SOSS" ? "active" : ""
+                                    }
+                                  >
+                                    <DropdownItem
+                                      tag="a"
+                                      href="#dropdownitem"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        setSchoolChosen("SOSS");
+                                      }}
+                                    >
+                                      <span>SOSS</span>
+                                    </DropdownItem>
+                                  </li>
+                                  <li
+                                    className={
+                                      schoolChosen === "SLAW" ? "active" : ""
+                                    }
+                                  >
+                                    <DropdownItem
+                                      tag="a"
+                                      href="#dropdownitem"
+                                      onClick={(e) => {
+                                        e.preventDefault();
+                                        setSchoolChosen("SLAW");
+                                      }}
+                                    >
+                                      <span>SLAW</span>
+                                    </DropdownItem>
+                                  </li>
+                                </ul>
+                              </DropdownMenu>
+                            </UncontrolledDropdown>
+                          </div>
+                          <div
+                            style={{
+                              marginTop: 10,
+                            }}
                           >
-                            <DropdownItem
-                              tag="a"
-                              href="#dropdownitem"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setSchoolChosen("SCI");
+                            <div
+                              className="device-status-ck"
+                              style={
+                                {
+                                  // backgroundColor: "red",
+                                }
+                              }
+                            >
+                              {/* <SessionDoughnut className="analytics-doughnut" state={sessionDevice} /> */}
+                              <PieChartExample data={doughnutChartData} />
+                              {/* <TCDoughnut className="analytics-doughnut" state={sessionDevice} /> */}
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
                               }}
                             >
-                              <span>SCI</span>
-                            </DropdownItem>
-                          </li>
-                          <li
-                            className={schoolChosen === "SBA" ? "active" : ""}
-                          >
-                            <DropdownItem
-                              tag="a"
-                              href="#dropdownitem"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setSchoolChosen("SBA");
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  marginRight: 10,
+                                }}
+                              >
+                                {/* <Icon style={{ color: "#798bff" }} name="monitor"></Icon> */}
+                                <div
+                                  style={{
+                                    width: 10,
+                                    height: 10,
+                                    backgroundColor: "rgba(156, 171, 255, 0.8)",
+                                  }}
+                                ></div>
+                                <div className="title">Online</div>
+                              </div>
+
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                {/* <Icon style={{ color: "#baaeff" }} name="monitor"></Icon> */}
+                                <div
+                                  style={{
+                                    width: 10,
+                                    height: 10,
+                                    backgroundColor: "rgba(244, 170, 164, 0.8)",
+                                  }}
+                                ></div>
+                                <div className="title">Physical</div>
+                              </div>
+                            </div>
+
+                            <div
+                              // className="device-status-group"
+                              style={{
+                                backgroundColor: "red",
+                                // width: "100%",
+                                display: "flex",
+                                // justifyContent: "space-between",
+                                // alignItems: "center",
+                                // flexWrap: "wrap",
+                                marginTop: 10,
                               }}
-                            >
-                              <span>SBA</span>
-                            </DropdownItem>
-                          </li>
-                          <li
-                            className={schoolChosen === "SCIAD" ? "active" : ""}
-                          >
-                            <DropdownItem
-                              tag="a"
-                              href="#dropdownitem"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setSchoolChosen("SCIAD");
-                              }}
-                            >
-                              <span>SCIAD</span>
-                            </DropdownItem>
-                          </li>
-                          <li
-                            className={schoolChosen === "SCOS" ? "active" : ""}
-                          >
-                            <DropdownItem
-                              tag="a"
-                              href="#dropdownitem"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setSchoolChosen("SCOS");
-                              }}
-                            >
-                              <span>SCOS</span>
-                            </DropdownItem>
-                          </li>
-                          <li
-                            className={schoolChosen === "SOSS" ? "active" : ""}
-                          >
-                            <DropdownItem
-                              tag="a"
-                              href="#dropdownitem"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setSchoolChosen("SOSS");
-                              }}
-                            >
-                              <span>SOSS</span>
-                            </DropdownItem>
-                          </li>
-                          <li
-                            className={schoolChosen === "SLAW" ? "active" : ""}
-                          >
-                            <DropdownItem
-                              tag="a"
-                              href="#dropdownitem"
-                              onClick={(e) => {
-                                e.preventDefault();
-                                setSchoolChosen("SLAW");
-                              }}
-                            >
-                              <span>SLAW</span>
-                            </DropdownItem>
-                          </li>
-                        </ul>
-                      </DropdownMenu>
-                    </UncontrolledDropdown>
+                            ></div>
+                          </div>
+                        </Card>
+                        {/* </PreviewAltCard> */}
+                      </Col>
+                    </Row>
                   </div>
+
                   <div
-                    style={{
-                      marginTop: 10,
-                    }}
+                  // style={{
+                  //   marginBottom: 20,
+                  // }}
                   >
-                    <div
-                      className="device-status-ck"
-                      style={
-                        {
-                          // backgroundColor: "red",
-                        }
-                      }
-                    >
-                      {/* <SessionDoughnut className="analytics-doughnut" state={sessionDevice} /> */}
-                      <PieChartExample data={doughnutChartData} />
-                      {/* <TCDoughnut className="analytics-doughnut" state={sessionDevice} /> */}
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          marginRight: 10,
-                        }}
-                      >
-                        {/* <Icon style={{ color: "#798bff" }} name="monitor"></Icon> */}
-                        <div
+                    <Row className="g-gs">
+                      <Col md={6}>
+                        <Card
+                          className={`card-bordered`}
                           style={{
-                            width: 10,
-                            height: 10,
-                            backgroundColor: "rgba(156, 171, 255, 0.8)",
+                            // backgroundColor: "red",
+                            // display: "flex",
+                            // justifyContent: "center",
+                            padding: "10px",
+                            // paddingTop: "10px",
+                            // marginRight: 10,
+                            // marginBottom: 10,
+                            height: 290,
+                            width: "100%",
                           }}
-                        ></div>
-                        <div className="title">Online</div>
-                      </div>
-
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        {/* <Icon style={{ color: "#baaeff" }} name="monitor"></Icon> */}
-                        <div
-                          style={{
-                            width: 10,
-                            height: 10,
-                            backgroundColor: "rgba(244, 170, 164, 0.8)",
-                          }}
-                        ></div>
-                        <div className="title">Physical</div>
-                      </div>
-                    </div>
-
-                    <div
-                      // className="device-status-group"
-                      style={{
-                        backgroundColor: "red",
-                        // width: "100%",
-                        display: "flex",
-                        // justifyContent: "space-between",
-                        // alignItems: "center",
-                        // flexWrap: "wrap",
-                        marginTop: 10,
-                      }}
-                    ></div>
-                  </div>
-                </Card>
-                {/* </PreviewAltCard> */}
-              </Col>
-            </Row>
-          </div>
-
-          <div
-          // style={{
-          //   marginBottom: 20,
-          // }}
-          >
-            <Row className="g-gs">
-              <Col md={6}>
-                <Card
-                  className={`card-bordered`}
-                  style={{
-                    // backgroundColor: "red",
-                    // display: "flex",
-                    // justifyContent: "center",
-                    padding: "10px",
-                    // paddingTop: "10px",
-                    // marginRight: 10,
-                    // marginBottom: 10,
-                    height: 290,
-                    width: "100%",
-                  }}
-                >
-                  <div className="card-head">
-                    <h6 className="title">
-                      Lectures - Weekly (Ended and Missed)
-                    </h6>
-                  </div>
-                  <div className="nk-ck-sm">
-                    <BarChartExample data={barChartMultiple} />
-                  </div>
-                </Card>
-              </Col>
-              {/* <Col md={6}>
+                        >
+                          <div className="card-head">
+                            <h6 className="title">
+                              Lectures - Weekly (Ended and Missed)
+                            </h6>
+                          </div>
+                          <div className="nk-ck-sm">
+                            <BarChartExample data={barChartMultiple} />
+                          </div>
+                        </Card>
+                      </Col>
+                      {/* <Col md={6}>
                 <PreviewCard>
                   <div className="card-head">
                     <h6 className="title">Total Courses Taught Vs Missed</h6>
@@ -1132,38 +1154,38 @@ const ChartWidgets = () => {
                 </PreviewCard>
               </Col> */}
 
-              <Col
-                md="6"
-                style={{
-                  height: "100%",
-                  // backgroundColor: "green",
-                }}
-              >
-                {/* <PreviewAltCard> */}
-                <Card
-                  className={`card-bordered`}
-                  style={{
-                    // backgroundColor: "red",
-                    // display: "flex",
-                    // justifyContent: "center",
-                    paddingLeft: "10px",
-                    paddingTop: "10px",
-                    paddingRight: "10px",
-                    // marginRight: 10,
-                    // marginBottom: 10,
-                    height: 290,
-                    width: "100%",
-                  }}
-                >
-                  {/* <SessionDevice /> */}
+                      <Col
+                        md="6"
+                        style={{
+                          height: "100%",
+                          // backgroundColor: "green",
+                        }}
+                      >
+                        {/* <PreviewAltCard> */}
+                        <Card
+                          className={`card-bordered`}
+                          style={{
+                            // backgroundColor: "red",
+                            // display: "flex",
+                            // justifyContent: "center",
+                            paddingLeft: "10px",
+                            paddingTop: "10px",
+                            paddingRight: "10px",
+                            // marginRight: 10,
+                            // marginBottom: 10,
+                            height: 290,
+                            width: "100%",
+                          }}
+                        >
+                          {/* <SessionDevice /> */}
 
-                  <div className="card-title-group">
-                    <div className="card-title card-title-sm">
-                      <h6 className="title">
-                        Online Lectures Vs Physical Lectures
-                      </h6>
-                    </div>
-                    {/* <UncontrolledDropdown>
+                          <div className="card-title-group">
+                            <div className="card-title card-title-sm">
+                              <h6 className="title">
+                                Online Lectures Vs Physical Lectures
+                              </h6>
+                            </div>
+                            {/* <UncontrolledDropdown>
                       <DropdownToggle className="dropdown-toggle dropdown-indicator btn btn-sm btn-outline-light btn-white">
                         {schoolChosen}
                       </DropdownToggle>
@@ -1244,83 +1266,83 @@ const ChartWidgets = () => {
                         </ul>
                       </DropdownMenu>
                     </UncontrolledDropdown> */}
-                  </div>
-                  <div
-                    style={{
-                      marginTop: 20,
-                    }}
-                  >
-                    <div
-                      className="device-status-ck"
-                      style={
-                        {
-                          // backgroundColor: "red",
-                        }
-                      }
-                    >
-                      {/* <SessionDoughnut className="analytics-doughnut" state={sessionDevice} /> */}
-                      <PieChartExample data={doughnutChartData} />
-                      {/* <TCDoughnut className="analytics-doughnut" state={sessionDevice} /> */}
-                    </div>
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          marginRight: 20,
-                        }}
-                      >
-                        {/* <Icon style={{ color: "#798bff" }} name="monitor"></Icon> */}
-                        <div
-                          style={{
-                            width: 10,
-                            height: 10,
-                            backgroundColor: "rgba(156, 171, 255, 0.8)",
-                          }}
-                        ></div>
-                        <div className="title">Online</div>
-                      </div>
+                          </div>
+                          <div
+                            style={{
+                              marginTop: 20,
+                            }}
+                          >
+                            <div
+                              className="device-status-ck"
+                              style={
+                                {
+                                  // backgroundColor: "red",
+                                }
+                              }
+                            >
+                              {/* <SessionDoughnut className="analytics-doughnut" state={sessionDevice} /> */}
+                              <PieChartExample data={doughnutChartData} />
+                              {/* <TCDoughnut className="analytics-doughnut" state={sessionDevice} /> */}
+                            </div>
+                            <div
+                              style={{
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                  marginRight: 20,
+                                }}
+                              >
+                                {/* <Icon style={{ color: "#798bff" }} name="monitor"></Icon> */}
+                                <div
+                                  style={{
+                                    width: 10,
+                                    height: 10,
+                                    backgroundColor: "rgba(156, 171, 255, 0.8)",
+                                  }}
+                                ></div>
+                                <div className="title">Online</div>
+                              </div>
 
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        {/* <Icon style={{ color: "#baaeff" }} name="monitor"></Icon> */}
-                        <div
-                          style={{
-                            width: 10,
-                            height: 10,
-                            backgroundColor: "rgba(244, 170, 164, 0.8)",
-                          }}
-                        ></div>
-                        <div className="title">Physical</div>
-                      </div>
-                    </div>
+                              <div
+                                style={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                {/* <Icon style={{ color: "#baaeff" }} name="monitor"></Icon> */}
+                                <div
+                                  style={{
+                                    width: 10,
+                                    height: 10,
+                                    backgroundColor: "rgba(244, 170, 164, 0.8)",
+                                  }}
+                                ></div>
+                                <div className="title">Physical</div>
+                              </div>
+                            </div>
 
-                    <div
-                      // className="device-status-group"
-                      style={{
-                        backgroundColor: "red",
-                        // width: "100%",
-                        display: "flex",
-                        // justifyContent: "space-between",
-                        // alignItems: "center",
-                        // flexWrap: "wrap",
-                        marginTop: 20,
-                      }}
-                    ></div>
-                  </div>
-                </Card>
-                {/* </PreviewAltCard> */}
-              </Col>
-              {/* <Col md={6}>
+                            <div
+                              // className="device-status-group"
+                              style={{
+                                backgroundColor: "red",
+                                // width: "100%",
+                                display: "flex",
+                                // justifyContent: "space-between",
+                                // alignItems: "center",
+                                // flexWrap: "wrap",
+                                marginTop: 20,
+                              }}
+                            ></div>
+                          </div>
+                        </Card>
+                        {/* </PreviewAltCard> */}
+                      </Col>
+                      {/* <Col md={6}>
                 <PreviewCard>
                   <div className="card-head">
                     <h6 className="title">Straight Chart</h6>
@@ -1330,8 +1352,11 @@ const ChartWidgets = () => {
                   </div>
                 </PreviewCard>
               </Col> */}
-            </Row>
-          </div>
+                    </Row>
+                  </div>
+                </>
+              )
+            : null}
 
           {/* </PreviewCard> */}
         </Block>

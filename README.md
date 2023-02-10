@@ -7,6 +7,9 @@
 
 2.  Install Dependencies
 
+"react-router": "^5.2.1",
+"react-router-dom": "^5.3.0",
+
     a. **_npm install or yarn install_**
 
 3.  Start the application / Run the dev-server:

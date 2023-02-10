@@ -5,14 +5,16 @@ import { Icon } from "../../../../components/Component";
 import { LinkList, LinkItem } from "../../../../components/links/Links";
 import urls from "../../../../api/apiConstants";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 const User = () => {
   const [open, setOpen] = useState(false);
   const toggle = () => setOpen((prevState) => !prevState);
   const user = useSelector((state) => state.user);
-
+  // const hsitory = useHistory();
   const handleSignout = () => {
     localStorage.removeItem("accessToken");
+    // history.push("/auth-login");
   };
 
   return (
@@ -45,7 +47,9 @@ const User = () => {
           <div className="user-card sm">
             <UserAvatar
               className="sm"
-              image={`${urls.baseUrl1}image/${user ? user.stu_no : "NUA213"}`}
+              image={`${urls.baseUrl1}api/lecturer/image/${
+                user ? user.stu_no : "NUA213"
+              }`}
             />
             {/* <div className="user-avatar">
               <span>AB</span>
@@ -87,13 +91,10 @@ const User = () => {
         </div>
         <div className="dropdown-inner">
           <LinkList>
-            <a
-              href={`${process.env.PUBLIC_URL}/auth-login`}
-              onClick={handleSignout}
-            >
+            <Link to={`/auth-login`} onClick={handleSignout}>
               <Icon name="signout"></Icon>
               <span>Sign Out</span>
-            </a>
+            </Link>
           </LinkList>
         </div>
       </DropdownMenu>

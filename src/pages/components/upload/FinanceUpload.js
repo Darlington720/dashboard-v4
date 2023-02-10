@@ -209,7 +209,7 @@ class App extends Component {
       return;
     }
 
-    // console.log(res.data);
+    console.log(res.data); 
 
     if (res.data.success) {
       messageToast(res.data.success, res.data.message);

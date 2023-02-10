@@ -268,21 +268,15 @@ const sem = [
   },
 ];
 
-function columnFormatter(cell, row, rowIndex) {
-  return <span>{rowIndex + 1}</span>;
-}
-
-function headerFormatter(column, colIndex) {
-  return (
-    <span
-      style={{
-        width: "50px",
-      }}
-    >
-      {column}
-    </span>
-  );
-}
+const study_times = [
+  { value: "DAY", label: "DAY" },
+  { value: "WEEKEND", label: "WEEKEND" },
+  { value: "EVENING", label: "EVENING" },
+  { value: "DISTANCE", label: "DISTANCE" },
+  { value: "MAS-WEEKEND", label: "MASTERS WEEKEND" },
+  { value: "MAS-DISTANCE", label: "MASTERS DISTANCE" },
+  { value: "DAY/WEEKEND", label: "DAY/WEEKEND" },
+];
 
 // const schools = [
 //   {
@@ -479,18 +473,14 @@ const messageToast = (success, message) => {
 function AddClassTT() {
   const [numOfRows, setNumOfRows] = useState(1);
   const [uploading, setUploading] = useState(false);
-  const [selectedItem, setSelectedItem] = useState();
-  const [typedConstraint, setTypedConstraint] = useState("");
-  const [constraints, setConstraints] = useState([]);
-  const [startDate, setStartDate] = useState(new Date());
+  const [classDataloading, setDataLoading] = useState(false);
+
   const [modalTop, setModalTop] = useState(false);
   const [invModalTop, setInvModalTop] = useState(false);
-  const [selectedExamSession, setSelectedExamSession] = useState();
-  const [selectedLecturer, setSelectedLecturer] = useState();
+
   const [examSessions, setExamSessions] = useState();
   const [staffMembers, setStaffMembers] = useState();
-  const [loading, setLoading] = useState(false);
-  const [invigilators, setInvigilators] = useState([]);
+
   const [rooms, setRooms] = useState();
   const [school, setSchool] = useState();
   const [studyTime, setStudyTime] = useState();
@@ -499,16 +489,10 @@ function AddClassTT() {
   const [selectedCampus, setSelectedCampus] = useState();
   const [selectedSem, setSelectedSem] = useState();
   const [modules, setModules] = useState([]);
-  const [selectedModule, setSelectedModule] = useState();
+
   const [schools, setSchools] = useState();
   const [studyTimes, setStudyTimes] = useState();
   const [newRoomName, setNewRoomName] = useState("");
-  const [inputList, setInputList] = useState([]);
-  const dispatch = useDispatch();
-
-  const { SearchBar } = Search;
-  const { ExportCSVButton } = CSVExport;
-
   const timetableRecords = [
     {
       day: "",
@@ -520,19 +504,95 @@ function AddClassTT() {
   ];
   const [timetable, setTimetable] = React.useState(timetableRecords);
 
-  const updateFieldChanged = (index) => (e) => {
-    // console.log("index: " + index);
-    // console.log("property name: " + e);
-    let newArr = [...timetable]; // copying the old datas array
-    // a deep copy is not needed as we are overriding the whole object below, and not setting a property of it. this does not mutate the state.
-    newArr[index].date = e; // replace e.target.value with whatever you want to change it to
-
-    setTimetable(newArr);
-  };
-
   const toggleTop = () => setModalTop(!modalTop);
 
   const toggleInvModal = () => setInvModalTop(!invModalTop);
+
+  const getAllClassTTReq = async () => {
+    setDataLoading(true);
+    const res = await staffApi.getClassTTRequirements();
+    setDataLoading(false);
+
+    if (!res.ok) {
+      alert("Failed to connect to the server!!!");
+      return;
+    }
+
+    if (res.data.success) {
+      // console.log("Result", res.data.result);
+
+      let tempArrRooms = [];
+      let tempArrStaffMembers = [];
+      let tempArrSchools = [];
+      let tempArrStudyTimes = [];
+      let tempArrSessions = [];
+      let tempArrModules = [];
+
+      //rooms
+      res.data.result.rooms.forEach((room) => {
+        tempArrRooms.push({
+          value: room.room_id,
+          label: room.room_name,
+        });
+      });
+
+      setRooms(tempArrRooms);
+      // res.data.result
+
+      //staff members
+      res.data.result.staff_members.forEach((staffMember) => {
+        tempArrStaffMembers.push({
+          value: staffMember.staff_id,
+          label: `${staffMember.title} ${staffMember.staff_name}`,
+        });
+      });
+
+      setStaffMembers(tempArrStaffMembers);
+
+      //schools
+      res.data.result.schools.forEach((school) => {
+        tempArrSchools.push({
+          value: school.school_id,
+          label: `${school.school_name} - ${school.alias}`,
+        });
+      });
+
+      setSchools(tempArrSchools);
+
+      //study times
+      res.data.result.study_times.forEach((studyTime) => {
+        tempArrStudyTimes.push({
+          value: studyTime.st_id,
+          label: `${studyTime.study_time_name}`,
+        });
+      });
+
+      setStudyTimes(tempArrStudyTimes);
+
+      //sessions
+      res.data.result.sessions.forEach((examSession) => {
+        tempArrSessions.push({
+          value: examSession.s_id,
+          label: examSession.session_name,
+        });
+      });
+
+      setExamSessions(tempArrSessions);
+
+      //modules
+      res.data.result.modules.forEach((module) => {
+        tempArrModules.push({
+          value: {
+            course_code: module.course_id,
+            course_name: module.course_name,
+          },
+          label: `${module.course_name} - ${module.school_id}`,
+        });
+      });
+
+      setModules(tempArrModules);
+    }
+  };
 
   const getRooms = async () => {
     const res = await roomsApi.getRooms();
@@ -553,135 +613,6 @@ function AddClassTT() {
     // successAlert();
   };
 
-  const getStaffMembers = async () => {
-    const res = await staffApi.getStaffMembers();
-    if (!res.ok) {
-      console.log("Failed to fetch staff Members from the server");
-    }
-
-    let tempArr = [];
-
-    res.data.forEach((staffMember) => {
-      tempArr.push({
-        value: staffMember.staff_id,
-        label: `${staffMember.title} ${staffMember.staff_name}`,
-      });
-    });
-
-    setStaffMembers(tempArr);
-    // successAlert();
-  };
-
-  const getSchools = async () => {
-    const res = await staffApi.getSchools();
-    if (!res.ok) {
-      console.log("Failed to fetch schools from the server");
-    }
-
-    let tempArr = [];
-
-    res.data.forEach((school) => {
-      tempArr.push({
-        value: school.school_id,
-        label: `${school.school_name} - ${school.alias}`,
-      });
-    });
-
-    setSchools(tempArr);
-    // successAlert();
-  };
-
-  const getStudyTimes = async () => {
-    const res = await staffApi.getStudyTimes();
-    if (!res.ok) {
-      console.log("Failed to fetch study times from the server");
-    }
-
-    let tempArr = [];
-
-    res.data.forEach((studyTime) => {
-      tempArr.push({
-        value: studyTime.st_id,
-        label: `${studyTime.study_time_name}`,
-      });
-    });
-
-    setStudyTimes(tempArr);
-    // successAlert();
-  };
-
-  const getExamSessions = async () => {
-    const res = await staffApi.getExamSessions();
-    if (!res.ok) {
-      console.log("Failed to fetch Exam Sessions from the server");
-    }
-
-    let tempArr = [];
-
-    res.data.forEach((examSession) => {
-      tempArr.push({
-        value: examSession.s_id,
-        label: examSession.session_name,
-      });
-    });
-
-    setExamSessions(tempArr);
-    // successAlert();
-  };
-
-  const getModules = async () => {
-    const res = await staffApi.getModules();
-    if (!res.ok) {
-      console.log("Failed to fetch Exam Modules from the server");
-    }
-
-    let tempArr = [];
-
-    res.data.forEach((module) => {
-      tempArr.push({
-        value: {
-          course_code: module.course_id,
-          course_name: module.course_name,
-        },
-        label: `${module.course_name} - ${module.school_id}`,
-      });
-    });
-
-    setModules(tempArr);
-    // successAlert();
-  };
-
-  const getConstraints = async () => {
-    const response = await constraintsApi.getContraints();
-
-    if (!response.ok) {
-      console.log("Failed to load constraints");
-    }
-    let arr = [];
-
-    response.data.forEach((constraint) => {
-      arr.push({
-        value: constraint.c_id,
-        label: constraint.c_name,
-      });
-    });
-
-    setConstraints(arr);
-  };
-
-  const getInvigilators = async () => {
-    setLoading(true);
-    const res = await staffApi.getInvigilators();
-    setLoading(false);
-    if (!res.ok) {
-      console.log("Failed to fetch Invigilators from the server");
-    }
-
-    setInvigilators(res.data);
-    // console.log("Invigilators", res.data);
-    // successAlert();
-  };
-
   const handleAddRoom = async () => {
     const dataToBeSent = {
       roomName: newRoomName,
@@ -697,43 +628,6 @@ function AddClassTT() {
       toggleTop();
     }
   };
-
-  const addInvigilators = async (data) => {
-    const res = await staffApi.addInvigilators(data);
-
-    if (!res.ok) {
-      console.log("Failed to add invigilator data to the database", res.data);
-    }
-
-    if (res.ok) {
-      Swal.fire({
-        icon: "success",
-        title: "Success",
-        text: "Data Saved Successfully",
-        focusConfirm: false,
-      });
-    }
-
-    getInvigilators();
-    return res.data;
-  };
-
-  const updateConstraint = async (constraint) => {
-    const res = await constraintsApi.updateConstraint(constraint);
-
-    if (!res.ok) {
-      console.log("failed to update the constraint");
-    }
-
-    // successAlert();
-    // console.log("response", res.data);
-  };
-
-  const defaultOptions = [
-    { value: constraints.c_id, label: constraints.c_name },
-    // { value: "strawberry", label: "Strawberry" },
-    // { value: "vanilla", label: "Vanilla" },
-  ];
 
   const InvigilatorDetailsModal = () => {
     return (
@@ -978,21 +872,8 @@ function AddClassTT() {
     );
   };
 
-  const filterColors = (inputValue) => {
-    return modules.filter((i) =>
-      i.label.toLowerCase().includes(inputValue.toLowerCase())
-    );
-  };
-
   useEffect(() => {
-    //getConstraints();
-    getRooms();
-    getStaffMembers();
-    getExamSessions();
-    getInvigilators();
-    getModules();
-    getSchools();
-    getStudyTimes();
+    getAllClassTTReq();
   }, []);
 
   class MenuList extends React.Component {
@@ -1015,17 +896,6 @@ function AddClassTT() {
   }
 
   const handleSubmit = async () => {
-    // const dataToBeSent = {
-    //   room: selectedItem,
-    //   invigilators: selectedInvigilators,
-    //   session: selectedExamSession,
-    //   date: `${new Date(startDate).getFullYear()}-${
-    //     new Date(startDate).getMonth() + 1
-    //   }-${new Date(startDate).getDate()}`,
-    //   status: 0,
-    //   assigned_by: 1,
-    // };
-
     const dataToBeSent = {
       headers: {
         school: school,
@@ -1041,8 +911,6 @@ function AddClassTT() {
     setUploading(true);
     const res = await staffApi.addLectureTimetable(dataToBeSent);
     setUploading(false);
-
-    // console.log("Resposnse", res.data);
 
     if (!res.ok) {
       // console.log("Failed to upload tt");
@@ -1129,7 +997,11 @@ function AddClassTT() {
                 <div className="form-group">
                   <label className="form-label">Select School</label>
                   <RSelect
-                    options={schools}
+                    options={
+                      classDataloading
+                        ? [{ value: "loading...", label: "loading..." }]
+                        : schools
+                    }
                     value={school}
                     onChange={(value) => setSchool(value)}
                     maxMenuHeight={200}
@@ -1144,7 +1016,7 @@ function AddClassTT() {
                   <div className="form-group">
                     <label className="form-label">Select StudyTime</label>
                     <RSelect
-                      options={studyTimes}
+                      options={study_times}
                       // isMulti
                       maxMenuHeight={200}
                       value={studyTime}
@@ -1216,7 +1088,11 @@ function AddClassTT() {
                         <label className="form-label">Day</label>
                         <div className="form-control-wrap">
                           <RSelect
-                            options={days(studyTime ? studyTime.value : {})}
+                            options={
+                              classDataloading
+                                ? [{ value: "loading...", label: "loading..." }]
+                                : days(studyTime ? studyTime.value : {})
+                            }
                             value={timetable[index].day}
                             // onChange={(value) => setMonth(value)}
                             onChange={(value) => {
@@ -1240,7 +1116,11 @@ function AddClassTT() {
                       <div className="form-group">
                         <label className="form-label">Session</label>
                         <RSelect
-                          options={examSessions}
+                          options={
+                            classDataloading
+                              ? [{ value: "loading...", label: "loading..." }]
+                              : examSessions
+                          }
                           value={timetable[index].session}
                           // onChange={(value) => {
                           //   setTimetable([
@@ -1263,7 +1143,11 @@ function AddClassTT() {
                       <div className="form-group">
                         <label className="form-label">Select Room</label>
                         <RSelect
-                          options={rooms}
+                          options={
+                            classDataloading
+                              ? [{ value: "loading...", label: "loading..." }]
+                              : rooms
+                          }
                           value={timetable[index].room}
                           onChange={(value) => {
                             timetable[index].room = value;
@@ -1287,7 +1171,11 @@ function AddClassTT() {
                         <div className="form-control-wrap">
                           <RSelect
                             components={{ MenuList }}
-                            options={modules}
+                            options={
+                              classDataloading
+                                ? [{ value: "loading...", label: "loading..." }]
+                                : modules
+                            }
                             // isMulti
                             maxMenuHeight={200}
                             value={timetable[index].courseUnit}
@@ -1296,7 +1184,10 @@ function AddClassTT() {
                                 label: `${value.label}`,
                                 value: {
                                   ...value.value,
-                                  course_code: `${value.value.course_code}-${studyTime.label}`,
+                                  course_code:
+                                    studyTime.value === "DAY/WEEKEND"
+                                      ? `${value.value.course_code}`
+                                      : `${value.value.course_code}-${studyTime.value}`,
                                 },
                               };
                               // if (
@@ -1344,7 +1235,11 @@ function AddClassTT() {
                         <label className="form-label">Select Lecturer</label>
                         <div className="form-control-wrap">
                           <RSelect
-                            options={staffMembers}
+                            options={
+                              classDataloading
+                                ? [{ value: "loading...", label: "loading..." }]
+                                : staffMembers
+                            }
                             // isMulti
                             maxMenuHeight={200}
                             // value={selectedLecturer}

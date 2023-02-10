@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PageContainer from "../../layout/page-container/PageContainer";
 import Head from "../../layout/head/Head";
 import AuthFooter from "./AuthFooter";
@@ -14,7 +14,7 @@ import {
 } from "../../components/Component";
 import { Form, FormGroup, Spinner, Alert } from "reactstrap";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import staffApi from "../../api/staffApi";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
@@ -24,8 +24,10 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const [passState, setPassState] = useState(false);
   const [errorVal, setError] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState();
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const onFormSubmit = async (formData) => {
     setLoading(true);
@@ -49,16 +51,18 @@ const Login = () => {
       // }, 2000);
     } else {
       localStorage.setItem("accessToken", JSON.stringify(res.data));
-
+      // navigate("/");
+      // setIsAuthenticated(true);
+      history.push("/");
       // localStorage.setItem("accessToken", user);
-      setTimeout(() => {
-        window.history.pushState(
-          `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
-          "auth-login",
-          `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
-        );
-        window.location.reload();
-      }, 2000);
+      // setTimeout(() => {
+      //   window.history.pushState(
+      //     `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
+      //     "auth-login",
+      //     `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
+      //   );
+      //   // window.location.reload();
+      // }, 2000);
     }
 
     console.log(res.data);
@@ -70,6 +74,11 @@ const Login = () => {
     //   setLoading(false);
     // }, 2000);
   };
+
+  // useEffect(() => {
+  //   if (isAuthenticated) {
+  //   }
+  // }, [isAuthenticated, history]);
 
   const { errors, register, handleSubmit } = useForm();
 

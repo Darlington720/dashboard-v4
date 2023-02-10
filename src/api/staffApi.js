@@ -58,6 +58,9 @@ const getSchools = () => mainClient.apiClient.get(`/schools`);
 
 const getStudyTimes = () => mainClient.apiClient.get(`/study_time`);
 
+const getClassTTRequirements = () =>
+  mainClient.apiClient.get(`/api/timetable/requirements/class_tt`);
+
 const getExamsOnGivenConstraints = (data) =>
   mainClient.apiClient.post("/api/exams", data);
 
@@ -111,6 +114,7 @@ const apiCalls = {
   importExcelToDB,
   getLastUploadedDateAndTime,
   addLectureTimetable,
+  getClassTTRequirements,
 };
 
 export default apiCalls;

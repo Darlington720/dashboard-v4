@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Content from "../../../layout/content/Content";
-import UserProfileRegularPage from "./UserProfileRegular";
-import UserProfileSettingPage from "./UserProfileSetting";
-import UserProfileNotificationPage from "./UserProfileNotification";
+
 import UserProfileActivityPage from "./UserProfileActivity";
 import { Route, Switch, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -10,7 +8,7 @@ import { Icon, UserAvatar } from "../../../components/Component";
 import { findUpper } from "../../../utils/Utils";
 
 //import { Card, DropdownItem, UncontrolledDropdown, DropdownMenu, DropdownToggle } from "reactstrap";
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, Button, CardTitle, CardText, Row, Col } from "reactstrap";
+import { Card } from "reactstrap";
 const UserProfileLayout = () => {
   const studentDetails = useSelector((state) => state.student);
   const [sm, updateSm] = useState(false);
@@ -42,9 +40,11 @@ const UserProfileLayout = () => {
     viewChange();
     window.addEventListener("load", viewChange);
     window.addEventListener("resize", viewChange);
-    document.getElementsByClassName("nk-header")[0].addEventListener("click", function () {
-      updateSm(false);
-    });
+    document
+      .getElementsByClassName("nk-header")[0]
+      .addEventListener("click", function () {
+        updateSm(false);
+      });
     return () => {
       window.removeEventListener("resize", viewChange);
       window.removeEventListener("load", viewChange);
@@ -65,7 +65,10 @@ const UserProfileLayout = () => {
               >
                 <div className="card-inner-group">
                   <div className="card-inner">
-                    <div className="user-card" style={{ display: "flex", flexDirection: "column" }}>
+                    <div
+                      className="user-card"
+                      style={{ display: "flex", flexDirection: "column" }}
+                    >
                       <div>
                         <UserAvatar
                           text={findUpper(profileName)}
@@ -74,11 +77,17 @@ const UserProfileLayout = () => {
                           image={
                             hasLoadedImage
                               ? `https://student1.zeevarsity.com:8001/get_photo.yaws?ic=nkumba&stdno=${
-                                  studentDetails ? studentDetails[0].stdno : "2000101041"
+                                  studentDetails
+                                    ? studentDetails[0].stdno
+                                    : "2000101041"
                                 }`
                               : ""
                           }
-                          style={{ width: 100, height: 100, backgroundColor: "lightgray" }}
+                          style={{
+                            width: 100,
+                            height: 100,
+                            backgroundColor: "lightgray",
+                          }}
                         >
                           <div className="status dot dot-lg dot-success"></div>
                         </UserAvatar>
@@ -102,7 +111,9 @@ const UserProfileLayout = () => {
                             textAlign: "center",
                           }}
                         >
-                          {studentDetails[0] ? studentDetails[0].name : "Akampa Darlington"}
+                          {studentDetails[0]
+                            ? studentDetails[0].name
+                            : "Akampa Darlington"}
                         </span>
 
                         <span
@@ -112,7 +123,9 @@ const UserProfileLayout = () => {
                             textTransform: "uppercase",
                           }}
                         >
-                          {studentDetails[0] ? studentDetails[0].stdno : "2000101041"}
+                          {studentDetails[0]
+                            ? studentDetails[0].stdno
+                            : "2000101041"}
                         </span>
                         <span
                           className="sub-text"
@@ -121,7 +134,9 @@ const UserProfileLayout = () => {
                             textTransform: "uppercase",
                           }}
                         >
-                          {studentDetails[0] ? studentDetails[0].regno : "2021/FEB/BCS/B223456/DAY"}
+                          {studentDetails[0]
+                            ? studentDetails[0].regno
+                            : "2021/FEB/BCS/B223456/DAY"}
                         </span>
                       </div>
                       {/* <div className="user-action">
@@ -177,72 +192,163 @@ const UserProfileLayout = () => {
                 </div> */}
                   <div className="card-inner p-0">
                     <ul className="link-list-menu">
-                      <div style={{ display: "flex", marginLeft: 25, marginRight: 25, marginBottom: 10 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          marginLeft: 25,
+                          marginRight: 25,
+                          marginBottom: 10,
+                        }}
+                      >
                         <span style={{ width: "40%" }}>School</span>
                         <span style={{ width: "2%" }}>:</span>
-                        <span style={{ width: "58%", fontWeight: "bold", fontSize: 10 }}>
-                          {studentDetails[0] ? studentDetails[0].facultytitle : "SCHOOL OF COMPUTING AND INFORMATICS"}
+                        <span
+                          style={{
+                            width: "58%",
+                            fontWeight: "bold",
+                            fontSize: 10,
+                          }}
+                        >
+                          {studentDetails[0]
+                            ? studentDetails[0].facultytitle
+                            : "SCHOOL OF COMPUTING AND INFORMATICS"}
                         </span>
                       </div>
 
-                      <div style={{ display: "flex", marginLeft: 25, marginRight: 25, marginBottom: 10 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          marginLeft: 25,
+                          marginRight: 25,
+                          marginBottom: 10,
+                        }}
+                      >
                         <span style={{ width: "40%" }}>Course</span>
                         <span style={{ width: "2%" }}>:</span>
-                        <span style={{ width: "58%", fontWeight: "bold", fontSize: 10 }}>
-                          {studentDetails[0] ? studentDetails[0].progtitle : "BACHELOR OF SCIENCE IN COMPUTER SCIENCE"}
+                        <span
+                          style={{
+                            width: "58%",
+                            fontWeight: "bold",
+                            fontSize: 10,
+                          }}
+                        >
+                          {studentDetails[0]
+                            ? studentDetails[0].progtitle
+                            : "BACHELOR OF SCIENCE IN COMPUTER SCIENCE"}
                         </span>
                       </div>
-                      <div style={{ display: "flex", marginLeft: 25, marginRight: 25, marginBottom: 10 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          marginLeft: 25,
+                          marginRight: 25,
+                          marginBottom: 10,
+                        }}
+                      >
                         <span style={{ width: "40%" }}>Study Year</span>
                         <span style={{ width: "2%" }}>:</span>
                         <span style={{ width: "58%", fontWeight: "bold" }}>
                           {studentDetails[0] ? studentDetails[0].study_yr : "2"}
                         </span>
                       </div>
-                      <div style={{ display: "flex", marginLeft: 25, marginRight: 25, marginBottom: 10 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          marginLeft: 25,
+                          marginRight: 25,
+                          marginBottom: 10,
+                        }}
+                      >
                         <span style={{ width: "40%" }}>Semester</span>
                         <span style={{ width: "2%" }}>:</span>
                         <span style={{ width: "58%", fontWeight: "bold" }}>
-                          {studentDetails[0] ? studentDetails[0].current_sem : "2"}
+                          {studentDetails[0]
+                            ? studentDetails[0].current_sem
+                            : "2"}
                         </span>
                       </div>
-                      <div style={{ display: "flex", marginLeft: 25, marginRight: 25, marginBottom: 10 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          marginLeft: 25,
+                          marginRight: 25,
+                          marginBottom: 10,
+                        }}
+                      >
                         <span style={{ width: "40%" }}>Study Time</span>
                         <span style={{ width: "2%" }}>:</span>
                         <span style={{ width: "58%", fontWeight: "bold" }}>
-                          {studentDetails[0] ? studentDetails[0].study_time : "DAY"}
+                          {studentDetails[0]
+                            ? studentDetails[0].study_time
+                            : "DAY"}
                         </span>
                       </div>
 
-                      <div style={{ display: "flex", marginLeft: 25, marginRight: 25, marginBottom: 10 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          marginLeft: 25,
+                          marginRight: 25,
+                          marginBottom: 10,
+                        }}
+                      >
                         <span style={{ width: "40%" }}>Campus</span>
                         <span style={{ width: "2%" }}>:</span>
                         <span style={{ width: "58%", fontWeight: "bold" }}>
-                          {studentDetails[0] ? studentDetails[0].campus : "Main"}
+                          {studentDetails[0]
+                            ? studentDetails[0].campus
+                            : "Main"}
                         </span>
                       </div>
 
-                      <div style={{ display: "flex", marginLeft: 25, marginRight: 25, marginBottom: 10 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          marginLeft: 25,
+                          marginRight: 25,
+                          marginBottom: 10,
+                        }}
+                      >
                         <span style={{ width: "40%" }}>Nationality</span>
                         <span style={{ width: "2%" }}>:</span>
                         <span style={{ width: "58%", fontWeight: "bold" }}>
-                          {studentDetails[0] ? studentDetails[0].nationality : "UGANDAN"}
+                          {studentDetails[0]
+                            ? studentDetails[0].nationality
+                            : "UGANDAN"}
                         </span>
                       </div>
 
-                      <div style={{ display: "flex", marginLeft: 25, marginRight: 25, marginBottom: 10 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          marginLeft: 25,
+                          marginRight: 25,
+                          marginBottom: 10,
+                        }}
+                      >
                         <span style={{ width: "40%" }}>Entry Ac Yr</span>
                         <span style={{ width: "2%" }}>:</span>
                         <span style={{ width: "58%", fontWeight: "bold" }}>
-                          {studentDetails[0] ? studentDetails[0].entry_study_yr : "2019/2020"}
+                          {studentDetails[0]
+                            ? studentDetails[0].entry_study_yr
+                            : "2019/2020"}
                         </span>
                       </div>
 
-                      <div style={{ display: "flex", marginLeft: 25, marginRight: 25, marginBottom: 10 }}>
+                      <div
+                        style={{
+                          display: "flex",
+                          marginLeft: 25,
+                          marginRight: 25,
+                          marginBottom: 10,
+                        }}
+                      >
                         <span style={{ width: "40%" }}>Residence Status</span>
                         <span style={{ width: "2%" }}>:</span>
                         <span style={{ width: "58%", fontWeight: "bold" }}>
-                          {studentDetails[0] ? studentDetails[0].residence_status : "Non Resident"}
+                          {studentDetails[0]
+                            ? studentDetails[0].residence_status
+                            : "Non Resident"}
                         </span>
                       </div>
 
@@ -286,7 +392,12 @@ const UserProfileLayout = () => {
                 </div>
               </div>
               <div className="card-inner card-inner-lg">
-                {sm && mobileView && <div className="toggle-overlay" onClick={() => updateSm(!sm)}></div>}
+                {sm && mobileView && (
+                  <div
+                    className="toggle-overlay"
+                    onClick={() => updateSm(!sm)}
+                  ></div>
+                )}
                 <Switch>
                   {/* <Route
                   exact
@@ -301,7 +412,9 @@ const UserProfileLayout = () => {
                   <Route
                     exact
                     path={`${process.env.PUBLIC_URL}/user-profile-activity`}
-                    render={() => <UserProfileActivityPage updateSm={updateSm} sm={sm} />}
+                    render={() => (
+                      <UserProfileActivityPage updateSm={updateSm} sm={sm} />
+                    )}
                   ></Route>
                   {/* <Route
                   exact

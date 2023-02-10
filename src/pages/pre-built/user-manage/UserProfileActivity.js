@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Head from "../../../layout/head/Head";
 import classnames from "classnames";
-import { TabContent, TabPane, Nav, NavItem, NavLink, Card, CardTitle, CardText, Row, Col } from "reactstrap";
+import { TabContent, TabPane, Nav, NavItem, NavLink } from "reactstrap";
 import {
   BlockBetween,
   BlockDes,
@@ -9,14 +9,10 @@ import {
   BlockHeadContent,
   BlockTitle,
   Icon,
-  LoginLogTable,
-  ReactDataTable,
-  PreviewCard,
   Button,
 } from "../../../components/Component";
 import DataTable from "react-data-table-component";
 import { useSelector } from "react-redux";
-import studentApi from "../../../api/studentApi";
 //import { DataTableData, dataTableColumns, dataTableColumns2, userData } from "./TableData";
 
 const DataTableData = [
@@ -157,7 +153,8 @@ function titleCase(str) {
   for (var i = 0; i < splitStr.length; i++) {
     // You do not need to check if i is larger than splitStr length, as your for does that for you
     // Assign it back to the array
-    splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
+    splitStr[i] =
+      splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);
   }
   // Directly return the joined string
   return splitStr.join(" ");
@@ -256,7 +253,9 @@ const UserProfileActivityPage = ({ sm, updateSm }) => {
               </BlockHeadContent>
               <BlockHeadContent className="align-self-start d-lg-none">
                 <Button
-                  className={`toggle btn btn-icon btn-trigger mt-n1 ${sm ? "active" : ""}`}
+                  className={`toggle btn btn-icon btn-trigger mt-n1 ${
+                    sm ? "active" : ""
+                  }`}
                   onClick={() => updateSm(!sm)}
                 >
                   <Icon name="menu-alt-r"></Icon>
